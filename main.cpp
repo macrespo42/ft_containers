@@ -20,5 +20,7 @@ int main(void)
 		std::cout << "a is different of b" << std::endl;
 	else
 		std::cout << "a is same as b" << std::endl;
+
+	std::cout << *a << std::endl;
 	return 0;
 }

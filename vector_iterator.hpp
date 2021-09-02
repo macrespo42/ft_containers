@@ -43,6 +43,18 @@ namespace ft
 			return !(*this == src);
 		}
 
+		reference
+		operator*(void)
+		{
+			return *this->_ptr;
+		}
+
+		reference
+		operator->(void)
+		{
+			return *this->_ptr;
+		}
+
 	private:
 		pointer _ptr;
 
