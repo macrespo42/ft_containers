@@ -19,15 +19,15 @@ namespace ft
 		vector_iterator(void) : _ptr(nullptr)
 		{}
 
-		vector_iterator(vector_iterator<T> src)
+		vector_iterator(vector_iterator<T> &src)
 		{
-			this->_ptr = src.ptr;
+			this->_ptr = src._ptr;
 		}
 
 		vector_iterator &
 		operator=(vector_iterator<T> const &src)
 		{
-			this->_ptr = src.ptr;
+			this->_ptr = src._ptr;
 			return *this;
 		}
 
