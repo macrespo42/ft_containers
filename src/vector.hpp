@@ -2,6 +2,7 @@
 #define VECTOR
 
 #include <memory>
+#include "vector_iterator.hpp"
 
 namespace ft
 {
@@ -24,12 +25,12 @@ namespace ft
 		typedef typename allocator_type::const_reference const_reference;
 		typedef typename allocator_type::pointer pointer;
 		typedef typename allocator_type::const_pointer const_pointer;
+		typedef vector_iterator<T> iterator;
+		typedef std::ptrdiff_t difference_type;
 		/* TO DO
-		iterator
 		const_iterator
 		reverse_iterator
 		const_reverse_iterator
-		difference_type
 		*/
 		typedef std::size_t size_type;
 
