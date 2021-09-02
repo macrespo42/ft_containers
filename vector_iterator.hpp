@@ -31,6 +31,18 @@ namespace ft
 			return *this;
 		}
 
+		bool
+		operator==(vector_iterator<T> const &src) const
+		{
+			return this->_ptr == src._ptr;
+		}
+
+		bool
+		operator!=(vector_iterator<T> const &src) const
+		{
+			return !(*this == src);
+		}
+
 	private:
 		pointer _ptr;
 
