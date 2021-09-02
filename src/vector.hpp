@@ -37,7 +37,7 @@ namespace ft
 		size_type _size;
 		size_type _capacity;
 		pointer  _vector;
-		allocator_type allocator;
+		allocator_type _allocator;
 
 	public:
 
@@ -47,9 +47,18 @@ namespace ft
 		 *
 		 */
 
-		explicit vector (const allocator_type& alloc = allocator_type()) : _size(0), _capacity(0), allocator(alloc)
+		explicit vector (const allocator_type& alloc = allocator_type()) : _size(0), _capacity(0), _allocator(alloc)
 		{
-			this->_vector = allocator.allocate(0);
+			this->_vector = this->_allocator.allocate(0);
+		}
+
+		explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) : 
+		_size(n),
+		_capacity(n),
+		_allocator(alloc)
+		{
+			this->_vector = this->_allocator.allocate(this->_capacity);
+			this->_allocator.construct(this->_vector, val);
 		}
 	};
 }

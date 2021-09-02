@@ -5,8 +5,8 @@
 
 int main(void)
 {
-	ft::vector<int> ft;
-	std::vector<int> original;
+	ft::vector<int> ft(150);
+	std::vector<int> original(10);
 
 	ft::vector_iterator<int> a;
 	ft::vector_iterator<int> b(a);

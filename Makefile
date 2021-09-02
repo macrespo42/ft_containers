@@ -8,7 +8,7 @@ all:
 clean:
 	rm main.o
 
-fclean: clean
+fclean:
 	rm a.out
 
 re: fclean all
