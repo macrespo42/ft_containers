@@ -94,12 +94,8 @@ namespace ft
 		//copy
 		vector (const vector& x)
 		{
-			this->_size = x._size;
-			this->_capacity = x._capacity;
 			this->_allocator = x._allocator;
-			this->_vector = this->_allocator.allocate(this->_capacity);
-			for (size_type i = 0; i < x._size; i++)
-				this->_vector[i] = x[i];
+			*this = x;
 		}
 
 		~vector(void)
@@ -110,6 +106,15 @@ namespace ft
 					this->_allocator.destroy(this->_vector + i);
 			}
 			this->_allocator.deallocate(this->_vector, this->_capacity);
+		}
+
+		vector &operator=(const vector& x)
+		{
+			this->_size = x._size;
+			this->_capacity = x._capacity;
+			this->_vector = this->_allocator.allocate(this->_capacity);
+			for (size_type i = 0; i < x._size; i++)
+				this->_vector[i] = x[i];
 		}
 	};
 }
