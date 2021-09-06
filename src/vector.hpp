@@ -47,7 +47,6 @@ namespace ft
 		 *
 		 */
 
-
 		// default
 		explicit vector(const allocator_type& alloc = allocator_type()) :
 		_size(0),
@@ -101,6 +100,16 @@ namespace ft
 			this->_vector = this->_allocator.allocate(this->_capacity);
 			for (size_type i = 0; i < x._size; i++)
 				this->_vector[i] = x[i];
+		}
+
+		~vector(void)
+		{
+			for (size_type i = 0; i < this->_size; i++)
+			{
+				if (this->_vector[i])
+					this->_allocator.destroy(this->_vector + i);
+			}
+			this->_allocator.deallocate(this->_vector, this->_capacity);
 		}
 	};
 }
