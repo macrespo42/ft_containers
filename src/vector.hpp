@@ -72,11 +72,15 @@ namespace ft
 		vector(InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()):
 		_allocator(alloc)
 		{
-			InputIterator first_cpy = first;
+			InputIterator firstCpy = first;
+			size_type iteratorDiff = 0;
 			int index = 0;
 
-			for (size_type iteratorDiff = 0; firstCpy != last; iteratorDiff++)
+			while(firstCpy != last)
+			{
 				firstCpy++;
+				iteratorDiff++;
+			}
 			this->_size = iteratorDiff;
 			this->_capacity = iteratorDiff;
 			this->_vector = this->_allocator.allocate(this->_capacity);
@@ -86,6 +90,17 @@ namespace ft
 				first++;
 				index++; 
 			}
+		}
+
+		//copy
+		vector (const vector& x)
+		{
+			this->_size = x._size;
+			this->_capacity = x._capacity;
+			this->_allocator = x._allocator;
+			this->_vector = this->_allocator.allocate(this->_capacity);
+			for (size_type i = 0; i < x._size; i++)
+				this->_vector[i] = x[i];
 		}
 	};
 }
