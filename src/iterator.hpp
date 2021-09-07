@@ -1,6 +1,8 @@
 #ifndef ITERATOR
 #define ITERATOR
 
+#include <cstddef>
+
 namespace ft
 {
 	struct input_iterator_tag {};
