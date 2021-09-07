@@ -1,12 +1,6 @@
 
 all:
-	clang++ -I ./src/ main.cpp
-
-# %.o: %.c
-# 	clang++ -I ./src/ -c main.cpp
-
-clean:
-	rm main.o
+	clang++ -I ./src/ -Wall -Wextra -Werror -std=c++98 main.cpp
 
 fclean:
 	rm a.out

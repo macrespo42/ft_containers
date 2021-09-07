@@ -6,7 +6,10 @@
 int main(void)
 {
 	ft::vector<int> ft(150);
+	ft::vector<int> cpy(12);
 	std::vector<int> original(10);
+
+	cpy = ft;
 
 	ft::vector_iterator<int> a;
 	ft::vector_iterator<int> b(a);

@@ -115,7 +115,22 @@ namespace ft
 			this->_vector = this->_allocator.allocate(this->_capacity);
 			for (size_type i = 0; i < x._size; i++)
 				this->_vector[i] = x[i];
+			return *this;
 		}
+
+		/*
+		 *
+		 * Element access methods
+		 *
+		*/
+
+		reference
+		operator[] (size_type n)
+		{ return this->_vector[n]; }
+
+		const_reference
+		operator[] (size_type n) const
+		{ return this->_vector[n]; };
 	};
 }
 #endif
