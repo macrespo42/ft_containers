@@ -3,6 +3,7 @@
 
 #include <memory>
 #include "vector_iterator.hpp"
+#include "type_traits.hpp"
 
 namespace ft
 {
@@ -68,7 +69,8 @@ namespace ft
 
 		// range
 		template <class InputIterator>
-		vector(InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()):
+		vector(InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(), 
+		typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = 0 ) :
 		_allocator(alloc)
 		{
 			InputIterator firstCpy = first;
