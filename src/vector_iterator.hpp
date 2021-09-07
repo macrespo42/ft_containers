@@ -19,6 +19,9 @@ namespace ft
 		vector_iterator(void) : _ptr(nullptr)
 		{}
 
+		vector_iterator(pointer ptr) : _ptr(ptr)
+		{}
+
 		vector_iterator(vector_iterator<T> &src)
 		{
 			this->_ptr = src._ptr;
