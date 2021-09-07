@@ -108,7 +108,8 @@ namespace ft
 			this->_allocator.deallocate(this->_vector, this->_capacity);
 		}
 
-		vector &operator=(const vector& x)
+		vector &
+		operator=(const vector& x)
 		{
 			this->_size = x._size;
 			this->_capacity = x._capacity;
@@ -122,7 +123,7 @@ namespace ft
 		 *
 		 * Element access methods
 		 *
-		*/
+		 */
 
 		reference
 		operator[] (size_type n)
