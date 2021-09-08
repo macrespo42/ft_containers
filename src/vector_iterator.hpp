@@ -55,7 +55,7 @@ namespace ft
 		reference
 		operator->(void)
 		{
-			return *this->_ptr;
+			return this->_ptr;
 		}
 
 	private:
