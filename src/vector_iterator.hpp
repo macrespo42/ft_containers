@@ -16,6 +16,12 @@ namespace ft
 		typedef T& reference;
 		typedef random_access_iterator_tag iterator_category;
 
+		/*
+		 *
+		 * Constructors
+		 *
+		 */
+
 		vector_iterator(void) : _ptr(nullptr)
 		{}
 
@@ -34,6 +40,12 @@ namespace ft
 			return *this;
 		}
 
+		/*
+		 *
+		 * Comparaisons
+		 *
+		 */		
+
 		bool
 		operator==(vector_iterator<T> const &src) const
 		{
@@ -46,6 +58,12 @@ namespace ft
 			return !(*this == src);
 		}
 
+		/*
+		 *
+		 * Dereference
+		 *
+		 */
+
 		reference
 		operator*(void)
 		{
@@ -57,6 +75,12 @@ namespace ft
 		{
 			return this->_ptr;
 		}
+
+		/*
+		 *
+		 * Arithmetic Operations
+		 *
+		 */
 
 		vector_iterator &
 		operator++(void)
