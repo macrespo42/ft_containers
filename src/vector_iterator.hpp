@@ -112,6 +112,24 @@ namespace ft
 			return tmp;	
 		}
 
+		pointer
+		operator+(int n) const
+		{
+			return this->_ptr + n;
+		}
+
+		pointer
+		operator-(int n) const
+		{
+			return this->_ptr - n;
+		}
+
+		pointer
+		operator-(vector_iterator<T> const &x)
+		{
+			return this->_ptr - x.ptr;
+		}
+
 	private:
 		pointer _ptr;
 
