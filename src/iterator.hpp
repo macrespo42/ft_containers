@@ -40,6 +40,15 @@ namespace ft
 		typedef const T& reference;
 		typedef random_access_iterator_tag iterator_category;
 	};
+
+	template <bool flag, class IsTrue, class IsFalse>	
+	struct is_const {};
+
+	template<class IsTrue, IsFalse>
+	struct is_const<true, IsTrue, IsFalse> { typedef IsTrue value; };
+
+	template<class IsTrue, IsFalse>
+	struct is_const<false, IsTrue, IsFalse> { typedef IsFalse value; };
 }
 
 #endif
