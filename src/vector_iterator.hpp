@@ -58,6 +58,21 @@ namespace ft
 			return this->_ptr;
 		}
 
+		vector_iterator &
+		operator++(void)
+		{
+			this->_ptr++;
+			return *this;
+		}
+
+		vector_iterator &
+		operator++(int)
+		{
+			vector_iterator<T> tmp(*this);
+			operator++();
+			return tmp;
+		}
+
 	private:
 		pointer _ptr;
 
