@@ -123,6 +123,24 @@ namespace ft
 
 		/*
 		 *
+		 * Iterators
+		 *
+		 */
+
+		iterator begin()
+		{
+			iterator first(this->_vector[0]);
+			return first;
+		}
+
+		iterator end()
+		{
+			iterator last(this->_vector[this->_size]);
+			return last;
+		}
+
+		/*
+		 *
 		 * Element access methods
 		 *
 		 */
