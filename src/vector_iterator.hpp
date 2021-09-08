@@ -130,6 +130,30 @@ namespace ft
 			return this->_ptr - x.ptr;
 		}
 
+		vector_iterator &
+		operator+=(int n)
+		{
+			vector_iterator<T> tmp(*this);
+			for (int i = 0; i < n; i++)
+				operator++();
+			return tmp;
+		}
+
+		vector_iterator &
+		operator-=(int n)
+		{
+			vector_iterator<T> tmp(*this);
+			for (int i = 0; i < n; i++)
+				operator--();
+			return tmp;
+		}
+
+		pointer
+		operator[](int n)
+		{
+			return this->_ptr + n;
+		}
+
 	private:
 		pointer _ptr;
 
