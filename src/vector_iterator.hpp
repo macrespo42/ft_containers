@@ -163,25 +163,25 @@ namespace ft
 		friend bool
 		operator<(vector_iterator<T> const &a, vector_iterator<T> const &b)
 		{
-			return a._ptr < b._ptr
+			return a._ptr < b._ptr;
 		}
 
 		friend bool
 		operator>(vector_iterator<T> const &a, vector_iterator<T> const &b)
 		{
-			return a._ptr > b._ptr
+			return a._ptr > b._ptr;
 		}
 
 		friend bool
 		operator<=(vector_iterator<T> const &a, vector_iterator<T> const &b)
 		{
-			return a._ptr <= b._ptr
+			return a._ptr <= b._ptr;
 		}
 
 		friend bool
 		operator>=(vector_iterator<T> const &a, vector_iterator<T> const &b)
 		{
-			return a._ptr >= b._ptr
+			return a._ptr >= b._ptr;
 		}
 
 	private:

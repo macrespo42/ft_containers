@@ -44,10 +44,10 @@ namespace ft
 	template <bool flag, class IsTrue, class IsFalse>	
 	struct is_const {};
 
-	template<class IsTrue, IsFalse>
+	template<class IsTrue, class IsFalse>
 	struct is_const<true, IsTrue, IsFalse> { typedef IsTrue value; };
 
-	template<class IsTrue, IsFalse>
+	template<class IsTrue, class IsFalse>
 	struct is_const<false, IsTrue, IsFalse> { typedef IsFalse value; };
 }
 
