@@ -11,8 +11,8 @@ int main(void)
 
 	cpy = ft;
 
-	ft::vector_iterator<int> a;
-	ft::vector_iterator<int> b(a);
+	ft::vector_iterator<int, true> a;
+	ft::vector_iterator<int, true> b(a);
 	a = b;
 	if (a == b)
 		std::cout << "a is equal to b" << std::endl;

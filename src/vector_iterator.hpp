@@ -5,15 +5,15 @@
 
 namespace ft
 {
-	template <class T>
+	template <class T, bool IsConst>
 	class vector_iterator
 	{
 
 	public:
 		typedef std::ptrdiff_t difference_type;
-		typedef T value_type;
-		typedef T* pointer;
-		typedef T& reference;
+		typedef typename ft::is_const<IsConst, T*, const T*>::value value_type;
+		typedef typename ft::is_const<IsConst, T*, const T*>::value pointer;
+		typedef typename ft::is_const<IsConst, T&, const T&>::value reference;
 		typedef random_access_iterator_tag iterator_category;
 
 		/*
@@ -28,13 +28,13 @@ namespace ft
 		vector_iterator(pointer ptr) : _ptr(ptr)
 		{}
 
-		vector_iterator(vector_iterator<T> &src)
+		vector_iterator(vector_iterator<T, IsConst> &src)
 		{
 			this->_ptr = src._ptr;
 		}
 
 		vector_iterator &
-		operator=(vector_iterator<T> const &src)
+		operator=(vector_iterator<T, IsConst> const &src)
 		{
 			this->_ptr = src._ptr;
 			return *this;
@@ -47,13 +47,13 @@ namespace ft
 		 */		
 
 		bool
-		operator==(vector_iterator<T> const &src) const
+		operator==(vector_iterator<T, IsConst> const &src) const
 		{
 			return this->_ptr == src._ptr;
 		}
 
 		bool
-		operator!=(vector_iterator<T> const &src) const
+		operator!=(vector_iterator<T, IsConst> const &src) const
 		{
 			return !(*this == src);
 		}
@@ -92,7 +92,7 @@ namespace ft
 		vector_iterator &
 		operator++(int)
 		{
-			vector_iterator<T> tmp(*this);
+			vector_iterator<T, IsConst> tmp(*this);
 			operator++();
 			return tmp;
 		}
@@ -107,7 +107,7 @@ namespace ft
 		vector_iterator &
 		operator--(int)
 		{
-			vector_iterator<T> tmp(*this);
+			vector_iterator<T, IsConst> tmp(*this);
 			operator--();
 			return tmp;	
 		}
@@ -125,7 +125,7 @@ namespace ft
 		}
 
 		pointer
-		operator-(vector_iterator<T> const &x)
+		operator-(vector_iterator<T, IsConst> const &x)
 		{
 			return this->_ptr - x.ptr;
 		}
@@ -133,7 +133,7 @@ namespace ft
 		vector_iterator &
 		operator+=(int n)
 		{
-			vector_iterator<T> tmp(*this);
+			vector_iterator<T, IsConst> tmp(*this);
 			for (int i = 0; i < n; i++)
 				operator++();
 			return tmp;
@@ -142,7 +142,7 @@ namespace ft
 		vector_iterator &
 		operator-=(int n)
 		{
-			vector_iterator<T> tmp(*this);
+			vector_iterator<T, IsConst> tmp(*this);
 			for (int i = 0; i < n; i++)
 				operator--();
 			return tmp;
@@ -161,25 +161,25 @@ namespace ft
 		 */
 
 		friend bool
-		operator<(vector_iterator<T> const &a, vector_iterator<T> const &b)
+		operator<(vector_iterator<T, IsConst> const &a, vector_iterator<T, IsConst> const &b)
 		{
 			return a._ptr < b._ptr;
 		}
 
 		friend bool
-		operator>(vector_iterator<T> const &a, vector_iterator<T> const &b)
+		operator>(vector_iterator<T, IsConst> const &a, vector_iterator<T, IsConst> const &b)
 		{
 			return a._ptr > b._ptr;
 		}
 
 		friend bool
-		operator<=(vector_iterator<T> const &a, vector_iterator<T> const &b)
+		operator<=(vector_iterator<T, IsConst> const &a, vector_iterator<T, IsConst> const &b)
 		{
 			return a._ptr <= b._ptr;
 		}
 
 		friend bool
-		operator>=(vector_iterator<T> const &a, vector_iterator<T> const &b)
+		operator>=(vector_iterator<T, IsConst> const &a, vector_iterator<T, IsConst> const &b)
 		{
 			return a._ptr >= b._ptr;
 		}
