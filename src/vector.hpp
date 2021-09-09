@@ -134,9 +134,21 @@ namespace ft
 			return first;
 		}
 
+		const_iterator begin() const
+		{
+			const_iterator first(this->_vector[0]);
+			return first;
+		}
+
 		iterator end()
 		{
 			iterator last(this->_vector[this->_size]);
+			return last;
+		}
+
+		const_iterator end() const
+		{
+			const_iterator last(this->_vector[this->_size]);
 			return last;
 		}
 
