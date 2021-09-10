@@ -140,6 +140,36 @@ namespace ft
 			return this->_it.operator->();
 		}
 
+		friend bool operator==(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
+		{
+			return lhs._it == rhs._it;
+		}
+
+		friend bool operator!=(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
+		{
+			return lhs._it != rhs._it;
+		}
+
+		friend bool operator<(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
+		{
+			return lhs._it > rhs._it;
+		}
+
+		friend bool operator<=(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
+		{
+			return lhs._it >= rhs._it;
+		}
+
+		friend bool operator>(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
+		{
+			return lhs._it < rhs._it;
+		}
+
+		friend bool operator>= (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
+		{
+			return lhs._it <= rhs._it;
+		}
+
 	private:
 
 		Iterator _it;
