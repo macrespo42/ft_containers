@@ -130,6 +130,16 @@ namespace ft
 			return *this;			
 		}
 
+		reference operator[] (difference_type n) const
+		{
+			return this->_it.operator[](n);
+		}
+
+		pointer operator->() const
+		{
+			return this->_it.operator->();
+		}
+
 	private:
 
 		Iterator _it;
