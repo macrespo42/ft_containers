@@ -86,13 +86,19 @@ namespace ft
   			return this;
   		}
 
+  		reverse_iterator operator- (difference_type n) const
+  		{
+  			this->_it.operator+(n);
+  			return this;
+  		}
+
   		reverse_iterator& operator++(void)
   		{
   			this->_it.operator--();
   			return this;
   		}
 
-  		reverse_iterator  operator++(int)
+  		reverse_iterator operator++(int)
   		{
   			reverse_iterator<Iterator> tmp(this);
   			this->_it.operator--(0);
@@ -105,11 +111,23 @@ namespace ft
   			return this;
   		}
 
-		reverse_iterator  operator--(int)
+		reverse_iterator operator--(int)
 		{
 			reverse_iterator<Iterator> tmp(this);
   			this->_it.operator++(0);
   			return tmp;
+		}
+
+		reverse_iterator& operator+=(difference_type n)
+		{
+			this->_it.operator+=(n);
+			return *this;
+		}
+
+		reverse_iterator& operator-= (difference_type n)
+		{
+			this->_it.operator-=(n);
+			return *this;			
 		}
 
 	private:
