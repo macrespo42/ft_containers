@@ -69,103 +69,121 @@ namespace ft
   			this->_it = rev_it._it;
   		}
 
-  		iterator_type base(void) const
+  		iterator_type
+  		base(void) const
   		{
   			Iterator cpy = this->_it;
   			return cpy;
   		}
 
-  		reference operator*(void) const
+  		reference
+  		operator*(void) const
   		{
   			return this->_it.operator*();
   		}
 
-  		reverse_iterator operator+(difference_type n) const
+  		reverse_iterator
+  		operator+(difference_type n) const
   		{
   			this->_it.operator-(n);
   			return this;
   		}
 
-  		reverse_iterator operator- (difference_type n) const
+  		reverse_iterator
+  		operator-(difference_type n) const
   		{
   			this->_it.operator+(n);
   			return this;
   		}
 
-  		reverse_iterator& operator++(void)
+  		reverse_iterator&
+  		operator++(void)
   		{
   			this->_it.operator--();
   			return this;
   		}
 
-  		reverse_iterator operator++(int)
+  		reverse_iterator
+  		operator++(int)
   		{
   			reverse_iterator<Iterator> tmp(this);
   			this->_it.operator--(0);
   			return tmp;
   		}
 
-  		reverse_iterator& operator--(void)
+  		reverse_iterator&
+  		operator--(void)
   		{
   			this->_it.operator++();
   			return this;
   		}
 
-		reverse_iterator operator--(int)
+		reverse_iterator
+		operator--(int)
 		{
 			reverse_iterator<Iterator> tmp(this);
   			this->_it.operator++(0);
   			return tmp;
 		}
 
-		reverse_iterator& operator+=(difference_type n)
+		reverse_iterator&
+		operator+=(difference_type n)
 		{
 			this->_it.operator+=(n);
 			return *this;
 		}
 
-		reverse_iterator& operator-= (difference_type n)
+		reverse_iterator&
+		operator-=(difference_type n)
 		{
 			this->_it.operator-=(n);
 			return *this;			
 		}
 
-		reference operator[] (difference_type n) const
+		reference
+		operator[](difference_type n) const
 		{
 			return this->_it.operator[](n);
 		}
 
-		pointer operator->() const
+		pointer
+		operator->() const
 		{
 			return this->_it.operator->();
 		}
 
-		friend bool operator==(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
+		friend bool
+		operator==(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
 		{
 			return lhs._it == rhs._it;
 		}
 
-		friend bool operator!=(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
+		friend bool
+		operator!=(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
 		{
 			return lhs._it != rhs._it;
 		}
 
-		friend bool operator<(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
+		friend bool
+		operator<(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
 		{
 			return lhs._it > rhs._it;
 		}
 
-		friend bool operator<=(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
+		friend bool
+		operator<=(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
 		{
 			return lhs._it >= rhs._it;
 		}
 
-		friend bool operator>(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
+		friend bool
+		operator>(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
 		{
 			return lhs._it < rhs._it;
 		}
 
-		friend bool operator>= (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
+		friend bool
+		operator>=(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
 		{
 			return lhs._it <= rhs._it;
 		}
