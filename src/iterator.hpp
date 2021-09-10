@@ -41,6 +41,20 @@ namespace ft
 		typedef random_access_iterator_tag iterator_category;
 	};
 
+	template <class Iterator>
+	class reverse_iterator
+	{
+	private:
+
+		typedef Iterator iterator_type;
+		typedef iterator_traits<Iterator>::iterator_category iterator_category;
+		typedef iterator_traits<Iterator>::value_type value_type;
+		typedef iterator_traits<Iterator>::difference_type difference_type;;
+		typedef iterator_traits<Iterator>::pointer pointer;
+		typedef iterator_traits<Iterator>::reference reference;
+
+	};
+
 	template <bool flag, class IsTrue, class IsFalse>	
 	struct is_const {};
 
