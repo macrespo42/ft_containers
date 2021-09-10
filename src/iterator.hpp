@@ -64,10 +64,53 @@ namespace ft
 		}
 
 		template <class Iter>
-  		reverse_iterator (const reverse_iterator<Iter>& rev_it);
+  		reverse_iterator (const reverse_iterator<Iter>& rev_it)
   		{
   			this->_it = rev_it._it;
   		}
+
+  		iterator_type base(void) const
+  		{
+  			Iterator cpy = this->_it;
+  			return cpy;
+  		}
+
+  		reference operator*(void) const
+  		{
+  			return this->_it.operator*();
+  		}
+
+  		reverse_iterator operator+(difference_type n) const
+  		{
+  			this->_it.operator-(n);
+  			return this;
+  		}
+
+  		reverse_iterator& operator++(void)
+  		{
+  			this->_it.operator--();
+  			return this;
+  		}
+
+  		reverse_iterator  operator++(int)
+  		{
+  			reverse_iterator<Iterator> tmp(this);
+  			this->_it.operator--(0);
+  			return tmp;
+  		}
+
+  		reverse_iterator& operator--(void)
+  		{
+  			this->_it.operator++();
+  			return this;
+  		}
+
+		reverse_iterator  operator--(int)
+		{
+			reverse_iterator<Iterator> tmp(this);
+  			this->_it.operator++(0);
+  			return tmp;
+		}
 
 	private:
 
