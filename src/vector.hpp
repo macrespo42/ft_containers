@@ -30,8 +30,8 @@ namespace ft
 		typedef vector_iterator<T, true> iterator;
 		typedef vector_iterator<T, false> const_iterator;
 		typedef std::ptrdiff_t difference_type;
-		// typedef reverse_iterator<vector_iterator<T, true>> reverse_iterator;
-		// typedef reverse_iterator<vector_iterator<T, false>> const_reverse_iterator;
+		typedef ft::reverse_iterator<iterator> reverse_iterator;
+		typedef ft::reverse_iterator<const_iterator> const_reverse_iterator;
 		typedef std::size_t size_type;
 
 		size_type _size;
