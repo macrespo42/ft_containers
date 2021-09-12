@@ -150,6 +150,30 @@ namespace ft
 			return last;
 		}
 
+		reverse_iterator rbegin()
+		{
+			reverse_iterator first(this->end());
+			return first;
+		}
+
+		const_reverse_iterator rbegin() const
+		{
+			const_reverse_iterator first(this->end());
+			return first;
+		}
+
+		reverse_iterator rend()
+		{
+			reverse_iterator last(this->begin());
+			return last;
+		}
+
+		const_reverse_iterator rend() const
+		{
+			reverse_iterator last(this->begin());
+			return last;
+		}
+
 		/*
 		 *
 		 * Element access methods

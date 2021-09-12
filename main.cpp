@@ -2,26 +2,12 @@
 #include "vector_iterator.hpp"
 #include <vector>
 #include <iostream>
+#include <vector>
 
-int main(void)
+#define NAMESPACE ft
+// #define NAMESPACE std
+
+int main ()
 {
-	ft::vector<int> ft(150);
-	ft::vector<int> cpy(12);
-	std::vector<int> original(10);
-
-	cpy = ft;
-
-	ft::vector_iterator<int, true> a;
-	ft::vector_iterator<int, true> b(a);
-	a = b;
-	if (a == b)
-		std::cout << "a is equal to b" << std::endl;
-	else
-		std::cout << "a is not equal to b" << std::endl;
-
-	if (a != b)
-		std::cout << "a is different of b" << std::endl;
-	else
-		std::cout << "a is same as b" << std::endl;
-	return 0;
+  return 0;
 }
