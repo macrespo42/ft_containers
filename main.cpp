@@ -4,8 +4,8 @@
 #include <iostream>
 #include <vector>
 
-// #define NAMESPACE ft
-#define NAMESPACE std
+#define NAMESPACE ft
+// #define NAMESPACE std
 
 void vectorConstructor_test(void)
 {
@@ -23,6 +23,18 @@ void vectorConstructor_test(void)
   for (NAMESPACE::vector<int>::iterator it = fifth.begin(); it != fifth.end(); ++it)
     std::cout << ' ' << *it;
   std::cout << '\n';
+}
+
+void vectorAssignation_test(void)
+{
+  std::vector<int> foo (3,0);
+  std::vector<int> bar (5,0);
+
+  bar = foo;
+  foo = std::vector<int>();
+
+  std::cout << "Size of foo: " << int(foo.size()) << '\n';
+  std::cout << "Size of bar: " << int(bar.size()) << '\n';
 }
 
 void rendRbegin_test(void)
@@ -44,6 +56,7 @@ void rendRbegin_test(void)
 int main ()
 {
   vectorConstructor_test();
+  vectorAssignation_test();
   rendRbegin_test();
   return 0;
 }
