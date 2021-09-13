@@ -177,6 +177,17 @@ namespace ft
 
 		/*
 		 *
+		 * Capacity
+		 *
+		 */
+
+		size_type size() const
+		{
+			return this->_size;
+		}
+
+		/*
+		 *
 		 * Element access methods
 		 *
 		 */
