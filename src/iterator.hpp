@@ -151,7 +151,9 @@ namespace ft
 		pointer
 		operator->() const
 		{
-			return this->_it.operator->();
+			iterator_type tmp;
+			tmp = this->_it;
+			return --tmp;
 		}
 
 		friend bool
