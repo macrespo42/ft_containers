@@ -11,7 +11,10 @@ int main ()
 {
   NAMESPACE::vector<int> ft;
 
-  NAMESPACE::vector<int>::iterator it = ft.begin();
+  NAMESPACE::vector<int>::iterator it;
+  NAMESPACE::vector<int>::iterator truc = ft.end();
+  (void)truc;
+  // truc = ft.begin();
   (void)it;
   return 0;
 }

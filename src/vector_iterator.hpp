@@ -28,9 +28,9 @@ namespace ft
 		vector_iterator(pointer ptr) : _ptr(ptr)
 		{}
 
-		vector_iterator(vector_iterator<T, IsConst> &src)
+		vector_iterator(vector_iterator const &src)
 		{
-			this->_ptr = src._ptr;
+			*this = src;
 		}
 
 		vector_iterator &
