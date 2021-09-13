@@ -7,7 +7,7 @@
 #define NAMESPACE ft
 // #define NAMESPACE std
 
-int main ()
+void rendRbegin_test(void)
 {
   NAMESPACE::vector<int> myvector (5);  // 5 default-constructed ints
 
@@ -21,5 +21,10 @@ int main ()
   for (NAMESPACE::vector<int>::iterator it = myvector.begin(); it != myvector.end(); ++it)
     std::cout << ' ' << *it;
   std::cout << '\n';
+}
+
+int main ()
+{
+  rendRbegin_test();
   return 0;
 }
