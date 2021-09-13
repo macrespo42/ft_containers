@@ -11,8 +11,8 @@ int main ()
 {
   NAMESPACE::vector<int> ft;
 
-  NAMESPACE::vector<int>::iterator it;
-  NAMESPACE::vector<int>::iterator truc = ft.end();
+  NAMESPACE::vector<int>::reverse_iterator it;
+  NAMESPACE::vector<int>::reverse_iterator truc = ft.rend();
   (void)truc;
   // truc = ft.begin();
   (void)it;
