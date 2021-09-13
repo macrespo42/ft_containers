@@ -65,13 +65,13 @@ namespace ft
 		 */
 
 		reference
-		operator*(void)
+		operator*(void) const
 		{
 			return *this->_ptr;
 		}
 
 		reference
-		operator->(void)
+		operator->(void) const
 		{
 			return this->_ptr;
 		}
@@ -89,7 +89,7 @@ namespace ft
 			return *this;
 		}
 
-		vector_iterator &
+		vector_iterator
 		operator++(int)
 		{
 			vector_iterator<T, IsConst> tmp(*this);
@@ -104,7 +104,7 @@ namespace ft
 			return *this;
 		}
 
-		vector_iterator &
+		vector_iterator
 		operator--(int)
 		{
 			vector_iterator<T, IsConst> tmp(*this);
@@ -125,7 +125,7 @@ namespace ft
 		}
 
 		pointer
-		operator-(vector_iterator<T, IsConst> const &x)
+		operator-(vector_iterator<T, IsConst> const &x) const
 		{
 			return this->_ptr - x.ptr;
 		}
@@ -149,7 +149,7 @@ namespace ft
 		}
 
 		pointer
-		operator[](int n)
+		operator[](int n) const
 		{
 			return this->_ptr + n;
 		}

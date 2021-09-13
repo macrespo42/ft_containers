@@ -79,7 +79,9 @@ namespace ft
   		reference
   		operator*(void) const
   		{
-  			return this->_it.operator*();
+  			iterator_type tmp;
+  			tmp = this->_it;
+  			return *--tmp;
   		}
 
   		reverse_iterator
@@ -99,15 +101,15 @@ namespace ft
   		reverse_iterator&
   		operator++(void)
   		{
-  			this->_it.operator--();
-  			return this;
+  			this->_it--;
+  			return *this;
   		}
 
   		reverse_iterator
   		operator++(int)
   		{
-  			reverse_iterator<Iterator> tmp(this);
-  			this->_it.operator--(0);
+  			reverse_iterator<Iterator> tmp = *this;
+  			this->_it--;
   			return tmp;
   		}
 
@@ -115,7 +117,7 @@ namespace ft
   		operator--(void)
   		{
   			this->_it.operator++();
-  			return this;
+  			return *this;
   		}
 
 		reverse_iterator
