@@ -9,5 +9,9 @@
 
 int main ()
 {
+  NAMESPACE::vector<int> ft;
+
+  NAMESPACE::vector<int>::iterator it = ft.begin();
+  (void)it;
   return 0;
 }
