@@ -129,10 +129,10 @@ namespace ft
 		pointer
 		operator-(vector_iterator<T, IsConst> const &x) const
 		{
-			return this->_ptr - x.ptr;
+			return (this->_ptr - x._ptr);
 		}
 
-		vector_iterator &
+		vector_iterator
 		operator+=(int n)
 		{
 			vector_iterator<T, IsConst> tmp(*this);
@@ -141,7 +141,7 @@ namespace ft
 			return tmp;
 		}
 
-		vector_iterator &
+		vector_iterator
 		operator-=(int n)
 		{
 			vector_iterator<T, IsConst> tmp(*this);
