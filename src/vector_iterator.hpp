@@ -66,6 +66,12 @@ namespace ft
 		 *
 		 */
 
+		pointer
+		getPtr(void)
+		{
+			return this->_ptr;
+		}
+
 		reference
 		operator*(void) const
 		{
@@ -150,7 +156,7 @@ namespace ft
 			return tmp;
 		}
 
-		pointer
+		reference
 		operator[](int n) const
 		{
 			return this->_ptr + n;
