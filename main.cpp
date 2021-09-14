@@ -37,6 +37,17 @@ void vectorAssignation_test(void)
   std::cout << "Size of bar: " << int(bar.size()) << '\n';
 }
 
+void beginEnd_test(void)
+{
+  std::vector<int> myvector;
+  // for (int i=1; i<=5; i++) myvector.push_back(i);
+
+  std::cout << "myvector contains:";
+  for (std::vector<int>::iterator it = myvector.begin() ; it != myvector.end(); ++it)
+    std::cout << ' ' << *it;
+  std::cout << '\n';
+}
+
 void rendRbegin_test(void)
 {
   NAMESPACE::vector<int> myvector (5);  // 5 default-constructed ints
@@ -53,10 +64,27 @@ void rendRbegin_test(void)
   std::cout << '\n';
 }
 
+void size_test(void)
+{
+  std::vector<int> myints;
+  std::cout << "0. size: " << myints.size() << '\n';
+
+  // for (int i=0; i<10; i++) myints.push_back(i);
+  // std::cout << "1. size: " << myints.size() << '\n';
+
+  // myints.insert (myints.end(),10,100);
+  // std::cout << "2. size: " << myints.size() << '\n';
+
+  // myints.pop_back();
+  // std::cout << "3. size: " << myints.size() << '\n';
+}
+
 int main ()
 {
   vectorConstructor_test();
   vectorAssignation_test();
+  beginEnd_test();
   rendRbegin_test();
+  size_test();
   return 0;
 }
