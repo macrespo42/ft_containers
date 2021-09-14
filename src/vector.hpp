@@ -127,49 +127,57 @@ namespace ft
 		 *
 		 */
 
-		iterator begin()
+		iterator
+		begin()
 		{
 			iterator first(this->_vector);
 			return first;
 		}
 
-		const_iterator begin() const
+		const_iterator
+		begin() const
 		{
 			const_iterator first(this->_vector);
 			return first;
 		}
 
-		iterator end()
+		iterator
+		end()
 		{
 			iterator last(this->_vector + this->_size);
 			return last;
 		}
 
-		const_iterator end() const
+		const_iterator
+		end() const
 		{
 			const_iterator last(this->_vector + this->_size);
 			return last;
 		}
 
-		reverse_iterator rbegin()
+		reverse_iterator
+		rbegin()
 		{
 			reverse_iterator first(this->end());
 			return first;
 		}
 
-		const_reverse_iterator rbegin() const
+		const_reverse_iterator
+		rbegin() const
 		{
 			const_reverse_iterator first(this->end());
 			return first;
 		}
 
-		reverse_iterator rend()
+		reverse_iterator
+		rend()
 		{
 			reverse_iterator last(this->begin());
 			return last;
 		}
 
-		const_reverse_iterator rend() const
+		const_reverse_iterator
+		rend() const
 		{
 			reverse_iterator last(this->begin());
 			return last;
@@ -181,9 +189,17 @@ namespace ft
 		 *
 		 */
 
-		size_type size() const
+		size_type
+		size() const
 		{
 			return this->_size;
+		}
+
+		void
+		reserve(size_type n)
+		{
+			if (n <= this->_capacity)
+				return ;
 		}
 
 		/*
@@ -199,6 +215,19 @@ namespace ft
 		const_reference
 		operator[] (size_type n) const
 		{ return this->_vector[n]; };
+
+		/*
+		 *
+		 * Modifiers
+		 *
+		 */
+
+		void
+		push_back(const value_type& val)
+		{
+			this->_size++;
+			this->_vector[this->_size] = val;
+		}
 	};
 }
 #endif
