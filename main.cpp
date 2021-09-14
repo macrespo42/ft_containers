@@ -4,8 +4,8 @@
 #include <iostream>
 #include <vector>
 
-#define NAMESPACE ft
-// #define NAMESPACE std
+// #define NAMESPACE ft
+#define NAMESPACE std
 
 void vectorConstructor_test(void)
 {
@@ -40,7 +40,7 @@ void vectorAssignation_test(void)
 void beginEnd_test(void)
 {
   std::vector<int> myvector;
-  // for (int i=1; i<=5; i++) myvector.push_back(i);
+  for (int i=1; i<=5; i++) myvector.push_back(i);
 
   std::cout << "myvector contains:";
   for (std::vector<int>::iterator it = myvector.begin() ; it != myvector.end(); ++it)
