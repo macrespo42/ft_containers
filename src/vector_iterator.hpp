@@ -2,6 +2,7 @@
 #define VECTOR_ITERATOR
 
 #include "iterator.hpp"
+#include "type_traits.hpp"
 
 namespace ft
 {
@@ -28,13 +29,14 @@ namespace ft
 		vector_iterator(pointer ptr) : _ptr(ptr)
 		{}
 
-		vector_iterator(vector_iterator const &src)
+		template<bool B>
+		vector_iterator(vector_iterator< T, B > const &src, typename ft::enable_if<B>::type* = 0)
 		{
 			*this = src;
 		}
 
 		vector_iterator &
-		operator=(vector_iterator<T, IsConst> const &src)
+		operator=(vector_iterator const &src)
 		{
 			this->_ptr = src._ptr;
 			return *this;

@@ -118,12 +118,18 @@ void push_back_test(void)
 
 int main ()
 {
-  vectorConstructor_test();
-  vectorAssignation_test();
-  beginEnd_test();
-  rendRbegin_test();
-  size_test();
-  reserve_test();
-  push_back_test();
+  // vectorConstructor_test();
+  // vectorAssignation_test();
+  // beginEnd_test();
+  // rendRbegin_test();
+  // size_test();
+  // reserve_test();
+  // push_back_test();
+  ft::vector<int> cul(10);
+
+  ft::vector<int>::iterator a = cul.begin();
+  (void)a;
+  ft::vector<int>::const_iterator b = cul.begin();
+  (void)b;
   return 0;
 }
