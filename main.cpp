@@ -42,7 +42,7 @@ void beginEnd_test(void)
   std::vector<int> myvector;
   for (int i=1; i<=5; i++) myvector.push_back(i);
 
-  std::cout << "myvector contains:";
+    std::cout << "myvector contains:";
   for (std::vector<int>::iterator it = myvector.begin() ; it != myvector.end(); ++it)
     std::cout << ' ' << *it;
   std::cout << '\n';
@@ -69,8 +69,8 @@ void size_test(void)
   std::vector<int> myints;
   std::cout << "0. size: " << myints.size() << '\n';
 
-  // for (int i=0; i<10; i++) myints.push_back(i);
-  // std::cout << "1. size: " << myints.size() << '\n';
+  for (int i=0; i<10; i++) myints.push_back(i);
+    std::cout << "1. size: " << myints.size() << '\n';
 
   // myints.insert (myints.end(),10,100);
   // std::cout << "2. size: " << myints.size() << '\n';
@@ -107,6 +107,15 @@ void reserve_test(void)
   }
 }
 
+void push_back_test(void)
+{
+  std::vector<int> myvector;
+
+  for (int i = 0; i < 10; i++)
+    myvector.push_back(i);  
+  std::cout << "myvector stores " << int(myvector.size()) << " numbers.\n";
+}
+
 int main ()
 {
   vectorConstructor_test();
@@ -115,5 +124,6 @@ int main ()
   rendRbegin_test();
   size_test();
   reserve_test();
+  push_back_test();
   return 0;
 }
