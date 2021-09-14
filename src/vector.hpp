@@ -195,11 +195,29 @@ namespace ft
 			return this->_size;
 		}
 
+		size_type
+		capacity() const
+		{
+			return this->_capacity;
+		}
+
 		void
 		reserve(size_type n)
 		{
 			if (n <= this->_capacity)
 				return ;
+			pointer vector;
+
+			vector = this->_allocator.allocate(n);
+			this->_capacity = n;
+			for (size_type i = 0; i < this->_size; i++)
+			{
+				vector[i] = this->_vector[i];
+				if (this->_vector[i])
+					this->_allocator.destroy(this->_vector + i);
+			}
+			this->_allocator.deallocate(this->_vector, this->_capacity);
+			this->_vector = vector;
 		}
 
 		/*
@@ -226,6 +244,8 @@ namespace ft
 		push_back(const value_type& val)
 		{
 			this->_size++;
+			if (this->_size > this->_capacity)
+				reserve(this->_capacity * 2);
 			this->_vector[this->_size] = val;
 		}
 	};
