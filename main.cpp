@@ -128,7 +128,6 @@ int main ()
   ft::vector<int> cul(10);
 
   ft::vector<int>::const_iterator a = cul.begin();
-  a = a + 2;
-  a = 2 + a;
+  (void)a;
   return 0;
 }

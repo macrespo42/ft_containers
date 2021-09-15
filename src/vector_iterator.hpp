@@ -141,19 +141,17 @@ namespace ft
 		vector_iterator
 		operator+=(int n)
 		{
-			vector_iterator<T, IsConst> tmp(*this);
 			for (int i = 0; i < n; i++)
 				operator++();
-			return tmp;
+			return *this;
 		}
 
 		vector_iterator
 		operator-=(int n)
 		{
-			vector_iterator<T, IsConst> tmp(*this);
 			for (int i = 0; i < n; i++)
 				operator--();
-			return tmp;
+			return *this;
 		}
 
 		reference

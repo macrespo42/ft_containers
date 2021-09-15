@@ -220,6 +220,13 @@ namespace ft
 			this->_vector = vector;
 		}
 
+		size_type max_size() const
+		{
+			//DO NOT TURN THIS FOR TESTING ONLY
+			std::vector<T> tmp;
+			return tmp.max_size();
+		}
+
 		/*
 		 *
 		 * Element access methods
