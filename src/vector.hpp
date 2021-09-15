@@ -249,10 +249,15 @@ namespace ft
 		void
 		push_back(const value_type& val)
 		{
-			this->_size++;
-			if (this->_size > this->_capacity)
+			if (this->_size + 1 > this->_capacity)
 				reserve(this->_capacity * 2);
 			this->_vector[this->_size] = val;
+			this->_size++;
+		}
+
+		void clear()
+		{
+			this->_size = 0;
 		}
 	};
 }
