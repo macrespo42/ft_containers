@@ -3,6 +3,7 @@
 
 #include "iterator.hpp"
 #include "type_traits.hpp"
+#include <iostream>
 
 namespace ft
 {
@@ -32,7 +33,7 @@ namespace ft
 		template<bool B>
 		vector_iterator(vector_iterator< T, B > const &src, typename ft::enable_if<B>::type* = 0)
 		{
-			*this = src;
+			this->_ptr = src.getPtr();
 		}
 
 		vector_iterator &
