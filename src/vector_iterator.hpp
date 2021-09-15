@@ -120,20 +120,20 @@ namespace ft
 			return tmp;	
 		}
 
-		pointer
+		vector_iterator
 		operator+(int n) const
 		{
 			return this->_ptr + n;
 		}
 
-		pointer
+		vector_iterator
 		operator-(int n) const
 		{
 			return this->_ptr - n;
 		}
 
-		pointer
-		operator-(vector_iterator<T, IsConst> const &x)
+		difference_type
+		operator-(vector_iterator<T, IsConst> const &x) const
 		{
 			return (this->_ptr - x._ptr);
 		}
