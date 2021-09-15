@@ -67,7 +67,7 @@ namespace ft
 		 */
 
 		pointer
-		getPtr(void)
+		getPtr(void) const
 		{
 			return this->_ptr;
 		}
@@ -133,7 +133,7 @@ namespace ft
 		}
 
 		pointer
-		operator-(vector_iterator<T, IsConst> const &x) const
+		operator-(vector_iterator<T, IsConst> const &x)
 		{
 			return (this->_ptr - x._ptr);
 		}
@@ -159,7 +159,7 @@ namespace ft
 		reference
 		operator[](int n) const
 		{
-			return this->_ptr + n;
+			return this->_ptr[n];
 		}
 
 		/*
@@ -190,6 +190,12 @@ namespace ft
 		operator>=(vector_iterator<T, IsConst> const &a, vector_iterator<T, IsConst> const &b)
 		{
 			return a._ptr >= b._ptr;
+		}
+
+		friend vector_iterator
+		operator+(int n, vector_iterator const &it)
+		{
+			return it.getPtr() + n;
 		}
 
 	private:
