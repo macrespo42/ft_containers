@@ -104,8 +104,7 @@ namespace ft
 		{
 			for (size_type i = 0; i < this->_size; i++)
 			{
-				if (this->_vector[i])
-					this->_allocator.destroy(this->_vector + i);
+				this->_allocator.destroy(this->_vector + i);
 			}
 			this->_allocator.deallocate(this->_vector, this->_capacity);
 		}

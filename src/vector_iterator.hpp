@@ -49,16 +49,18 @@ namespace ft
 		 *
 		 */		
 
+		template<bool B>
 		bool
-		operator==(vector_iterator<T, IsConst> const &src) const
+		operator==(vector_iterator<T, B> const &src) const
 		{
-			return this->_ptr == src._ptr;
+			return this->_ptr == src.getPtr();
 		}
 
+		template<bool B>
 		bool
-		operator!=(vector_iterator<T, IsConst> const &src) const
+		operator!=(vector_iterator<T, B> const &src) const
 		{
-			return !(*this == src);
+			return !(this->_ptr == src.getPtr());
 		}
 
 		/*
