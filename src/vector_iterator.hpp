@@ -79,7 +79,7 @@ namespace ft
 			return *this->_ptr;
 		}
 
-		reference
+		pointer
 		operator->(void) const
 		{
 			return this->_ptr;
