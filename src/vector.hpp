@@ -120,7 +120,6 @@ namespace ft
 			this->_allocator = x._allocator;
 			this->_size = x._size;
 			this->reserve(x._size);
-			this->_vector = this->_allocator.allocate(this->_capacity);
 			for (size_type i = 0; i < x._size; i++)
 				this->_allocator.construct(this->_vector + i, x[i]);
 			return *this;
