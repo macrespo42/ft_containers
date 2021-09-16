@@ -4,8 +4,8 @@
 #include <iostream>
 #include <vector>
 
-// #define NAMESPACE ft
-#define NAMESPACE std
+#define NAMESPACE ft
+// #define NAMESPACE std
 
 void vectorConstructor_test(void)
 {
@@ -118,16 +118,12 @@ void push_back_test(void)
 
 int main ()
 {
-  // vectorConstructor_test();
-  // vectorAssignation_test();
-  // beginEnd_test();
-  // rendRbegin_test();
-  // size_test();
-  // reserve_test();
-  // push_back_test();
-  ft::vector<int> cul(10);
-
-  ft::vector<int>::const_iterator a = cul.begin();
-  (void)a;
+  vectorConstructor_test();
+  vectorAssignation_test();
+  beginEnd_test();
+  rendRbegin_test();
+  size_test();
+  reserve_test();
+  push_back_test();
   return 0;
 }

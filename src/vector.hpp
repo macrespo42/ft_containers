@@ -70,7 +70,7 @@ namespace ft
 		// range
 		template <class InputIterator>
 		vector(InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(), 
-		typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = 0 ) :
+			typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = 0 ) :
 		_allocator(alloc)
 		{
 			InputIterator firstCpy = first;
@@ -211,7 +211,7 @@ namespace ft
 			this->_capacity = n;
 			for (size_type i = 0; i < this->_size; i++)
 			{
-				vector[i] = this->_vector[i];
+				this->_allocator.construct(vector + i, this->_vector[i]);
 				if (this->_vector[i])
 					this->_allocator.destroy(this->_vector + i);
 			}
