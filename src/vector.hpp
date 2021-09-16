@@ -97,7 +97,12 @@ namespace ft
 		vector (const vector& x)
 		{
 			this->_allocator = x._allocator;
-			*this = x;
+			this->_size = x._size;
+			this->_capacity = x._capacity;
+			this->_vector = this->_allocator.allocate(this->_capacity);
+
+			for (size_type i = 0 ; i < this->_size ; i++)
+				this->_allocator.construct(_vector + i, x[i]);
 		}
 
 		~vector(void)
@@ -112,11 +117,12 @@ namespace ft
 		vector &
 		operator=(const vector& x)
 		{
+			this->_allocator = x._allocator;
 			this->_size = x._size;
-			this->_capacity = x._capacity;
+			this->reserve(x._size);
 			this->_vector = this->_allocator.allocate(this->_capacity);
 			for (size_type i = 0; i < x._size; i++)
-				this->_vector[i] = x[i];
+				this->_allocator.construct(this->_vector + i, x[i]);
 			return *this;
 		}
 
