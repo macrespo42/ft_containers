@@ -95,14 +95,14 @@ namespace ft
   		operator+(difference_type n) const
   		{
   			this->_it.operator-(n);
-  			return this;
+  			return *this;
   		}
 
   		reverse_iterator
   		operator-(difference_type n) const
   		{
   			this->_it.operator+(n);
-  			return this;
+  			return *this;
   		}
 
   		reverse_iterator&
