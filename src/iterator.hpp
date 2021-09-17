@@ -2,6 +2,7 @@
 #define ITERATOR
 
 #include <cstddef>
+#include <iostream>
 
 namespace ft
 {
@@ -66,7 +67,13 @@ namespace ft
 		template <class Iter>
   		reverse_iterator (const reverse_iterator<Iter>& rev_it)
   		{
-  			this->_it = rev_it._it;
+  			this->_it = rev_it.base();
+  		}
+
+  		reverse_iterator &operator=(reverse_iterator const &x)
+  		{
+  			this->_it = x._it;
+  			return *this;
   		}
 
   		iterator_type
