@@ -229,6 +229,19 @@ namespace ft
 			return this->_allocator.max_size();
 		}
 
+		void resize (size_type n, value_type val = value_type())
+		{
+			while (n < this->_size)
+			{
+				this->pop_back();
+				return ;
+			}
+			if (n > this->_capacity)
+				this->reserve(n);
+			while (n > this->_size)
+				this->push_back(val);
+		}
+
 		bool empty() const
 		{
 			return this->_size == 0;
