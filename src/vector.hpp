@@ -5,6 +5,7 @@
 #include "iterator.hpp"
 #include "vector_iterator.hpp"
 #include "type_traits.hpp"
+#include <stdexcept>
 
 namespace ft
 {
@@ -252,37 +253,41 @@ namespace ft
 		reference
 		at(size_type n)
 		{
+			if (n > this->_size)
+				throw std::out_of_range("");
 			return this->_vector[n];
 		}
 
 		const_reference
 		at(size_type n) const
 		{
+			if (n > this->_size)
+				throw std::out_of_range("");
 			return this->_vector[n];
 		}
 
 		reference
 		front(void)
 		{
-			return this->_vector[0];
+			return this->at(0);
 		}
 
 		const_reference
 		front() const
 		{
-			return this->_vector[0];
+			return this->at(0);
 		}
 
 		reference
 		back()
 		{
-			return this->_vector[this->_size - 1];
+			return this->at(this->_size - 1);
 		}
 
 		const_reference
 		back() const
 		{
-			return this->_vector[this->_size - 1];
+			return this->at(this->_size - 1);
 		}
 
 		/*
