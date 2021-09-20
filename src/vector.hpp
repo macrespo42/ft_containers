@@ -302,15 +302,23 @@ namespace ft
 		push_back(const value_type& val)
 		{
 			if (this->_size + 1 > this->_capacity)
-				reserve(this->_capacity * 2);
+			{
+				if (this->_capacity == 0)
+					reserve(1);
+				else
+					reserve(this->_capacity * 2);
+			}
 			this->_vector[this->_size] = val;
 			this->_size++;
 		}
 
 		void pop_back()
 		{
-			this->_allocator.destroy(this->_vector + this->_size);
-			this->_size -= 1;
+			if (this->_size > 0)
+			{
+				this->_allocator.destroy(this->_vector + this->_size - 1);
+				this->_size -= 1;
+			}
 		}
 
 		void clear()

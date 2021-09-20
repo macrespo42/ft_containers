@@ -4,8 +4,8 @@
 #include <iostream>
 #include <vector>
 
-#define NAMESPACE ft
-// #define NAMESPACE std
+// #define NAMESPACE ft
+#define NAMESPACE std
 
 void vectorConstructor_test(void)
 {
@@ -107,8 +107,24 @@ void reserve_test(void)
   }
 }
 
-void push_back_test(void)
+void empty_test(void)
 {
+  NAMESPACE::vector<int> myvector;
+  int sum (0);
+
+  for (int i=1;i<=10;i++) myvector.push_back(i);
+
+  while (!myvector.empty())
+  {
+    sum += myvector.back();
+    myvector.pop_back();
+  }
+
+  std::cout << "total: " << sum << '\n';
+}
+
+ void push_back_test(void)
+ {
   NAMESPACE::vector<int> myvector;
 
   for (int i = 0; i < 10; i++)
@@ -186,8 +202,9 @@ int main ()
     // rendRbegin_test();
     // size_test();
     // reserve_test();
+  empty_test();
   // push_back_test();
-  pop_back_test();
+  // pop_back_test();
   // at_test();
   // front_test();
   // back_test();
