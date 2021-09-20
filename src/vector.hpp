@@ -249,14 +249,40 @@ namespace ft
 			return this->_vector[n];
 		}
 
-		reference at (size_type n)
+		reference
+		at(size_type n)
 		{
 			return this->_vector[n];
 		}
 
-		const_reference at (size_type n) const
+		const_reference
+		at(size_type n) const
 		{
 			return this->_vector[n];
+		}
+
+		reference
+		front(void)
+		{
+			return this->_vector[0];
+		}
+
+		const_reference
+		front() const
+		{
+			return this->_vector[0];
+		}
+
+		reference
+		back()
+		{
+			return this->_vector[this->_size - 1];
+		}
+
+		const_reference
+		back() const
+		{
+			return this->_vector[this->_size - 1];
 		}
 
 		/*

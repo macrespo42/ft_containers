@@ -130,15 +130,48 @@ void at_test(void)
   std::cout << '\n';
 }
 
-  int main ()
+void front_test(void)
+{
+  NAMESPACE::vector<int> myvector;
+
+  myvector.push_back(78);
+  myvector.push_back(16);
+
+  // now front equals 78, and back 16
+
+  myvector.front() -= myvector.back();
+
+  std::cout << "myvector.front() is now " << myvector.front() << '\n';
+}
+
+void back_test(void)
+{
+  NAMESPACE::vector<int> myvector;
+
+  myvector.push_back(10);
+
+  while (myvector.back() != 0)
   {
+    myvector.push_back ( myvector.back() -1 );
+  }
+
+  std::cout << "myvector contains:";
+  for (unsigned i=0; i<myvector.size() ; i++)
+    std::cout << ' ' << myvector[i];
+  std::cout << '\n';
+}
+
+int main ()
+{
     // vectorConstructor_test();
     // vectorAssignation_test();
     // beginEnd_test();
     // rendRbegin_test();
     // size_test();
     // reserve_test();
-    // push_back_test();
-    at_test();
-    return 0;
-  }
+  // push_back_test();
+  // at_test();
+  front_test();
+  back_test();
+  return 0;
+}
