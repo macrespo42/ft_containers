@@ -4,8 +4,8 @@
 #include <iostream>
 #include <vector>
 
-#define NAMESPACE ft
-// #define NAMESPACE std
+// #define NAMESPACE ft
+#define NAMESPACE std
 
 void vectorConstructor_test(void)
 {
@@ -94,7 +94,7 @@ void reserve_test(void)
     }
   }
 
-  std::vector<int> bar;
+  NAMESPACE::vector<int> bar;
   sz = bar.capacity();
   bar.reserve(100);   // this is the only difference with foo above
   std::cout << "making bar grow:\n";
@@ -109,21 +109,36 @@ void reserve_test(void)
 
 void push_back_test(void)
 {
-  std::vector<int> myvector;
+  NAMESPACE::vector<int> myvector;
 
   for (int i = 0; i < 10; i++)
     myvector.push_back(i);  
   std::cout << "myvector stores " << int(myvector.size()) << " numbers.\n";
 }
 
-int main ()
+void at_test(void)
 {
-  vectorConstructor_test();
-  vectorAssignation_test();
-  beginEnd_test();
-  rendRbegin_test();
-  size_test();
-  reserve_test();
-  push_back_test();
-  return 0;
+  NAMESPACE::vector<int> myvector (10);   // 10 zero-initialized ints
+
+  // assign some values:
+  for (unsigned i=0; i<myvector.size(); i++)
+    myvector.at(i)=i;
+
+  std::cout << "myvector contains:";
+  for (unsigned i=0; i<myvector.size(); i++)
+    std::cout << ' ' << myvector.at(i);
+  std::cout << '\n';
 }
+
+  int main ()
+  {
+    // vectorConstructor_test();
+    // vectorAssignation_test();
+    // beginEnd_test();
+    // rendRbegin_test();
+    // size_test();
+    // reserve_test();
+    // push_back_test();
+    at_test();
+    return 0;
+  }

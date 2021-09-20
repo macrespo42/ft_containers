@@ -239,11 +239,25 @@ namespace ft
 
 		reference
 		operator[] (size_type n)
-		{ return this->_vector[n]; }
+		{
+			return this->_vector[n];
+		}
 
 		const_reference
 		operator[] (size_type n) const
-		{ return this->_vector[n]; };
+		{
+			return this->_vector[n];
+		}
+
+		reference at (size_type n)
+		{
+			return this->_vector[n];
+		}
+
+		const_reference at (size_type n) const
+		{
+			return this->_vector[n];
+		}
 
 		/*
 		 *
