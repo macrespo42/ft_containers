@@ -227,9 +227,7 @@ namespace ft
 
 		size_type max_size() const
 		{
-			//DO NOT TURN THIS FOR TESTING ONLY
-			std::vector<T> tmp;
-			return tmp.max_size();
+			return this->_allocator.max_size();
 		}
 
 		/*
