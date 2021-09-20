@@ -4,8 +4,8 @@
 #include <iostream>
 #include <vector>
 
-// #define NAMESPACE ft
-#define NAMESPACE std
+#define NAMESPACE ft
+// #define NAMESPACE std
 
 void vectorConstructor_test(void)
 {
@@ -116,6 +116,23 @@ void push_back_test(void)
   std::cout << "myvector stores " << int(myvector.size()) << " numbers.\n";
 }
 
+void pop_back_test(void)
+{
+  NAMESPACE::vector<int> myvector;
+  int sum (0);
+  myvector.push_back (100);
+  myvector.push_back (200);
+  myvector.push_back (300);
+
+  while (!myvector.empty())
+  {
+    sum+=myvector.back();
+    myvector.pop_back();
+  }
+
+  std::cout << "The elements of myvector add up to " << sum << '\n';
+}
+
 void at_test(void)
 {
   NAMESPACE::vector<int> myvector (10);   // 10 zero-initialized ints
@@ -170,8 +187,9 @@ int main ()
     // size_test();
     // reserve_test();
   // push_back_test();
+  pop_back_test();
   // at_test();
-  front_test();
-  back_test();
+  // front_test();
+  // back_test();
   return 0;
 }

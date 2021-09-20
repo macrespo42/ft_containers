@@ -218,8 +218,7 @@ namespace ft
 			for (size_type i = 0; i < this->_size; i++)
 			{
 				this->_allocator.construct(vector + i, this->_vector[i]);
-				if (this->_vector[i])
-					this->_allocator.destroy(this->_vector + i);
+				this->_allocator.destroy(this->_vector + i);
 			}
 			this->_allocator.deallocate(this->_vector, this->_capacity);
 			this->_vector = vector;
@@ -228,6 +227,11 @@ namespace ft
 		size_type max_size() const
 		{
 			return this->_allocator.max_size();
+		}
+
+		bool empty() const
+		{
+			return this->_size == 0;
 		}
 
 		/*
@@ -301,6 +305,12 @@ namespace ft
 				reserve(this->_capacity * 2);
 			this->_vector[this->_size] = val;
 			this->_size++;
+		}
+
+		void pop_back()
+		{
+			this->_allocator.destroy(this->_vector + this->_size);
+			this->_size -= 1;
 		}
 
 		void clear()
