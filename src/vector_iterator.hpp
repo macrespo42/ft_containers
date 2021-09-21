@@ -141,7 +141,7 @@ namespace ft
 			return (this->_ptr - x._ptr);
 		}
 
-		vector_iterator
+		vector_iterator&
 		operator+=(int n)
 		{
 			for (int i = 0; i < n; i++)
@@ -149,7 +149,7 @@ namespace ft
 			return *this;
 		}
 
-		vector_iterator
+		vector_iterator&
 		operator-=(int n)
 		{
 			for (int i = 0; i < n; i++)

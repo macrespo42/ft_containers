@@ -136,15 +136,15 @@ namespace ft
 		reverse_iterator&
 		operator+=(difference_type n)
 		{
-			this->_it.operator+=(n);
+			this->_it.operator-=(n);
 			return *this;
 		}
 
 		reverse_iterator&
 		operator-=(difference_type n)
 		{
-			this->_it.operator-=(n);
-			return *this;			
+			this->_it.operator+=(n);
+			return *this;
 		}
 
 		reference
