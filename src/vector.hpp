@@ -232,14 +232,17 @@ namespace ft
 
 		void resize (size_type n, value_type val = value_type())
 		{
-			while (n < this->_size)
+			bool inf = false;
+			while (this->_size > n)
 			{
 				this->pop_back();
-				return ;
+				inf = true;
 			}
-			if (n > this->_capacity)
+			if (inf == true)
+				return ;
+			if (this->_capacity < n)
 				this->reserve(n);
-			while (n > this->_size)
+			while (this->_size < n)
 				this->push_back(val);
 		}
 
