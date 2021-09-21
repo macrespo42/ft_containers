@@ -65,7 +65,8 @@ namespace ft
 		_allocator(alloc)
 		{
 			this->_vector = this->_allocator.allocate(this->_capacity);
-			this->_allocator.construct(this->_vector, val);
+			for (size_t i = 0; i < n; i++)
+				this->_allocator.construct(this->_vector + i, val);
 		}
 
 		// range
@@ -321,8 +322,7 @@ namespace ft
 				else
 					reserve(this->_capacity * 2);
 			}
-			this->_vector[this->_size] = val;
-			this->_size++;
+			this->_vector[this->_size++] = val;
 		}
 
 		void pop_back()
