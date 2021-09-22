@@ -150,7 +150,7 @@ namespace ft
 		reference
 		operator[](difference_type n) const
 		{
-			return this->_it.operator[](n);
+			return base()[-n-1];
 		}
 
 		pointer
@@ -195,6 +195,12 @@ namespace ft
 		operator>=(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
 		{
 			return lhs._it <= rhs._it;
+		}
+
+		friend reverse_iterator
+		operator+(int n, reverse_iterator const& rhs)
+		{
+			return rhs.base() - n;
 		}
 
 	private:
