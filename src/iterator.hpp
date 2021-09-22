@@ -156,9 +156,7 @@ namespace ft
 		pointer
 		operator->() const
 		{
-			iterator_type tmp;
-			tmp = this->_it;
-			return --tmp;
+			return &(operator*());
 		}
 
 		template< class Iterator1, class Iterator2 >
