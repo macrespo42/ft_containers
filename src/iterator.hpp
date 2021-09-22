@@ -161,46 +161,52 @@ namespace ft
 			return --tmp;
 		}
 
+		template< class Iterator1, class Iterator2 >
 		friend bool
-		operator==(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
+		operator==(const reverse_iterator<Iterator1>& lhs, const reverse_iterator<Iterator2>& rhs)
 		{
-			return lhs._it == rhs._it;
+			return lhs.base() == rhs.base();
 		}
 
+		template< class Iterator1, class Iterator2 >
 		friend bool
-		operator!=(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
+		operator!=(const reverse_iterator<Iterator1>& lhs, const reverse_iterator<Iterator2>& rhs)
 		{
-			return lhs._it != rhs._it;
+			return lhs.base() != rhs.base();
 		}
 
+		template< class Iterator1, class Iterator2 >
 		friend bool
-		operator<(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
+		operator<(const reverse_iterator<Iterator1>& lhs, const reverse_iterator<Iterator2>& rhs)
 		{
-			return lhs._it > rhs._it;
+			return lhs.base() > rhs.base();
 		}
 
+		template< class Iterator1, class Iterator2 >
 		friend bool
-		operator<=(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
+		operator<=(const reverse_iterator<Iterator1>& lhs, const reverse_iterator<Iterator2>& rhs)
 		{
-			return lhs._it >= rhs._it;
+			return lhs.base() >= rhs.base();
 		}
 
+		template< class Iterator1, class Iterator2 >
 		friend bool
-		operator>(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
+		operator>(const reverse_iterator<Iterator1>& lhs, const reverse_iterator<Iterator2>& rhs)
 		{
-			return lhs._it < rhs._it;
+			return lhs.base() < rhs.base();
 		}
 
+		template< class Iterator1, class Iterator2 >
 		friend bool
-		operator>=(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
+		operator>=(const reverse_iterator<Iterator1>& lhs, const reverse_iterator<Iterator2>& rhs)
 		{
-			return lhs._it <= rhs._it;
+			return lhs.base() <= rhs.base();
 		}
 
 		friend reverse_iterator
 		operator+(int n, reverse_iterator const& rhs)
 		{
-			return rhs.base() - n;
+			return reverse_iterator(rhs.base() - n);
 		}
 
 	private:
