@@ -135,10 +135,11 @@ namespace ft
 			return this->_ptr - n;
 		}
 
+		template<bool B>
 		difference_type
-		operator-(vector_iterator<T, IsConst> const &x) const
+		operator-(vector_iterator<T, B> const &x) const
 		{
-			return (this->_ptr - x._ptr);
+			return (this->getPtr() - x.getPtr());
 		}
 
 		vector_iterator&
