@@ -5,6 +5,7 @@
 #include "iterator.hpp"
 #include "vector_iterator.hpp"
 #include "type_traits.hpp"
+#include "algorithm.hpp"
 #include <stdexcept>
 
 namespace ft
@@ -530,6 +531,21 @@ namespace ft
 		{
 			this->_size = 0;
 		}
+
+		void
+		swap(vector& x)
+		{
+			ft::swap(this->_vector, x._vector);
+			ft::swap(this->_size, x._size);
+			ft::swap(this->_capacity, x._capacity);
+			ft::swap(this->_allocator, x._allocator);
+		}
 	};
+
+	template <class T, class Alloc>
+  	void swap (vector<T,Alloc>& x, vector<T,Alloc>& y)
+  	{
+  		x.swap(y);
+  	}
 }
 #endif
