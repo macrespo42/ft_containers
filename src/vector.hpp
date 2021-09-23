@@ -234,18 +234,19 @@ namespace ft
 		void
 		resize(size_type n, value_type val = value_type())
 		{
-			bool inf = false;
-			while (this->_size > n)
+			if (n > this->_capacity)
 			{
-				this->pop_back();
-				inf = true;
+				if (n > this->_capacity * 2)
+					this->reserve(n);
+				else if (this->_capacity > 0)
+					this->reserve(this->_capacity * 2);
+				else
+					this->reserve(1);
 			}
-			if (inf == true)
-				return ;
-			if (this->_capacity < n)
-				this->reserve(n);
-			while (this->_size < n)
+			while (n > this->_size)
 				this->push_back(val);
+			while (n < this->_size)
+				this->pop_back();
 		}
 
 		bool empty() const
