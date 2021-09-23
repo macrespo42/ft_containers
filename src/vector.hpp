@@ -379,6 +379,71 @@ namespace ft
 			}
 		}
 
+		template <class InputIterator>
+		void insert (iterator position, InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = 0)
+		{
+			pointer tmp;
+			size_type n = 0;
+
+			for (InputIterator len = first; len != last; len++)
+				n++;
+			tmp = this->_allocator.allocate(this->_size + n);
+			iterator it = this->begin();
+			size_type i = 0;
+			while (it != this->end())
+			{
+				if (it == position)
+				{
+					for (InputIterator fill = first; fill != last; fill++)
+					{
+						this->_allocator.construct(tmp + i, *fill);
+						i++;
+					}
+				}
+				this->_allocator.construct(tmp + i, *it);
+				i++;
+				it++;
+			}
+			if (position == this->end())
+			{
+				for (InputIterator fill = first; fill != last; fill++)
+				{
+					this->_allocator.construct(tmp + i, *fill);
+					i++;
+				}
+			}
+			this->_size = i;
+			if (this->_size + 1 > this->_capacity && this->_capacity == 0)
+				this->reserve(this->_size);
+			else if (this->_size + 1 > this->_capacity * 2)
+				this->reserve(this->_size);
+			else if (this->_size + 1 > this->_capacity)
+				this->reserve(this->_capacity * 2);
+			this->_vector = tmp;
+		}
+
+		iterator erase(iterator position)
+		{
+			iterator cursor = position;
+			while (cursor + 1 != end())
+			{
+				*cursor = *(cursor + 1);
+				cursor++;
+			}
+			this->_size--;
+			return (iterator(position));
+		}
+
+		iterator erase(iterator first, iterator last)
+		{
+			while (first != last)
+			{
+				erase(first);
+				last--;
+			}
+			return (iterator(first));
+		}
+
 		void clear()
 		{
 			this->_size = 0;
