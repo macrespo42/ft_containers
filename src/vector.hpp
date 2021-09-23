@@ -315,6 +315,48 @@ namespace ft
 		 *
 		 */
 
+        template <class InputIterator>
+		void assign (InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = 0)
+		{
+			this->clear();
+			size_type diff = 0;
+			for (InputIterator it = first; it != last; it++)
+				diff++;
+			if (diff > this->_capacity)
+			{
+				this->reserve(diff);
+				this->_size = this->_capacity;
+				size_type i = 0;
+				while (first != last)
+				{
+					this->_vector[i] = *first;
+					i++;
+					first++;
+				}
+				return ;
+			}
+			while (first != last)
+			{
+				this->push_back(*first);
+				first++;
+			}
+		}
+
+		void assign (size_type n, const value_type& val)
+		{
+			this->clear();
+			if (n > this->_capacity)
+			{
+				this->reserve(n);
+				this->_size = this->_capacity;
+				for (size_type i = 0; i < n; i++)
+					this->_vector[i] = val;
+				return ;
+			}
+			for (size_type i = 0; i < n; i++)
+				this->push_back(val);
+		}
+
 		void
 		push_back(const value_type& val)
 		{
