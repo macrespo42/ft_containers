@@ -225,12 +225,14 @@ namespace ft
 			this->_vector = vector;
 		}
 
-		size_type max_size() const
+		size_type
+		max_size() const
 		{
 			return this->_allocator.max_size();
 		}
 
-		void resize (size_type n, value_type val = value_type())
+		void
+		resize(size_type n, value_type val = value_type())
 		{
 			bool inf = false;
 			while (this->_size > n)
@@ -316,7 +318,8 @@ namespace ft
 		 */
 
         template <class InputIterator>
-		void assign (InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = 0)
+		void
+		assign(InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = 0)
 		{
 			this->clear();
 			size_type diff = 0;
@@ -342,7 +345,8 @@ namespace ft
 			}
 		}
 
-		void assign (size_type n, const value_type& val)
+		void
+		assign(size_type n, const value_type& val)
 		{
 			this->clear();
 			if (n > this->_capacity)
@@ -370,7 +374,8 @@ namespace ft
 			this->_vector[this->_size++] = val;
 		}
 
-		void pop_back()
+		void
+		pop_back()
 		{
 			if (this->_size > 0)
 			{
@@ -379,7 +384,8 @@ namespace ft
 			}
 		}
 
-		iterator insert (iterator position, const value_type& val)
+		iterator
+		insert(iterator position, const value_type& val)
 		{
 			pointer tmp;
 
@@ -415,7 +421,8 @@ namespace ft
 			return tmp + ret;
 		}
 
-		void insert (iterator position, size_type n, const value_type& val)
+		void
+		insert(iterator position, size_type n, const value_type& val)
 		{
 			pointer tmp;
 
@@ -450,7 +457,8 @@ namespace ft
 		}
 
 		template <class InputIterator>
-		void insert (iterator position, InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = 0)
+		void
+		insert(iterator position, InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = 0)
 		{
 			pointer tmp;
 			size_type n = 0;
@@ -492,7 +500,8 @@ namespace ft
 			this->_vector = tmp;
 		}
 
-		iterator erase(iterator position)
+		iterator
+		erase(iterator position)
 		{
 			iterator cursor = position;
 			while (cursor + 1 != end())
@@ -504,7 +513,8 @@ namespace ft
 			return (iterator(position));
 		}
 
-		iterator erase(iterator first, iterator last)
+		iterator
+		erase(iterator first, iterator last)
 		{
 			while (first != last)
 			{
@@ -514,7 +524,8 @@ namespace ft
 			return (iterator(first));
 		}
 
-		void clear()
+		void
+		clear()
 		{
 			this->_size = 0;
 		}
