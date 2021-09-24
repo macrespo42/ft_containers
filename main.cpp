@@ -86,9 +86,26 @@ void max_size_test(void)
   // set some content in the vector:
   for (int i=0; i<100; i++) myvector.push_back(i);
 
-  std::cout << "size: " << myvector.size() << "\n";
+    std::cout << "size: " << myvector.size() << "\n";
   std::cout << "capacity: " << myvector.capacity() << "\n";
   std::cout << "max_size: " << myvector.max_size() << "\n";
+}
+
+void resize_test(void)
+{
+  NAMESPACE::vector<int> myvector;
+
+  // set some initial content:
+  for (size_t i=1;i<10;i++) myvector.push_back(i);
+
+  myvector.resize(5);
+  myvector.resize(8,100);
+  myvector.resize(12);
+
+  std::cout << "myvector contains:";
+  for (size_t i=0;i<myvector.size();i++)
+    std::cout << ' ' << myvector[i];
+  std::cout << '\n';
 }
 
 void reserve_test(void)
@@ -133,23 +150,6 @@ void empty_test(void)
     }
 
     std::cout << "total: " << sum << '\n';
-  }
-
-  void resize_test(void)
-  {
-    NAMESPACE::vector<int> myvector;
-
-  // set some initial content:
-    for (int i=1;i<10;i++) myvector.push_back(i);
-
-      myvector.resize(5);
-    myvector.resize(8,100);
-    myvector.resize(12);
-
-    std::cout << "myvector contains:";
-    for (size_t i=0;i<myvector.size();i++)
-      std::cout << ' ' << myvector[i];
-    std::cout << '\n';
   }
 
   void push_back_test(void)
@@ -244,6 +244,7 @@ int main ()
   rendRbegin_test();
   size_test();
   max_size_test();
+  resize_test();
   reserve_test();
   empty_test();
   push_back_test();
