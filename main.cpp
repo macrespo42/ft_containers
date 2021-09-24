@@ -253,6 +253,25 @@ void pop_back_test(void)
   std::cout << "The elements of myvector add up to " << sum << '\n';
 }
 
+void erase_test(void)
+{
+  NAMESPACE::vector<int> myvector;
+
+  // set some values (from 1 to 10)
+  for (int i=1; i<=10; i++) myvector.push_back(i);
+
+  // erase the 6th element
+  myvector.erase (myvector.begin()+5);
+
+  // erase the first 3 elements:
+  myvector.erase (myvector.begin(),myvector.begin()+3);
+
+  std::cout << "myvector contains:";
+  for (unsigned i=0; i<myvector.size(); ++i)
+    std::cout << ' ' << myvector[i];
+  std::cout << '\n';
+}
+
 void comparaison_test(void)
 {
   NAMESPACE::vector<int> foo (3,100);   // three ints with a value of 100
@@ -279,6 +298,7 @@ int main ()
   reserve_test();
   empty_test();
   assign_test();
+  erase_test();
   push_back_test();
   pop_back_test();
   at_test();
