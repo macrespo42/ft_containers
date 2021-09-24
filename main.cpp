@@ -290,6 +290,28 @@ void swap_test(void)
   std::cout << '\n';  
 }
 
+void clear_test(void)
+{
+  NAMESPACE::vector<int> myvector;
+  myvector.push_back (100);
+  myvector.push_back (200);
+  myvector.push_back (300);
+
+  std::cout << "myvector contains:";
+  for (unsigned i=0; i<myvector.size(); i++)
+    std::cout << ' ' << myvector[i];
+  std::cout << '\n';
+
+  myvector.clear();
+  myvector.push_back (1101);
+  myvector.push_back (2202);
+
+  std::cout << "myvector contains:";
+  for (unsigned i=0; i<myvector.size(); i++)
+    std::cout << ' ' << myvector[i];
+  std::cout << '\n';
+}
+
 void comparaison_test(void)
 {
   NAMESPACE::vector<int> foo (3,100);   // three ints with a value of 100
@@ -323,6 +345,7 @@ int main ()
   at_test();
   front_test();
   back_test();
+  clear_test();
   comparaison_test();
   return 0;
 }
