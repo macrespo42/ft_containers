@@ -5,7 +5,7 @@
 #include <vector>
 
 // #define NAMESPACE ft
-#define NAMESPACE std
+// #define NAMESPACE std
 
 void vectorConstructor_test(void)
 {

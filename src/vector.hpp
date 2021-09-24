@@ -573,7 +573,8 @@ namespace ft
 			return (rhs < lhs);
 		}
 
-		friend bool operator>= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+		friend bool
+		operator>=(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
 		{
 			return !(lhs < rhs);
 		}
