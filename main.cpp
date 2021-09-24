@@ -72,11 +72,23 @@ void size_test(void)
   for (int i=0; i<10; i++) myints.push_back(i);
     std::cout << "1. size: " << myints.size() << '\n';
 
-  // myints.insert (myints.end(),10,100);
-  // std::cout << "2. size: " << myints.size() << '\n';
+  myints.insert (myints.end(),10,100);
+  std::cout << "2. size: " << myints.size() << '\n';
 
-  // myints.pop_back();
-  // std::cout << "3. size: " << myints.size() << '\n';
+  myints.pop_back();
+  std::cout << "3. size: " << myints.size() << '\n';
+}
+
+void max_size_test(void)
+{
+  NAMESPACE::vector<int> myvector;
+
+  // set some content in the vector:
+  for (int i=0; i<100; i++) myvector.push_back(i);
+
+  std::cout << "size: " << myvector.size() << "\n";
+  std::cout << "capacity: " << myvector.capacity() << "\n";
+  std::cout << "max_size: " << myvector.max_size() << "\n";
 }
 
 void reserve_test(void)
@@ -226,18 +238,19 @@ void comparaison_test(void)
 
 int main ()
 {
-    // vectorConstructor_test();
-    // vectorAssignation_test();
-    // beginEnd_test();
-    // rendRbegin_test();
-    // size_test();
-    // reserve_test();
-  // empty_test();
-  // push_back_test();
-  // pop_back_test();
-  // at_test();
-  // front_test();
-  // back_test();
+  vectorConstructor_test();
+  vectorAssignation_test();
+  beginEnd_test();
+  rendRbegin_test();
+  size_test();
+  max_size_test();
+  reserve_test();
+  empty_test();
+  push_back_test();
+  pop_back_test();
+  at_test();
+  front_test();
+  back_test();
   comparaison_test();
   return 0;
 }
