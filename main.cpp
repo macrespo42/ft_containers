@@ -272,6 +272,24 @@ void erase_test(void)
   std::cout << '\n';
 }
 
+void swap_test(void)
+{
+  NAMESPACE::vector<int> foo (3,100);   // three ints with a value of 100
+  NAMESPACE::vector<int> bar (5,200);   // five ints with a value of 200
+
+  foo.swap(bar);
+
+  std::cout << "foo contains:";
+  for (unsigned i=0; i<foo.size(); i++)
+    std::cout << ' ' << foo[i];
+  std::cout << '\n';
+
+  std::cout << "bar contains:";
+  for (unsigned i=0; i<bar.size(); i++)
+    std::cout << ' ' << bar[i];
+  std::cout << '\n';  
+}
+
 void comparaison_test(void)
 {
   NAMESPACE::vector<int> foo (3,100);   // three ints with a value of 100
@@ -299,6 +317,7 @@ int main ()
   empty_test();
   assign_test();
   erase_test();
+  swap_test();
   push_back_test();
   pop_back_test();
   at_test();
