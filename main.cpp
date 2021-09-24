@@ -114,60 +114,60 @@ void empty_test(void)
 
   for (int i=1;i<=10;i++) myvector.push_back(i);
 
-  while (!myvector.empty())
-  {
-    sum += myvector.back();
-    myvector.pop_back();
+    while (!myvector.empty())
+    {
+      sum += myvector.back();
+      myvector.pop_back();
+    }
+
+    std::cout << "total: " << sum << '\n';
   }
 
-  std::cout << "total: " << sum << '\n';
-}
-
-void resize_test(void)
-{
-  NAMESPACE::vector<int> myvector;
+  void resize_test(void)
+  {
+    NAMESPACE::vector<int> myvector;
 
   // set some initial content:
-  for (int i=1;i<10;i++) myvector.push_back(i);
+    for (int i=1;i<10;i++) myvector.push_back(i);
 
-  myvector.resize(5);
-  myvector.resize(8,100);
-  myvector.resize(12);
+      myvector.resize(5);
+    myvector.resize(8,100);
+    myvector.resize(12);
 
-  std::cout << "myvector contains:";
-  for (size_t i=0;i<myvector.size();i++)
-    std::cout << ' ' << myvector[i];
-  std::cout << '\n';
-}
-
- void push_back_test(void)
- {
-  NAMESPACE::vector<int> myvector;
-
-  for (int i = 0; i < 10; i++)
-    myvector.push_back(i);  
-  std::cout << "myvector stores " << int(myvector.size()) << " numbers.\n";
-}
-
-void pop_back_test(void)
-{
-  NAMESPACE::vector<int> myvector;
-  int sum (0);
-  myvector.push_back (100);
-  myvector.push_back (200);
-  myvector.push_back (300);
-
-  while (!myvector.empty())
-  {
-    sum+=myvector.back();
-    myvector.pop_back();
+    std::cout << "myvector contains:";
+    for (size_t i=0;i<myvector.size();i++)
+      std::cout << ' ' << myvector[i];
+    std::cout << '\n';
   }
 
-  std::cout << "The elements of myvector add up to " << sum << '\n';
-}
+  void push_back_test(void)
+  {
+    NAMESPACE::vector<int> myvector;
 
-void at_test(void)
-{
+    for (int i = 0; i < 10; i++)
+      myvector.push_back(i);  
+    std::cout << "myvector stores " << int(myvector.size()) << " numbers.\n";
+  }
+
+  void pop_back_test(void)
+  {
+    NAMESPACE::vector<int> myvector;
+    int sum (0);
+    myvector.push_back (100);
+    myvector.push_back (200);
+    myvector.push_back (300);
+
+    while (!myvector.empty())
+    {
+      sum+=myvector.back();
+      myvector.pop_back();
+    }
+
+    std::cout << "The elements of myvector add up to " << sum << '\n';
+  }
+
+  void at_test(void)
+  {
   NAMESPACE::vector<int> myvector (10);   // 10 zero-initialized ints
 
   // assign some values:
@@ -211,6 +211,19 @@ void back_test(void)
   std::cout << '\n';
 }
 
+void comparaison_test(void)
+{
+  NAMESPACE::vector<int> foo (3,100);   // three ints with a value of 100
+  NAMESPACE::vector<int> bar (2,200);   // two ints with a value of 200
+
+  if (foo==bar) std::cout << "foo and bar are equal\n";
+  // if (foo!=bar) std::cout << "foo and bar are not equal\n";
+  // if (foo< bar) std::cout << "foo is less than bar\n";
+  // if (foo> bar) std::cout << "foo is greater than bar\n";
+  // if (foo<=bar) std::cout << "foo is less than or equal to bar\n";
+  // if (foo>=bar) std::cout << "foo is greater than or equal to bar\n";
+}
+
 int main ()
 {
     // vectorConstructor_test();
@@ -219,11 +232,12 @@ int main ()
     // rendRbegin_test();
     // size_test();
     // reserve_test();
-  empty_test();
+  // empty_test();
   // push_back_test();
   // pop_back_test();
   // at_test();
   // front_test();
   // back_test();
+  comparaison_test();
   return 0;
 }

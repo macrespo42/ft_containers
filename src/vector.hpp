@@ -535,10 +535,18 @@ namespace ft
 		void
 		swap(vector& x)
 		{
-			ft::swap(this->_vector, x._vector);
-			ft::swap(this->_size, x._size);
-			ft::swap(this->_capacity, x._capacity);
-			ft::swap(this->_allocator, x._allocator);
+			swap(this->_vector, x._vector);
+			swap(this->_size, x._size);
+			swap(this->_capacity, x._capacity);
+			swap(this->_allocator, x._allocator);
+		}
+
+		friend bool
+		operator==(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+		{
+			if (lhs.size() == rhs.size())
+				return equal(lhs.begin(), lhs.end(), rhs.begin());
+			return false;
 		}
 	};
 
