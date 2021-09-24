@@ -108,6 +108,18 @@ void resize_test(void)
   std::cout << '\n';
 }
 
+void capacity_test(void)
+{
+  NAMESPACE::vector<int> myvector;
+
+  // set some content in the vector:
+  for (int i=0; i<100; i++) myvector.push_back(i);
+
+  std::cout << "size: " << (int) myvector.size() << '\n';
+  std::cout << "capacity: " << (int) myvector.capacity() << '\n';
+  std::cout << "max_size: " << (int) myvector.max_size() << '\n';
+}
+
 void reserve_test(void)
 {
   std::vector<int>::size_type sz;
@@ -245,6 +257,7 @@ int main ()
   size_test();
   max_size_test();
   resize_test();
+  capacity_test();
   reserve_test();
   empty_test();
   push_back_test();
