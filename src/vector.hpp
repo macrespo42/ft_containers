@@ -535,10 +535,10 @@ namespace ft
 		void
 		swap(vector& x)
 		{
-			swap(this->_vector, x._vector);
-			swap(this->_size, x._size);
-			swap(this->_capacity, x._capacity);
-			swap(this->_allocator, x._allocator);
+			ft::swap(this->_vector, x._vector);
+			ft::swap(this->_size, x._size);
+			ft::swap(this->_capacity, x._capacity);
+			ft::swap(this->_allocator, x._allocator);
 		}
 
 		friend bool
