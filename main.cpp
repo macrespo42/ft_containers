@@ -4,9 +4,6 @@
 #include <iostream>
 #include <vector>
 
-// #define NAMESPACE ft
-// #define NAMESPACE std
-
 void vectorConstructor_test(void)
 {
   // constructors used in the same order as described above:
@@ -155,43 +152,17 @@ void empty_test(void)
 
   for (int i=1;i<=10;i++) myvector.push_back(i);
 
-    while (!myvector.empty())
-    {
-      sum += myvector.back();
-      myvector.pop_back();
-    }
-
-    std::cout << "total: " << sum << '\n';
+  while (!myvector.empty())
+  {
+    sum += myvector.back();
+    myvector.pop_back();
   }
 
-  void push_back_test(void)
-  {
-    NAMESPACE::vector<int> myvector;
+  std::cout << "total: " << sum << '\n';
+}
 
-    for (int i = 0; i < 10; i++)
-      myvector.push_back(i);  
-    std::cout << "myvector stores " << int(myvector.size()) << " numbers.\n";
-  }
-
-  void pop_back_test(void)
-  {
-    NAMESPACE::vector<int> myvector;
-    int sum (0);
-    myvector.push_back (100);
-    myvector.push_back (200);
-    myvector.push_back (300);
-
-    while (!myvector.empty())
-    {
-      sum+=myvector.back();
-      myvector.pop_back();
-    }
-
-    std::cout << "The elements of myvector add up to " << sum << '\n';
-  }
-
-  void at_test(void)
-  {
+void at_test(void)
+{
   NAMESPACE::vector<int> myvector (10);   // 10 zero-initialized ints
 
   // assign some values:
@@ -235,6 +206,53 @@ void back_test(void)
   std::cout << '\n';
 }
 
+void assign_test(void)
+{
+  NAMESPACE::vector<int> first;
+  NAMESPACE::vector<int> second;
+  NAMESPACE::vector<int> third;
+
+  first.assign (7,100);             // 7 ints with a value of 100
+
+  NAMESPACE::vector<int>::iterator it;
+  it=first.begin()+1;
+
+  second.assign (it,first.end()-1); // the 5 central values of first
+
+  int myints[] = {1776,7,4};
+  third.assign (myints,myints+3);   // assigning from array.
+
+  std::cout << "Size of first: " << int (first.size()) << '\n';
+  std::cout << "Size of second: " << int (second.size()) << '\n';
+  std::cout << "Size of third: " << int (third.size()) << '\n';
+}
+
+void push_back_test(void)
+{
+  NAMESPACE::vector<int> myvector;
+
+  for (int i = 0; i < 10; i++)
+    myvector.push_back(i);  
+  std::cout << "myvector stores " << int(myvector.size()) << " numbers.\n";
+}
+
+void pop_back_test(void)
+{
+  NAMESPACE::vector<int> myvector;
+  int sum (0);
+  myvector.push_back (100);
+  myvector.push_back (200);
+  myvector.push_back (300);
+
+  while (!myvector.empty())
+  {
+    sum+=myvector.back();
+    myvector.pop_back();
+  }
+
+  std::cout << "The elements of myvector add up to " << sum << '\n';
+}
+
 void comparaison_test(void)
 {
   NAMESPACE::vector<int> foo (3,100);   // three ints with a value of 100
@@ -260,6 +278,7 @@ int main ()
   capacity_test();
   reserve_test();
   empty_test();
+  assign_test();
   push_back_test();
   pop_back_test();
   at_test();
