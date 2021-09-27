@@ -38,7 +38,7 @@ namespace ft
 
 		void push(const value_type& val)
 		{
-			this->_stack.push_back();
+			this->_stack.push_back(val);
 		}
 
 		void pop()
@@ -47,37 +47,37 @@ namespace ft
 		}
 
 		friend bool
-		operator==(const std::stack<T,Container>& lhs, const std::stack<T,Container>& rhs)
+		operator==(const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs)
 		{
 			return lhs._stack == rhs._stack;
 		}
 
 		friend bool
-		operator!=(const std::stack<T,Container>& lhs, const std::stack<T,Container>& rhs)
+		operator!=(const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs)
 		{
 			return !(lhs._stack == rhs._stack);
 		}
 
 		friend bool
-		operator<(const std::stack<T,Container>& lhs, const std::stack<T,Container>& rhs)
+		operator<(const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs)
 		{
 			return lhs._stack < rhs._stack;
 		}
 
 		friend bool
-		operator<=(const std::stack<T,Container>& lhs, const std::stack<T,Container>& rhs)
+		operator<=(const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs)
 		{
 			return !(rhs._stack < lhs._stack);
 		}
 
 		friend bool
-		operator>(const std::stack<T,Container>& lhs, const std::stack<T,Container>& rhs)
+		operator>(const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs)
 		{
 			return (rhs._stack < lhs._stack);
 		}
 
 		friend bool
-		operator>=(const std::stack<T,Container>& lhs, const std::stack<T,Container>& rhs)
+		operator>=(const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs)
 		{
 			return !(lhs._stack < rhs._stack);
 		}
