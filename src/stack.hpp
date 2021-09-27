@@ -12,6 +12,13 @@ namespace ft
 		typedef T value_type;
 		typedef Container container_type;
 		typedef size_t size_type;
+
+		explicit stack (const container_type& ctnr = container_type()) : _stack(ctnr)
+		{}
+
+	private:
+
+		container_type _stack;
 	};
 }
 
