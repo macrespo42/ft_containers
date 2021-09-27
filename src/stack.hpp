@@ -46,6 +46,42 @@ namespace ft
 			this->_stack.pop_back();
 		}
 
+		friend bool
+		operator==(const std::stack<T,Container>& lhs, const std::stack<T,Container>& rhs)
+		{
+			return lhs._stack == rhs._stack;
+		}
+
+		friend bool
+		operator!=(const std::stack<T,Container>& lhs, const std::stack<T,Container>& rhs)
+		{
+			return !(lhs._stack == rhs._stack);
+		}
+
+		friend bool
+		operator<(const std::stack<T,Container>& lhs, const std::stack<T,Container>& rhs)
+		{
+			return lhs._stack < rhs._stack;
+		}
+
+		friend bool
+		operator<=(const std::stack<T,Container>& lhs, const std::stack<T,Container>& rhs)
+		{
+			return !(rhs._stack < lhs._stack);
+		}
+
+		friend bool
+		operator>(const std::stack<T,Container>& lhs, const std::stack<T,Container>& rhs)
+		{
+			return (rhs._stack < lhs._stack);
+		}
+
+		friend bool
+		operator>=(const std::stack<T,Container>& lhs, const std::stack<T,Container>& rhs)
+		{
+			return !(lhs._stack < rhs._stack);
+		}
+
 	private:
 
 		container_type _stack;
