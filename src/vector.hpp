@@ -108,21 +108,26 @@ namespace ft
 				this->_allocator.construct(_vector + i, x[i]);
 		}
 
-		~vector(void)
+		virtual ~vector(void)
 		{
 			for (size_type i = 0; i < this->_size; i++)
-			{
 				this->_allocator.destroy(this->_vector + i);
-			}
 			this->_allocator.deallocate(this->_vector, this->_capacity);
 		}
 
 		vector &
 		operator=(const vector& x)
 		{
+			for (size_type i = 0; i < this->_size; i++)
+				this->_allocator.destroy(this->_vector + i);
 			this->_allocator = x._allocator;
 			this->_size = x._size;
-			this->reserve(x._size);
+			if (x._size > this->_capacity)
+			{
+				this->_allocator.deallocate(this->_vector, this->_capacity);
+				this->_vector = this->_allocator.allocate(x._size);
+				this->_capacity = x._size;
+			}
 			for (size_type i = 0; i < x._size; i++)
 				this->_allocator.construct(this->_vector + i, x[i]);
 			return *this;
@@ -220,9 +225,7 @@ namespace ft
 			for (size_type i = 0; i < this->_size; i++)
 			{
 				this->_allocator.construct(vector + i, this->_vector[i]);
-				this->_allocator.destroy(this->_vector + i);
 			}
-			this->_allocator.deallocate(this->_vector, this->_capacity);
 			this->_vector = vector;
 		}
 
@@ -581,10 +584,10 @@ namespace ft
 	};
 
 	template <class T, class Alloc>
-  	void
-  	swap(vector<T,Alloc>& x, vector<T,Alloc>& y)
-  	{
-  		x.swap(y);
-  	}
+	void
+	swap(vector<T,Alloc>& x, vector<T,Alloc>& y)
+	{
+		x.swap(y);
+	}
 }
 #endif

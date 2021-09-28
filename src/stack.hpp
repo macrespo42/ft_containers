@@ -16,6 +16,11 @@ namespace ft
 		explicit stack (const container_type& ctnr = container_type()) : _stack(ctnr)
 		{}
 
+		stack& operator=(const stack& other)
+		{
+			this->_stack = other.stack;
+		}
+
 		bool empty() const
 		{
 			return this->_stack.empty();
