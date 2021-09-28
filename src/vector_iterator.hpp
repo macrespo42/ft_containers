@@ -24,7 +24,7 @@ namespace ft
 		 *
 		 */
 
-		vector_iterator(void) : _ptr(nullptr)
+		vector_iterator(void) : _ptr(NULL)
 		{}
 
 		vector_iterator(pointer ptr) : _ptr(ptr)
