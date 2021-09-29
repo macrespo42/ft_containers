@@ -5,7 +5,7 @@ namespace sta
   void stackConstructor_test(void)
   {
     // std::deque<int> mydeque (3,100);
-    // NAMESPACE::vector<int> myvector (2,200);
+    // NAMESPACE::vector<int> myvector (2,200);     
 
     // NAMESPACE::stack<int> first;
     // NAMESPACE::stack<int> second (mydeque);
@@ -91,7 +91,7 @@ namespace sta
 
 int stack_unit_test(void)
 {
-      // stackConstructor_test();
+  // stackConstructor_test();
   empty_test();
   size_test();
   top_test();
