@@ -32,3 +32,4 @@
 *.app
 
 *containers_test
+*rb_main.cpp
