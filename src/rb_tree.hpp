@@ -9,15 +9,50 @@ namespace ft
 		RB_RED
 	};
 
-	typedef struct rb_tree_node
+	template < class T, class Alloc = std::allocator<T> >
+	class rb_tree
 	{
-		struct rb_tree_node *parent;
-		struct rb_tree_node *left;
-		struct rb_tree_node *right;
-		void 				*data;
-		enum 				rb_tree_color;
+	public:
+		typedef struct rb_node rb_node;
+		typedef rb_node* node_pointer;
+		typedef T value_type;
+		typedef T* pointer;
+		typedef T& reference;
+		typedef rb_tree_color node_color;
 
-	}			   rb_tree_node;
+	private:
+
+		struct rb_node
+		{
+			node_pointer parent;
+			node_pointer left;
+			node_pointer right;
+			value_type item;
+			node_color color;
+			bool is_root;
+		};
+
+		rb_node root;
+
+	public:
+
+		rb_tree *init_tree(void)
+		{
+			rb_tree *root;
+
+			root = new rb_tree();
+			root->parent = NULL;
+			root->left = NULL;
+			root->right = NULL;
+			root->item = item;
+			color = RB_BLACK;
+		}
+	};
 }
+
+// add node
+// delete node
+// rotation
+// coloration
 
 #endif
