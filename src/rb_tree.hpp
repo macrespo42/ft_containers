@@ -1,7 +1,9 @@
 #ifndef RB_TREE
 #define RB_TREE
 
+#include <iostream>
 #include <memory>
+#include <string>
 
 namespace ft
 {
@@ -45,6 +47,15 @@ namespace ft
 			return NULL;
 		}
 
+		rb_node get_brother(rb_node *current)
+		{
+			if (current->parent && current->parent->item > current->item)
+				return current->parent->right;
+			else (current->parent && current->parent->item < current->item)
+				return current->parent->left;
+			return NULL;
+		}
+
 	public:
 
 		rb_tree(void) :
@@ -79,6 +90,16 @@ namespace ft
 					tmp = tmp->right;
 			}
 			new_child->parent = tmp->parent;
+		}
+
+		void print_tree(void)
+		{
+			std::string red='\033[0;31m';
+			std::string reset='\033[0m';
+
+			rb_node tmp = _root;
+			while (tmp->left != NULL)
+				tmp = tmp->left;
 		}
 	};
 }
