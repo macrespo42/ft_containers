@@ -100,6 +100,12 @@ namespace ft
 			rb_node tmp = _root;
 			while (tmp->left != NULL)
 				tmp = tmp->left;
+			std::cout << "------------------------------------------" << std::endl;
+			while (tmp != _root)
+			{
+				
+			}
+			std::cout << "------------------------------------------" << std::endl;
 		}
 	};
 }
