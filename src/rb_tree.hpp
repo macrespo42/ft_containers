@@ -20,6 +20,7 @@ namespace ft
 		typedef T& reference;
 		typedef rb_tree_color node_color;
 		typedef std::size_t size_type;
+		typedef Alloc allocator_type;
 
 	private:
 
@@ -34,6 +35,15 @@ namespace ft
 
 		size_type _size;
 		rb_node _root;
+
+		rb_node get_uncle(rb_node *current)
+		{
+			if (current->parent->parent && current->parent->parent->item > current->parent->item)
+				return current->parent->parent->right;
+			else if (current->parent->parent && current->parent->parent->item < current->parent->item)
+				return current->parent->parent->left;
+			return NULL;
+		}
 
 	public:
 
