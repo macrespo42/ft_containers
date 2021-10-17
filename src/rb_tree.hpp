@@ -103,7 +103,10 @@ namespace ft
 			std::cout << "------------------------------------------" << std::endl;
 			while (tmp != _root)
 			{
-				
+				std::cout << tmp->item << std::endl;
+				if (get_brother(tmp) != NULL)
+					std::cout << get_brother(tmp)->item << std::endl;
+				tmp = tmp->parent;
 			}
 			std::cout << "------------------------------------------" << std::endl;
 		}
