@@ -48,30 +48,38 @@ namespace ft
 		}
 
 		rb_node*
-		get_uncle(rb_node *current)
+		get_father(rb_node *current)
 		{
-			if (current->parent->parent && current->parent->parent->item > current->parent->item)
-				return current->parent->parent->right;
-			else if (current->parent->parent && current->parent->parent->item < current->parent->item)
-				return current->parent->parent->left;
-			return NULL;
-		}
-
-		rb_node*
-		get_brother(rb_node *current)
-		{
-			if (current->parent && current->parent->item > current->item)
-				return current->parent->right;
-			else if (current->parent && current->parent->item < current->item)
-				return current->parent->left;
+			if (current->parent)
+				return current->parent;
 			return NULL;
 		}
 
 		rb_node*
 		get_grandfather(rb_node *current)
 		{
-			if (current->parent && current->parent->parent)
+			if (get_father(current) && current->parent->parent)
 				return current->parent->parent;
+			return NULL;
+		}
+
+		rb_node*
+		get_uncle(rb_node *current)
+		{
+			if (get_grandfather(current) && get_grandfather(current)->item > get_father(current)->item)
+				return get_grandfather(current)->right;
+			else if (get_grandfather(current) && get_grandfather(current)->item < get_father(current)->item)
+				return get_grandfather(current)->left;
+			return NULL;
+		}
+
+		rb_node*
+		get_brother(rb_node *current)
+		{
+			if (get_father(current) && get_father(current)->item > current->item)
+				return get_father(current)->right;
+			else if (get_father(current) && get_father(current)->item < current->item)
+				return get_father(current)->left;
 			return NULL;
 		}
 
@@ -91,10 +99,10 @@ namespace ft
 		recoloration(rb_node *current)
 		{
 			rb_node *tmp = current;
-			while (tmp->parent && tmp->parent->color != BLACK && get_uncle(tmp)->color == RED)
+			while (get_father(tmp) && get_father(tmp)->color != BLACK && get_uncle(tmp)->color == RED)
 			{
 				change_color(get_uncle(tmp));
-				change_color(tmp->parent);
+				change_color(get_father(tmp));
 				if (get_grandfather(tmp) != _root)
 				{
 					change_color(get_grandfather(tmp));
@@ -124,6 +132,7 @@ namespace ft
 				uncle stay grandfather child
 				grandfather and parent swap colors
 			*/
+
 		}
 
 	public:
@@ -154,8 +163,8 @@ namespace ft
 				else
 					tmp = tmp->right;
 			}
-			new_node->parent = tmp->parent;
-			recoloration(new_child);
+			get_father(new_node) = get_father(tmp);
+			recoloration(new_node);
 		}
 
 		void
