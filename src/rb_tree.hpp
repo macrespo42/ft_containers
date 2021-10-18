@@ -38,7 +38,8 @@ namespace ft
 		size_type _size;
 		rb_node _root;
 
-		rb_node *get_uncle(rb_node *current)
+		rb_node*
+		get_uncle(rb_node *current)
 		{
 			if (current->parent->parent && current->parent->parent->item > current->parent->item)
 				return current->parent->parent->right;
@@ -47,7 +48,8 @@ namespace ft
 			return NULL;
 		}
 
-		rb_node *get_brother(rb_node *current)
+		rb_node*
+		get_brother(rb_node *current)
 		{
 			if (current->parent && current->parent->item > current->item)
 				return current->parent->right;
@@ -56,14 +58,16 @@ namespace ft
 			return NULL;
 		}
 
-		rb_node get_grandfather(rb_node *current)
+		rb_node*
+		get_grandfather(rb_node *current)
 		{
 			if (current->parent && current->parent->parent)
 				return current->parent->parent;
 			return NULL;
 		}
 
-		void print_node(rb_node *current)
+		void
+		print_node(rb_node *current)
 		{
 			std::string red="\033[0;31m";
 			std::string reset="\033[0m";
@@ -74,7 +78,8 @@ namespace ft
 				std::cout << current->item << std::endl;
 		}
 
-		void recoloration(rb_node *current)
+		void
+		recoloration(rb_node *current)
 		{
 			rb_node *tmp = current;
 			while (tmp->parent && tmp->parent->color != BLACK && get_uncle(tmp)->color == RED)
@@ -83,10 +88,22 @@ namespace ft
 				tmp->parent->color = BLACK;
 				if (get_grandfather(tmp) != _root)
 				{
-					get_grandfather(tmp)->color = BLACK;
+					get_grandfather(tmp)->color = RED;
 					tmp = get_grandfather(tmp);
 				}
 			}
+		}
+
+		rb_node*
+		create_node(const value_type &value)
+		{
+			rb_node *new_child;
+
+			new_child = new rb_node();
+			new_child->left = NULL;
+			new_child->right = NULL;
+			new_child->item = value;
+			new_child->color = RED;
 		}
 
 	public:
@@ -104,17 +121,12 @@ namespace ft
 		~rb_tree(void)
 		{}
 
-		void add_node(const value_type &value)
+		void
+		insert_node(const value_type &value)
 		{
-			rb_node *new_child;
-
-			new_child = new rb_node();
-			new_child->left = NULL;
-			new_child->right = NULL;
-			new_child->item = value;
-			new_child->color = RED;
-
+			rb_node new_node = create_node(value);
 			rb_node tmp = _root;
+
 			while (tmp != NULL)
 			{
 				if (tmp->item && tmp->item > value)
@@ -122,11 +134,12 @@ namespace ft
 				else
 					tmp = tmp->right;
 			}
-			new_child->parent = tmp->parent;
+			new_node->parent = tmp->parent;
 			recoloration(new_child);
 		}
 
-		void print_tree(void)
+		void
+		print_tree(void)
 		{
 			rb_node tmp = _root;
 			while (tmp->left != NULL)
