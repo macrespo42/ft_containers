@@ -156,6 +156,20 @@ namespace ft
 			ll_rotation(current);
 		}
 
+		void
+		rr_rotation(rb_node *current)
+		{
+			rb_node *tmp;
+			rb_node *tmp2;
+
+			tmp = get_father(current)->left;
+			get_father(current)->left = get_grandfather(current);
+			tmp2 = get_grandfather(get_father(current));
+			get_grandfather(current)->parent = get_father(current);
+			get_uncle(current)->right = tmp;
+			get_father(current)->parent = tmp2;
+		}
+
 	public:
 
 		rb_tree(void) :
