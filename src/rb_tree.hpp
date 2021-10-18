@@ -170,6 +170,24 @@ namespace ft
 			get_father(current)->parent = tmp2;
 		}
 
+		void
+		rl_rotation(rb_node *current)
+		{
+			rb_node *p_cpy = get_father(current);
+			rb_node *t1_cpy = current->right;
+			rb_node *t2_cpy = current->left;
+			rb_node *t3_cpy = get_father(current)->left;
+			rb_node *g_cpy = get_grandfather(current);
+
+			get_grandfather(current)->right = current;
+			current->left = t3_cpy;
+			current->right = p_cpy;
+			get_father(current)->right = t1_cpy;
+			get_father(current)->left = t2_cpy;
+			current->parent = g_cpy;
+			lr_rotation(current);
+		}
+
 	public:
 
 		rb_tree(void) :
