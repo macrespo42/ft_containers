@@ -38,7 +38,7 @@ namespace ft
 		size_type _size;
 		rb_node _root;
 
-		rb_node get_uncle(rb_node *current)
+		rb_node *get_uncle(rb_node *current)
 		{
 			if (current->parent->parent && current->parent->parent->item > current->parent->item)
 				return current->parent->parent->right;
@@ -47,12 +47,19 @@ namespace ft
 			return NULL;
 		}
 
-		rb_node get_brother(rb_node *current)
+		rb_node *get_brother(rb_node *current)
 		{
 			if (current->parent && current->parent->item > current->item)
 				return current->parent->right;
 			else if (current->parent && current->parent->item < current->item)
 				return current->parent->left;
+			return NULL;
+		}
+
+		rb_node get_grandfather(rb_node *current)
+		{
+			if (current->parent && current->parent->parent)
+				return current->parent->parent;
 			return NULL;
 		}
 
@@ -74,10 +81,10 @@ namespace ft
 			{
 				get_uncle(tmp)->color = BLACK;
 				tmp->parent->color = BLACK;
-				if (tmp->parent->parent != _root)
+				if (get_grandfather(tmp) != _root)
 				{
-					tmp->parent->parent->color = BLACK;
-					tmp = tmp->parent->parent;
+					get_grandfather(tmp)->color = BLACK;
+					tmp = get_grandfather(tmp);
 				}
 			}
 		}
