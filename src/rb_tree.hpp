@@ -126,22 +126,34 @@ namespace ft
 		void
 		ll_rotation(rb_node *current)
 		{
-			/*
-				x parent become grandfather
-				grandfather become parent child
-				uncle stay grandfather child
-				grandfather and parent swap colors
-			*/
 			rb_node *tmp;
 			rb_node *tmp2;
 
 			tmp = get_father(current);
 			get_father(current)->parent = get_grandfather(get_father(current));
-			tmp2 = get_father(curret)->left;
+			tmp2 = get_father(current)->left;
 			get_father(current)->left = tmp;
 			get_father(current)->left->left = tmp2;
 			change_color(get_father(current));
 			change_color(get_uncle(current));
+		}
+
+		void
+		lr_rotation(rb_node *current)
+		{
+			rb_node *p_cpy = get_father(current);
+			rb_node *t1_cpy = current->right;
+			rb_node *t2_cpy = current->left;
+			rb_node *t3_cpy = get_father(current)->left;
+			rb_node *g_cpy = get_grandfather(current);
+
+			get_grandfather(current)->left = current;
+			current->right = t3_cpy;
+			current->left = p_cpy;
+			get_father(current)->left = t1_cpy;
+			get_father(current)->right = t2_cpy;
+			current->parent = g_cpy;
+			ll_rotation(current);
 		}
 
 	public:
@@ -198,6 +210,5 @@ namespace ft
 
 // delete node
 // rotation
-// coloration
 
 #endif
