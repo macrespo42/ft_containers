@@ -132,7 +132,16 @@ namespace ft
 				uncle stay grandfather child
 				grandfather and parent swap colors
 			*/
+			rb_node *tmp;
+			rb_node *tmp2;
 
+			tmp = get_father(current);
+			get_father(current)->parent = get_grandfather(get_father(current));
+			tmp2 = get_father(curret)->left;
+			get_father(current)->left = tmp;
+			get_father(current)->left->left = tmp2;
+			change_color(get_father(current));
+			change_color(get_uncle(current));
 		}
 
 	public:
