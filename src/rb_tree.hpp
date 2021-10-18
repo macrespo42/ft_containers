@@ -51,15 +51,15 @@ namespace ft
 		{
 			if (current->parent && current->parent->item > current->item)
 				return current->parent->right;
-			else (current->parent && current->parent->item < current->item)
+			else if (current->parent && current->parent->item < current->item)
 				return current->parent->left;
 			return NULL;
 		}
 
 		void print_node(rb_node *current)
 		{
-			std::string red='\033[0;31m';
-			std::string reset='\033[0m';
+			std::string red="\033[0;31m";
+			std::string reset="\033[0m";
 
 			if (current->color == RED)
 				std::cout << red << current->item << reset << std::endl;
