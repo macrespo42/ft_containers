@@ -38,6 +38,15 @@ namespace ft
 		size_type _size;
 		rb_node _root;
 
+		void
+		change_color(rb_node *node)
+		{
+			if (node->color == BLACK)
+				node->color = RED;
+			else
+				node->color = BLACK;
+		}
+
 		rb_node*
 		get_uncle(rb_node *current)
 		{
@@ -84,11 +93,11 @@ namespace ft
 			rb_node *tmp = current;
 			while (tmp->parent && tmp->parent->color != BLACK && get_uncle(tmp)->color == RED)
 			{
-				get_uncle(tmp)->color = BLACK;
-				tmp->parent->color = BLACK;
+				change_color(get_uncle(tmp));
+				change_color(tmp->parent);
 				if (get_grandfather(tmp) != _root)
 				{
-					get_grandfather(tmp)->color = RED;
+					change_color(get_grandfather(tmp));
 					tmp = get_grandfather(tmp);
 				}
 			}
@@ -104,6 +113,17 @@ namespace ft
 			new_child->right = NULL;
 			new_child->item = value;
 			new_child->color = RED;
+		}
+
+		void
+		ll_rotation(rb_node *current)
+		{
+			/*
+				x parent become grandfather
+				grandfather become parent child
+				uncle stay grandfather child
+				grandfather and parent swap colors
+			*/
 		}
 
 	public:
