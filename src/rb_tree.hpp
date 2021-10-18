@@ -56,6 +56,17 @@ namespace ft
 			return NULL;
 		}
 
+		void print_node(rb_node *current)
+		{
+			std::string red='\033[0;31m';
+			std::string reset='\033[0m';
+
+			if (current->color == RED)
+				std::cout << red << current->item << reset << std::endl;
+			else
+				std::cout << current->item << std::endl;
+		}
+
 	public:
 
 		rb_tree(void) :
@@ -94,9 +105,6 @@ namespace ft
 
 		void print_tree(void)
 		{
-			std::string red='\033[0;31m';
-			std::string reset='\033[0m';
-
 			rb_node tmp = _root;
 			while (tmp->left != NULL)
 				tmp = tmp->left;
