@@ -67,6 +67,21 @@ namespace ft
 				std::cout << current->item << std::endl;
 		}
 
+		void recoloration(rb_node *current)
+		{
+			rb_node *tmp = current;
+			while (tmp->parent && tmp->parent->color != BLACK && get_uncle(tmp)->color == RED)
+			{
+				get_uncle(tmp)->color = BLACK;
+				tmp->parent->color = BLACK;
+				if (tmp->parent->parent != _root)
+				{
+					tmp->parent->parent->color = BLACK;
+					tmp = tmp->parent->parent;
+				}
+			}
+		}
+
 	public:
 
 		rb_tree(void) :
@@ -82,25 +97,26 @@ namespace ft
 		~rb_tree(void)
 		{}
 
-		void add_node(const value_type &val)
+		void add_node(const value_type &value)
 		{
 			rb_node *new_child;
 
 			new_child = new rb_node();
 			new_child->left = NULL;
 			new_child->right = NULL;
-			new_child->item = val;
+			new_child->item = value;
 			new_child->color = RED;
 
 			rb_node tmp = _root;
 			while (tmp != NULL)
 			{
-				if (tmp->val && tmp->val > val)
+				if (tmp->item && tmp->item > value)
 					tmp = tmp->left;
 				else
 					tmp = tmp->right;
 			}
 			new_child->parent = tmp->parent;
+			recoloration(new_child);
 		}
 
 		void print_tree(void)
@@ -116,6 +132,7 @@ namespace ft
 					std::cout << get_brother(tmp)->item << std::endl;
 				tmp = tmp->parent;
 			}
+			tmp = _root;
 			std::cout << "------------------------------------------" << std::endl;
 		}
 	};
