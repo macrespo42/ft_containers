@@ -221,7 +221,8 @@ namespace ft
 			recoloration(new_node);
 		}
 
-		void levelOrderHelper(rb_node *root)
+		void
+		levelOrderHelper(rb_node *root)
 		{
 			if (root == NULL)
 				return;
@@ -232,7 +233,7 @@ namespace ft
 			while (!q.empty())
 			{
 				rb_node *temp = q.front();
-				std::cout << temp->data << "  ";
+				std::cout << temp->item << "  ";
 				q.pop();
 		
 				if (temp->left != NULL)
@@ -242,6 +243,10 @@ namespace ft
 					q.push(temp->right);
 			}
 		}
+
+		void
+		levelOrder()
+		{  levelOrderHelper(&_root); }
 	};
 }
 
