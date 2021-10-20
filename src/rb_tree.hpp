@@ -184,19 +184,19 @@ namespace ft
 		}
 
 		rb_node *
-		bst_insert(rb_node *new_node)
+		bst_insert(rb_node *root ,rb_node *new_node)
 		{
-			if (new_node == _root)
+			if (root == NULL)
 				return new_node;
-			if (new_node->item < _root->item)
+			if (new_node->item < root->item)
 			{
-				_root->left = bst_insert(_root->left, new_node);
-				_root->left->parent = _root;
+				root->left = bst_insert(root->left, new_node);
+				root->left->parent = root;
 			}
-			else if (new_node->item > _root->item)
+			else if (new_node->item < root->item)
 			{
-				_root->right = bst_insert(_root->right, new_node);
-				_root->right->parent = _root;
+				root->right = bst_insert(root->right, new_node);
+				root->right->parent = root;
 			}
 			return root;
 		}
@@ -214,17 +214,9 @@ namespace ft
 		void
 		insert_node(const value_type &value)
 		{
-			rb_node *new_node = create_node(value);
-			rb_node *tmp = _root;
+			rb_node *new_node = new rb_node(value);
 
-			while (tmp != NULL)
-			{
-				if (tmp->item && tmp->item > value)
-					tmp = tmp->left;
-				else
-					tmp = tmp->right;
-			}
-			get_father(new_node) = get_father(tmp);
+			_root = bst_insert(_root, new_node);
 			// recoloration(new_node);
 		}
 
