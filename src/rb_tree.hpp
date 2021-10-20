@@ -183,6 +183,24 @@ namespace ft
 			lr_rotation(current);
 		}
 
+		rb_node *
+		bst_insert(rb_node *new_node)
+		{
+			if (new_node == _root)
+				return new_node;
+			if (new_node->item < _root->item)
+			{
+				_root->left = bst_insert(_root->left, new_node);
+				_root->left->parent = _root;
+			}
+			else if (new_node->item > _root->item)
+			{
+				_root->right = bst_insert(_root->right, new_node);
+				_root->right->parent = _root;
+			}
+			return root;
+		}
+
 	public:
 
 		rb_tree(void)
@@ -193,22 +211,22 @@ namespace ft
 		~rb_tree(void)
 		{}
 
-		// void
-		// insert_node(const value_type &value)
-		// {
-		// 	rb_node *new_node = create_node(value);
-		// 	rb_node *tmp = _root;
+		void
+		insert_node(const value_type &value)
+		{
+			rb_node *new_node = create_node(value);
+			rb_node *tmp = _root;
 
-		// 	while (tmp != NULL)
-		// 	{
-		// 		if (tmp->item && tmp->item > value)
-		// 			tmp = tmp->left;
-		// 		else
-		// 			tmp = tmp->right;
-		// 	}
-		// 	get_father(new_node) = get_father(tmp);
-		// 	// recoloration(new_node);
-		// }
+			while (tmp != NULL)
+			{
+				if (tmp->item && tmp->item > value)
+					tmp = tmp->left;
+				else
+					tmp = tmp->right;
+			}
+			get_father(new_node) = get_father(tmp);
+			// recoloration(new_node);
+		}
 
 		void
 		levelOrderHelper(rb_node *root)
