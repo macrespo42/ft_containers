@@ -4,6 +4,7 @@
 #include <iostream>
 #include <memory>
 #include <string>
+#include <queue>
 
 namespace ft
 {
@@ -220,22 +221,26 @@ namespace ft
 			recoloration(new_node);
 		}
 
-		void
-		print_tree(void)
+		void levelOrderHelper(rb_node *root)
 		{
-			rb_node tmp = _root;
-			while (tmp->left != NULL)
-				tmp = tmp->left;
-			std::cout << "------------------------------------------" << std::endl;
-			while (tmp != _root)
+			if (root == NULL)
+				return;
+		
+			std::queue<rb_node *> q;
+			q.push(root);
+		
+			while (!q.empty())
 			{
-				std::cout << tmp->item << std::endl;
-				if (get_brother(tmp) != NULL)
-					std::cout << get_brother(tmp)->item << std::endl;
-				tmp = tmp->parent;
+				rb_node *temp = q.front();
+				std::cout << temp->data << "  ";
+				q.pop();
+		
+				if (temp->left != NULL)
+					q.push(temp->left);
+		
+				if (temp->right != NULL)
+					q.push(temp->right);
 			}
-			tmp = _root;
-			std::cout << "------------------------------------------" << std::endl;
 		}
 	};
 }
