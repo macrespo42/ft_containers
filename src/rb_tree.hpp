@@ -34,10 +34,16 @@ namespace ft
 			rb_node* right;
 			value_type item;
 			node_color color;
+
+			rb_node(value_type data)
+			{
+				this->item = data;
+				parent = left = right = NULL;
+				this->color = RED;
+			}
 		}				rb_node;
 
-		size_type _size;
-		rb_node _root;
+		rb_node *_root;
 
 		void
 		change_color(rb_node *node)
@@ -112,18 +118,6 @@ namespace ft
 			}
 		}
 
-		rb_node*
-		create_node(const value_type &value)
-		{
-			rb_node *new_child;
-
-			new_child = new rb_node();
-			new_child->left = NULL;
-			new_child->right = NULL;
-			new_child->item = value;
-			new_child->color = RED;
-		}
-
 		void
 		ll_rotation(rb_node *current)
 		{
@@ -191,35 +185,30 @@ namespace ft
 
 	public:
 
-		rb_tree(void) :
-		_size(0)
+		rb_tree(void)
 		{
-			_root.parent = NULL;
-			_root.left = NULL;
-			_root.right = NULL;
-			_root.item = value_type();
-			_root.color = BLACK;
+			_root = NULL;
 		}
 
 		~rb_tree(void)
 		{}
 
-		void
-		insert_node(const value_type &value)
-		{
-			rb_node new_node = create_node(value);
-			rb_node tmp = _root;
+		// void
+		// insert_node(const value_type &value)
+		// {
+		// 	rb_node *new_node = create_node(value);
+		// 	rb_node *tmp = _root;
 
-			while (tmp != NULL)
-			{
-				if (tmp->item && tmp->item > value)
-					tmp = tmp->left;
-				else
-					tmp = tmp->right;
-			}
-			get_father(new_node) = get_father(tmp);
-			recoloration(new_node);
-		}
+		// 	while (tmp != NULL)
+		// 	{
+		// 		if (tmp->item && tmp->item > value)
+		// 			tmp = tmp->left;
+		// 		else
+		// 			tmp = tmp->right;
+		// 	}
+		// 	get_father(new_node) = get_father(tmp);
+		// 	// recoloration(new_node);
+		// }
 
 		void
 		levelOrderHelper(rb_node *root)
@@ -246,7 +235,7 @@ namespace ft
 
 		void
 		levelOrder()
-		{  levelOrderHelper(&_root); }
+		{  levelOrderHelper(_root); }
 	};
 }
 
