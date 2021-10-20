@@ -97,7 +97,7 @@ namespace ft
 			std::string reset="\033[0m";
 
 			if (current->color == RED)
-				std::cout << red << current->item << reset << std::endl;
+				std::cout << red << current->item << reset << " ";
 			else
 				std::cout << current->item << std::endl;
 		}
@@ -232,7 +232,7 @@ namespace ft
 			while (!q.empty())
 			{
 				rb_node *temp = q.front();
-				std::cout << temp->item << "  ";
+				print_node(temp);
 				q.pop();
 		
 				if (temp->left != NULL)
