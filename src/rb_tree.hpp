@@ -217,6 +217,8 @@ namespace ft
 			rb_node *new_node = new rb_node(value);
 
 			_root = bst_insert(_root, new_node);
+			if (new_node == _root)
+				_root->color = BLACK;
 			// recoloration(new_node);
 		}
 
