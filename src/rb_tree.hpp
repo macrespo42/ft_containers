@@ -95,7 +95,9 @@ namespace ft
 		{
 			std::string red="\033[0;31m";
 			std::string reset="\033[0m";
-
+			
+			if (!current)
+				return ;
 			if (current->color == RED)
 				std::cout << red << current->item << reset << " ";
 			else
@@ -193,7 +195,7 @@ namespace ft
 				root->left = bst_insert(root->left, new_node);
 				root->left->parent = root;
 			}
-			else if (new_node->item < root->item)
+			else if (new_node->item > root->item)
 			{
 				root->right = bst_insert(root->right, new_node);
 				root->right->parent = root;
