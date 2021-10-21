@@ -99,7 +99,7 @@ namespace ft
 			if (current->color == RED)
 				std::cout << red << current->item << reset << " ";
 			else
-				std::cout << current->item << std::endl;
+				std::cout << current->item << " ";
 		}
 
 		void
