@@ -221,7 +221,7 @@ namespace ft
 			_root = bst_insert(_root, new_node);
 			if (new_node == _root)
 				_root->color = BLACK;
-			// recoloration(new_node);
+			recoloration(new_node);
 		}
 
 		void
