@@ -120,69 +120,40 @@ namespace ft
 			}
 		}
 
-		void
-		ll_rotation(rb_node *current)
+		void rotate_left(rb_node *root, rb_node *current)
 		{
-			rb_node *tmp;
-			rb_node *tmp2;
+			rb_node *current_right = current->right;
 
-			tmp = get_father(current);
-			get_father(current)->parent = get_grandfather(get_father(current));
-			tmp2 = get_father(current)->left;
-			get_father(current)->left = tmp;
-			get_father(current)->left->left = tmp2;
-			change_color(get_father(current));
-			change_color(get_uncle(current));
+			current->right = current_right->left;
+			if (current->right != NULL)
+				current->right->parent = current;
+			current_right->parent = current->parent;
+			if (current->parent == NULL)
+				root = current_right;
+			else if (current == current->parent->left)
+				current->parent->left = current_right;
+			else
+				current->parent->right = current_right;
+			current_right->left = current;
+			current->parent = current_right;
 		}
 
-		void
-		lr_rotation(rb_node *current)
+		void rotate_right(rb_node *root, rb_node *current)
 		{
-			rb_node *p_cpy = get_father(current);
-			rb_node *t1_cpy = current->right;
-			rb_node *t2_cpy = current->left;
-			rb_node *t3_cpy = get_father(current)->left;
-			rb_node *g_cpy = get_grandfather(current);
+			rb_node *current_left = current->left;
 
-			get_grandfather(current)->left = current;
-			current->right = t3_cpy;
-			current->left = p_cpy;
-			get_father(current)->left = t1_cpy;
-			get_father(current)->right = t2_cpy;
-			current->parent = g_cpy;
-			ll_rotation(current);
-		}
-
-		void
-		rr_rotation(rb_node *current)
-		{
-			rb_node *tmp;
-			rb_node *tmp2;
-
-			tmp = get_father(current)->left;
-			get_father(current)->left = get_grandfather(current);
-			tmp2 = get_grandfather(get_father(current));
-			get_grandfather(current)->parent = get_father(current);
-			get_uncle(current)->right = tmp;
-			get_father(current)->parent = tmp2;
-		}
-
-		void
-		rl_rotation(rb_node *current)
-		{
-			rb_node *p_cpy = get_father(current);
-			rb_node *t1_cpy = current->right;
-			rb_node *t2_cpy = current->left;
-			rb_node *t3_cpy = get_father(current)->left;
-			rb_node *g_cpy = get_grandfather(current);
-
-			get_grandfather(current)->right = current;
-			current->left = t3_cpy;
-			current->right = p_cpy;
-			get_father(current)->right = t1_cpy;
-			get_father(current)->left = t2_cpy;
-			current->parent = g_cpy;
-			lr_rotation(current);
+			current->left = current_left->right;
+			if (current->left != NULL)
+			    current->left->parent = current;
+			current_left->parent = current->parent;
+			if (current->parent == NULL)
+				root = current_left;
+			else if (current == current->parent->left)
+				current->parent->left = current_left;
+			else
+				current->parent->right = current_left;
+			current_left->right = current;
+			current->parent = current_left;
 		}
 
 		rb_node *
@@ -201,6 +172,14 @@ namespace ft
 				root->right->parent = root;
 			}
 			return root;
+		}
+
+		void rotation(rb_node *current)
+		{
+			rb_node *parent = get_father(current);
+			rb_node *grand_father = get_grandfather(current);
+
+
 		}
 
 	public:
