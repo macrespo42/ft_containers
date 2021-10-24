@@ -5,6 +5,7 @@
 #include <memory>
 #include <string>
 #include <queue>
+#include "algorithm.hpp"
 
 namespace ft
 {
@@ -174,12 +175,52 @@ namespace ft
 			return root;
 		}
 
-		void rotation(rb_node *current)
+		void rotation(rb_node *root,  rb_node *current)
 		{
-			rb_node *parent = get_father(current);
-			rb_node *grand_father = get_grandfather(current);
+			rb_node *parent = NULL;
+			rb_node *grand_father = NULL;
+			rb_node *uncle = NULL;
 
+			while ((current != root) && (current->color != BLACK) && (get_father(current)->color == RED))
+			{
+				parent = get_father(current);
+				grand_father = get_grandfather(current);
+				uncle = get_uncle(current);
 
+				if (parent == grand_father->left)
+				{
+					if (uncle != NULL && uncle->color == BLACK)
+					{
+						if (current == parent->right)
+						{
+							rotate_left(root, parent);
+							current = parent;
+							parent = get_father(current);
+						}
+
+						rotate_right(root, grand_father);
+						ft::swap(parent->color, grand_father->color);
+						current = parent;
+					}
+				}
+				else
+				{
+					if (uncle != NULL && uncle->color == BLACK)
+					{
+						if (current == parent->left)
+						{
+							rotate_right(root, parent);
+							current = parent;
+							parent = get_father(current);
+						}
+
+						rotate_left(root, grand_father);
+						ft::swap(parent->color, grand_father->color);
+						current = parent;
+					}
+				}
+			}
+			root->color = BLACK;
 		}
 
 	public:
@@ -201,6 +242,7 @@ namespace ft
 			if (new_node == _root)
 				_root->color = BLACK;
 			recoloration(new_node);
+			// rotation(_root, new_node);
 		}
 
 		void
