@@ -236,7 +236,7 @@ namespace ft
 			root->color = BLACK;
 		}
 
-		rb_node *bst_delete(rb_node *root, value_type item)
+		rb_node *bst_delete(rb_node *root, const value_type &item)
 		{
 			if (!root)
 				return NULL;
@@ -288,10 +288,12 @@ namespace ft
 			rb_node *new_node = new rb_node(value);
 
 			_root = bst_insert(_root, new_node);
-			// if (new_node == _root)
-			// 	_root->color = BLACK;
-			// recoloration(new_node);
 			fix_violation(_root, new_node);
+		}
+
+		void delete_node(const value_type &value)
+		{
+			bst_delete(_root, value);
 		}
 
 		void
