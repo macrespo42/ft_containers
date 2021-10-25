@@ -236,6 +236,42 @@ namespace ft
 			root->color = BLACK;
 		}
 
+		rb_node *bst_delete(rb_node *root, value_type item)
+		{
+			if (!root)
+				return NULL;
+			if (item < root->item)
+				root->left = bst_delete(root->left, item);
+			else if (item > root->item)
+				root->right = bst_delete(root->right, item);
+			else
+			{
+				if (root->left == NULL && root->right == NULL)
+					return NULL;
+				else if (root->left == NULL)
+				{
+					rb_node *tmp = root->left;
+					free(root);
+					return tmp;
+				}
+				else if (root->right == NULL)
+				{
+					rb_node *tmp = root->right;
+					free(root);
+					return tmp;
+				}
+
+				rb_node *temp;
+
+				temp = root->right;
+				while (temp && temp->left != NULL)
+					temp = temp->left;
+				root->item = temp->item;
+				root->right = bst_delete(root->right, temp->item);
+			}
+			return root;
+		}
+
 	public:
 
 		rb_tree(void)
