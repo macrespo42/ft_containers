@@ -109,7 +109,7 @@ namespace ft
 		recoloration(rb_node *current)
 		{
 			rb_node *tmp = current;
-			while (get_father(tmp) && get_father(tmp)->color != BLACK && get_uncle(tmp)->color == RED)
+			while (get_father(tmp) && get_uncle(tmp) && get_father(tmp)->color != BLACK && get_uncle(tmp)->color == RED)
 			{
 				change_color(get_uncle(tmp));
 				change_color(get_father(tmp));
@@ -121,40 +121,40 @@ namespace ft
 			}
 		}
 
-		void rotate_left(rb_node *root, rb_node *current)
+		void rotate_left(rb_node *&root, rb_node *&pt)
 		{
-			rb_node *current_right = current->right;
-
-			current->right = current_right->left;
-			if (current->right != NULL)
-				current->right->parent = current;
-			current_right->parent = current->parent;
-			if (current->parent == NULL)
-				root = current_right;
-			else if (current == current->parent->left)
-				current->parent->left = current_right;
+			rb_node *pt_right = pt->right;
+		
+			pt->right = pt_right->left;
+			if (pt->right != NULL)
+				pt->right->parent = pt;
+			pt_right->parent = pt->parent;
+			if (pt->parent == NULL)
+				root = pt_right;
+			else if (pt == pt->parent->left)
+				pt->parent->left = pt_right;
 			else
-				current->parent->right = current_right;
-			current_right->left = current;
-			current->parent = current_right;
+				pt->parent->right = pt_right;
+			pt_right->left = pt;
+			pt->parent = pt_right;
 		}
-
-		void rotate_right(rb_node *root, rb_node *current)
+		
+		void rotate_right(rb_node *&root, rb_node *&pt)
 		{
-			rb_node *current_left = current->left;
+			rb_node *pt_left = pt->left;
 
-			current->left = current_left->right;
-			if (current->left != NULL)
-			    current->left->parent = current;
-			current_left->parent = current->parent;
-			if (current->parent == NULL)
-				root = current_left;
-			else if (current == current->parent->left)
-				current->parent->left = current_left;
+			pt->left = pt_left->right;
+			if (pt->left != NULL)
+				pt->left->parent = pt;		
+			pt_left->parent = pt->parent;
+			if (pt->parent == NULL)
+				root = pt_left;
+			else if (pt == pt->parent->left)
+				pt->parent->left = pt_left;
 			else
-				current->parent->right = current_left;
-			current_left->right = current;
-			current->parent = current_left;
+				pt->parent->right = pt_left;
+			pt_left->right = pt;
+			pt->parent = pt_left;
 		}
 
 		rb_node *
@@ -175,48 +175,61 @@ namespace ft
 			return root;
 		}
 
-		void rotation(rb_node *root,  rb_node *current)
+		void fix_violation(rb_node *&root, rb_node *&pt)
 		{
-			rb_node *parent = NULL;
-			rb_node *grand_father = NULL;
-			rb_node *uncle = NULL;
-
-			while ((current != root) && (current->color != BLACK) && (get_father(current)->color == RED))
+			rb_node *cur_parent = NULL;
+			rb_node *grand_parent_pt = NULL;
+		
+			while ((pt != root) && (pt->color != BLACK) && (pt->parent->color == RED))
 			{
-				parent = get_father(current);
-				grand_father = get_grandfather(current);
-				uncle = get_uncle(current);
-
-				if (parent == grand_father->left)
+				cur_parent = pt->parent;
+				grand_parent_pt = pt->parent->parent;
+				if (cur_parent == grand_parent_pt->left)
 				{
-					if (uncle != NULL && uncle->color == BLACK)
-					{
-						if (current == parent->right)
-						{
-							rotate_left(root, parent);
-							current = parent;
-							parent = get_father(current);
-						}
+					rb_node *uncle_pt = grand_parent_pt->right;
 
-						rotate_right(root, grand_father);
-						ft::swap(parent->color, grand_father->color);
-						current = parent;
+					if (uncle_pt != NULL && uncle_pt->color == RED)
+					{
+						grand_parent_pt->color = RED;
+						cur_parent->color = BLACK;
+						uncle_pt->color = BLACK;
+						pt = grand_parent_pt;
+					}
+					else
+					{
+						if (pt == cur_parent->right)
+						{
+							rotate_left(root, cur_parent);
+							pt = cur_parent;
+							cur_parent = pt->parent;
+						}
+						rotate_right(root, grand_parent_pt);
+						ft::swap(cur_parent->color, grand_parent_pt->color);
+						pt = cur_parent;
 					}
 				}
 				else
 				{
-					if (uncle != NULL && uncle->color == BLACK)
+					rb_node *uncle_pt = grand_parent_pt->left;
+		
+					if ((uncle_pt != NULL) && (uncle_pt->color == RED))
 					{
-						if (current == parent->left)
+						grand_parent_pt->color = RED;
+						cur_parent->color = BLACK;
+						uncle_pt->color = BLACK;
+						pt = grand_parent_pt;
+					}
+					else
+					{
+						if (pt == cur_parent->left)
 						{
-							rotate_right(root, parent);
-							current = parent;
-							parent = get_father(current);
+							rotate_right(root, cur_parent);
+							pt = cur_parent;
+							cur_parent = pt->parent;
 						}
-
-						rotate_left(root, grand_father);
-						ft::swap(parent->color, grand_father->color);
-						current = parent;
+						rotate_left(root, grand_parent_pt);
+						ft::swap(cur_parent->color, grand_parent_pt->color);
+						pt = cur_parent;
 					}
 				}
 			}
@@ -239,10 +252,10 @@ namespace ft
 			rb_node *new_node = new rb_node(value);
 
 			_root = bst_insert(_root, new_node);
-			if (new_node == _root)
-				_root->color = BLACK;
-			recoloration(new_node);
-			// rotation(_root, new_node);
+			// if (new_node == _root)
+			// 	_root->color = BLACK;
+			// recoloration(new_node);
+			fix_violation(_root, new_node);
 		}
 
 		void
