@@ -285,6 +285,23 @@ namespace ft
 			bst_delete(_root, value);
 		}
 
+		rb_node *
+		search(const value_type &value)
+		{
+			rb_node *tmp = _root;
+
+			while (tmp != NULL)
+			{
+				if (value < tmp->item)
+					tmp = tmp->left;
+				else if (value > tmp->item)
+					tmp = tmp->right;
+				else
+					return tmp;
+			}
+			return NULL;
+		}
+
 		void
 		levelOrderHelper(rb_node *root)
 		{
