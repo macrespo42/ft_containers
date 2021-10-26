@@ -260,6 +260,16 @@ namespace ft
 			return root;
 		}
 
+		rb_node *
+		successor(rb_node *current)
+		{
+			rb_node *tmp = current;
+
+			while (tmp->left != NULL)
+				tmp = tmp->left;
+			return tmp;
+		}
+
 	public:
 
 		rb_tree(void)
