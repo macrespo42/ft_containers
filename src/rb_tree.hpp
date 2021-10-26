@@ -270,6 +270,19 @@ namespace ft
 			return tmp;
 		}
 
+		rb_node *
+		bst_replace(rb_node *current)
+		{
+			if (current->left != NULL && current->right != NULL)
+				return successor(current->right);
+			if (current->left == NULL && current->right == NULL)
+				return NULL;
+			if (current->left != NULL)
+				return current->left;
+			else
+				return current->right;
+		}
+
 	public:
 
 		rb_tree(void)
