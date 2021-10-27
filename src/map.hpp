@@ -6,10 +6,11 @@
 #include "algorithm.hpp"
 #include <stdexcept>
 #include <functional>
+#include "pair.hpp"
 
 namespace ft
 {
-    template <class Key, class T, class compare = std::less<Key>, class Alloc = std::allocator<std::pair<const Key, T> > >
+    template <class Key, class T, class compare = std::less<Key>, class Alloc = std::allocator<ft::pair<const Key, T> > >
     class map
     {
 
