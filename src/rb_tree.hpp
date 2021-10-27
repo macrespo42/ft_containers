@@ -42,6 +42,26 @@ namespace ft
 				parent = left = right = NULL;
 				this->color = RED;
 			}
+			
+			  bool
+			  is_on_left()
+			  { return this == parent->left; }
+
+			rb_node
+			*sibling()
+			{
+				if (parent == NULL)
+					return NULL;
+				if (is_on_left())
+					return parent->right;
+				return parent->left;
+			}
+
+			bool
+			hasRedChild()
+			{
+    			return (left != NULL && left->color == RED) || (right != NULL && right->color == RED);
+  			}
 		}				rb_node;
 
 		rb_node *_root;
@@ -223,43 +243,6 @@ namespace ft
 			root->color = BLACK;
 		}
 
-		rb_node*
-		bst_delete(rb_node *root, const value_type &item)
-		{
-			if (!root)
-				return NULL;
-			if (item < root->item)
-				root->left = bst_delete(root->left, item);
-			else if (item > root->item)
-				root->right = bst_delete(root->right, item);
-			else
-			{
-				if (root->left == NULL && root->right == NULL)
-					return NULL;
-				else if (root->left == NULL)
-				{
-					rb_node *tmp = root->left;
-					free(root);
-					return tmp;
-				}
-				else if (root->right == NULL)
-				{
-					rb_node *tmp = root->right;
-					free(root);
-					return tmp;
-				}
-
-				rb_node *temp;
-
-				temp = root->right;
-				while (temp && temp->left != NULL)
-					temp = temp->left;
-				root->item = temp->item;
-				root->right = bst_delete(root->right, temp->item);
-			}
-			return root;
-		}
-
 		rb_node *
 		successor(rb_node *current)
 		{
@@ -283,6 +266,54 @@ namespace ft
 				return current->right;
 		}
 
+		// void delete_node(rb_node *v)
+		// {
+		// 	rb_node *u = bst_replace(v);
+		// 	bool uvBlack = ((u == NULL or u->color == BLACK) and (v->color == BLACK));
+    	// 	rb_node *parent = get_father(v);
+
+		// 	if (u == NULL)
+		// 	{
+		// 		if (v == _root)
+		// 			_root = NULL;
+		// 		else
+		// 		{
+		// 			if (uvBlack)
+		// 				//fix_double_black;
+		// 		}
+				
+		// 	}
+		// }
+
+		void fix_double_black(rb_node *x)
+		{
+			if (x == _root)
+				return ;
+			
+			rb_node *sibling = x->sibling();
+			rb_node *parent = get_father(x);
+
+			if (sibling == NULL)
+				fix_double_black(parent);
+			else
+			{
+				if (sibling->color == RED)
+				{
+					parent->color = RED;
+					sibling->color = BLACK;
+					if (sibling->is_on_left())
+						rotate_right(parent);
+					else
+						rotate_right(parent);
+					fix_double_black(x);
+				}
+				else
+				{
+
+				}
+			}
+		}
+
 	public:
 
 		rb_tree(void)
@@ -300,12 +331,6 @@ namespace ft
 
 			_root = bst_insert(_root, new_node);
 			fix_violation(_root, new_node);
-		}
-
-		void
-		delete_node(const value_type &value)
-		{
-			bst_delete(_root, value);
 		}
 
 		rb_node *
