@@ -287,8 +287,7 @@ namespace ft
 				else
 				{
 					if (uvBlack)
-						(void)uvBlack;
-						// fix_double_black(v);
+						fix_double_black(v);
 					else
 					{
 						if (v->sibling() != NULL)
@@ -319,8 +318,7 @@ namespace ft
 					delete v;
 					u->parent = parent;
 					if (uvBlack)
-						(void)uvBlack;
-						// fix_double_black(u);
+						fix_double_black(u);
 					else
 						u->color = BLACK;
 				}
