@@ -58,7 +58,7 @@ namespace ft
 			}
 
 			bool
-			hasRedChild()
+			has_red_child()
 			{
     			return (left != NULL && left->color == RED) || (right != NULL && right->color == RED);
   			}
@@ -288,13 +288,13 @@ namespace ft
 		void fix_double_black(rb_node *x)
 		{
 			if (x == _root)
-				return ;
-			
-			rb_node *sibling = x->sibling();
-			rb_node *parent = get_father(x);
-
+			return;
+		
+			rb_node *sibling = x->sibling(), *parent = x->parent;
 			if (sibling == NULL)
+			{
 				fix_double_black(parent);
+			}
 			else
 			{
 				if (sibling->color == RED)
@@ -304,15 +304,56 @@ namespace ft
 					if (sibling->is_on_left())
 						rotate_right(parent);
 					else
-						rotate_right(parent);
+						rotate_left(parent);
 					fix_double_black(x);
 				}
 				else
 				{
-
+					if (sibling->has_red_child())
+					{
+						if (sibling->left != NULL and sibling->left->color == RED)
+						{
+							if (sibling->is_on_left())
+							{
+								sibling->left->color = sibling->color;
+								sibling->color = parent->color;
+								rotate_right(parent);
+							}
+							else
+							{
+								sibling->left->color = parent->color;
+								rotate_right(sibling);
+								rotate_left(parent);
+							}
+						}
+						else
+						{
+							if (sibling->isOnLeft())
+							{
+								sibling->right->color = parent->color;
+								rotate_left(sibling);
+								rotate_right(parent);
+							}
+							else
+							{
+								sibling->right->color = sibling->color;
+								sibling->color = parent->color;
+								rotate_left(parent);
+							}
+						}
+						parent->color = BLACK;
+					}
+					else
+					{
+						sibling->color = RED;
+						if (parent->color == BLACK)
+							fix_double_black(parent);
+						else
+							parent->color = BLACK;
+					}
 				}
 			}
-		}
+  		}
 
 	public:
 
