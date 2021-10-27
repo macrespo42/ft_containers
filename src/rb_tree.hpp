@@ -266,24 +266,67 @@ namespace ft
 				return current->right;
 		}
 
-		// void delete_node(rb_node *v)
-		// {
-		// 	rb_node *u = bst_replace(v);
-		// 	bool uvBlack = ((u == NULL or u->color == BLACK) and (v->color == BLACK));
-    	// 	rb_node *parent = get_father(v);
+		void swap_values(rb_node *u, rb_node *v)
+		{
+			int temp;
+			temp = u->val;
+			u->val = v->val;
+			v->val = temp;
+		}
 
-		// 	if (u == NULL)
-		// 	{
-		// 		if (v == _root)
-		// 			_root = NULL;
-		// 		else
-		// 		{
-		// 			if (uvBlack)
-		// 				//fix_double_black;
-		// 		}
-				
-		// 	}
-		// }
+		void delete_node(rb_node *v)
+		{
+			rb_node *u = bst_replace(v);
+			
+			bool uvBlack = ((u == NULL or u->color == BLACK) and (v->color == BLACK));
+			rb_node *parent = v->parent;
+			if (u == NULL)
+			{
+				if (v == _root)
+					_root = NULL;
+				else
+				{
+					if (uvBlack)
+						fix_double_black(v);
+					else
+					{
+						if (v->sibling() != NULL)
+							v->sibling()->color = RED;
+					}
+					if (v->is_on_left())
+						parent->left = NULL;
+					else
+						parent->right = NULL;
+				}
+				delete v;
+				return;
+			}
+			if (v->left == NULL or v->right == NULL)
+			{
+				if (v == _root)
+				{
+					v->val = u->val;
+					v->left = v->right = NULL;
+					delete u;
+				}
+				else
+				{
+					if (v->is_on_left())
+						parent->left = u;
+					else
+						parent->right = u;
+					delete v;
+					u->parent = parent;
+					if (uvBlack)
+						fix_double_black(u);
+					else
+						u->color = BLACK;
+				}
+				return;
+			}
+			swap_values(u, v);
+			delete_node(u);
+		}
 
 		void fix_double_black(rb_node *x)
 		{
@@ -419,8 +462,4 @@ namespace ft
 		{  levelOrderHelper(_root); }
 	};
 }
-
-// delete node
-// rotation
-
 #endif
