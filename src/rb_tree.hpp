@@ -269,9 +269,9 @@ namespace ft
 		void swap_values(rb_node *u, rb_node *v)
 		{
 			int temp;
-			temp = u->val;
-			u->val = v->val;
-			v->val = temp;
+			temp = u->item;
+			u->item = v->item;
+			v->item = temp;
 		}
 
 		void delete_node(rb_node *v)
@@ -287,7 +287,8 @@ namespace ft
 				else
 				{
 					if (uvBlack)
-						fix_double_black(v);
+						(void)uvBlack;
+						// fix_double_black(v);
 					else
 					{
 						if (v->sibling() != NULL)
@@ -305,7 +306,7 @@ namespace ft
 			{
 				if (v == _root)
 				{
-					v->val = u->val;
+					v->item = u->item;
 					v->left = v->right = NULL;
 					delete u;
 				}
@@ -318,7 +319,8 @@ namespace ft
 					delete v;
 					u->parent = parent;
 					if (uvBlack)
-						fix_double_black(u);
+						(void)uvBlack;
+						// fix_double_black(u);
 					else
 						u->color = BLACK;
 				}
@@ -345,9 +347,9 @@ namespace ft
 					parent->color = RED;
 					sibling->color = BLACK;
 					if (sibling->is_on_left())
-						rotate_right(parent);
+						rotate_right(_root, parent);
 					else
-						rotate_left(parent);
+						rotate_left(_root, parent);
 					fix_double_black(x);
 				}
 				else
@@ -360,28 +362,28 @@ namespace ft
 							{
 								sibling->left->color = sibling->color;
 								sibling->color = parent->color;
-								rotate_right(parent);
+								rotate_right(_root, parent);
 							}
 							else
 							{
 								sibling->left->color = parent->color;
-								rotate_right(sibling);
-								rotate_left(parent);
+								rotate_right(_root, sibling);
+								rotate_left(_root, parent);
 							}
 						}
 						else
 						{
-							if (sibling->isOnLeft())
+							if (sibling->is_on_left())
 							{
 								sibling->right->color = parent->color;
-								rotate_left(sibling);
-								rotate_right(parent);
+								rotate_left(_root, sibling);
+								rotate_right(_root, parent);
 							}
 							else
 							{
 								sibling->right->color = sibling->color;
 								sibling->color = parent->color;
-								rotate_left(parent);
+								rotate_left(_root, parent);
 							}
 						}
 						parent->color = BLACK;
@@ -417,21 +419,42 @@ namespace ft
 			fix_violation(_root, new_node);
 		}
 
-		rb_node *
-		search(const value_type &value)
+		rb_node
+		*search(int n)
 		{
-			rb_node *tmp = _root;
-
-			while (tmp != NULL)
+			rb_node *temp = _root;
+			while (temp != NULL)
 			{
-				if (value < tmp->item)
-					tmp = tmp->left;
-				else if (value > tmp->item)
-					tmp = tmp->right;
+				if (n < temp->item)
+				{
+					if (temp->left == NULL)
+						break;
 				else
-					return tmp;
+					temp = temp->left;
+				}
+				else if (n == temp->item)
+					break;
+				else
+				{
+					if (temp->right == NULL)
+					break;
+					else
+					temp = temp->right;
+				}
 			}
-			return NULL;
+			return temp;
+		}
+
+		void
+		delete_by_val(const value_type &n)
+		{
+			if (_root == NULL)
+				return;
+			rb_node *v = search(n), *u;
+		
+			if (v->item && v->item != n)
+				return;
+			delete_node(v);
 		}
 
 		void
