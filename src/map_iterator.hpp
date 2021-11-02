@@ -100,7 +100,20 @@ namespace ft
             return &(this->_ptr->item);
         }
 
+        map_iterator &
+        operator++(void)
+        {
+            successor()
+            return *this;
+        }
 
+        map_iterator
+        operator++(int)
+        {
+            map_iterator<T, isConst> tmp(*this);
+            operator++();
+            return tmp;
+        }
     };
 }
 
