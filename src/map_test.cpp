@@ -1,4 +1,5 @@
 #include "map.hpp"
+#include <map>
 #include <string>
 
 int main(void)
@@ -9,6 +10,13 @@ int main(void)
 
     product1 = product2;
 
-    ft::map<int, int> test;
+    std::map<int, int> test;
+    if (test.empty())
+        std::cout << "empty" << std::endl;
+    else
+        std::cout << "not empty" << std::endl;
+    
+    std::cout << test.size() << std::endl;
+    std::cout << test.max_size() << std::endl;
     return 0;
 }
