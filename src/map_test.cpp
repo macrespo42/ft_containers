@@ -8,5 +8,7 @@ int main(void)
     ft::pair <std::string,double> product3 (product2);          // copy constructor
 
     product1 = product2;
+
+    ft::map<int, int> test;
     return 0;
 }

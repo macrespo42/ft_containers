@@ -7,6 +7,7 @@
 #include <stdexcept>
 #include <functional>
 #include "utility.hpp"
+#include "rb_tree.hpp"
 
 namespace ft
 {
@@ -21,17 +22,28 @@ namespace ft
         typedef compare key_compare;
         // value_compare;
         typedef Alloc allocator_type;
-        typedef allocator_type::reference reference;
-        typedef allocator_type::const_reference const_reference;
-        typedef allocator_type::pointer pointer;
-        typedef allocator_type::const_pointer pointer;
+        typedef typename allocator_type::reference reference;
+        typedef typename allocator_type::const_reference const_reference;
+        typedef typename allocator_type::pointer pointer;
+        typedef typename allocator_type::const_pointer const_pointer;
         typedef size_t size_type;
 
         private:
 
         size_type _size;
         allocator_type _allocator;
-        ft::rb_tree<value_type> _map;
+        ft::rb_tree<value_type> *_map;
+        compare _cmp;
+
+        public:
+
+        explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) :
+        _size(0),
+        _allocator(alloc),
+        _cmp(comp)
+        {
+            _map = new ft::rb_tree<value_type>();
+        }
     };
 }
 
