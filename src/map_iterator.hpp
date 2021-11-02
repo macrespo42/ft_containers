@@ -47,6 +47,11 @@ namespace ft
             }
         }
 
+        void predecessor(void)
+        {
+
+        }
+
         public:
 
         map_iterator(void) : _ptr(NULL)
@@ -112,6 +117,21 @@ namespace ft
         {
             map_iterator<T, isConst> tmp(*this);
             operator++();
+            return tmp;
+        }
+
+        map_iterator &
+        operator--(void)
+        {
+            predecessor();
+            return *this;
+        }
+
+        map_iterator
+        operator--(int)
+        {
+            map_iterator<T, isConst> tmp(*this);
+            operator--();
             return tmp;
         }
     };
