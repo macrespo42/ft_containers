@@ -159,47 +159,6 @@ namespace ft
 			return &(operator*());
 		}
 
-		// template< class Iterator1, class Iterator2 >
-		// friend bool
-		// operator==(const reverse_iterator<Iterator1>& lhs, const reverse_iterator<Iterator2>& rhs)
-		// {
-		// 	return lhs.base() == rhs.base();
-		// }
-
-		// template< class Iterator1, class Iterator2 >
-		// friend bool
-		// operator!=(const reverse_iterator<Iterator1>& lhs, const reverse_iterator<Iterator2>& rhs)
-		// {
-		// 	return lhs.base() != rhs.base();
-		// }
-
-		// template< class Iterator1, class Iterator2 >
-		// friend bool
-		// operator<(const reverse_iterator<Iterator1>& lhs, const reverse_iterator<Iterator2>& rhs)
-		// {
-		// 	return lhs.base() > rhs.base();
-		// }
-
-		// template< class Iterator1, class Iterator2 >
-		// friend bool
-		// operator<=(const reverse_iterator<Iterator1>& lhs, const reverse_iterator<Iterator2>& rhs)
-		// {
-		// 	return lhs.base() >= rhs.base();
-		// }
-
-		// template< class Iterator1, class Iterator2 >
-		// friend bool
-		// operator>(const reverse_iterator<Iterator1>& lhs, const reverse_iterator<Iterator2>& rhs)
-		// {
-		// 	return lhs.base() < rhs.base();
-		// }
-
-		// template< class Iterator1, class Iterator2 >
-		// friend bool
-		// operator>=(const reverse_iterator<Iterator1>& lhs, const reverse_iterator<Iterator2>& rhs)
-		// {
-		// 	return lhs.base() <= rhs.base();
-		// }
 		template <class U>
 		bool
 		operator==(const reverse_iterator<U> & x) const
