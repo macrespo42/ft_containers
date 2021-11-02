@@ -58,11 +58,22 @@ namespace ft
 		}
 
         pointer
-        base()
+        base(void) const
         {
             return this->_ptr;
         }
 
+        reference
+        operator*(void) const
+        {
+            return this->_ptr->item;
+        }
+
+        pointer
+        operator->(void) const
+        {
+            return &(this->_ptr->item);
+        }  
     };
 }
 
