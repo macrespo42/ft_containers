@@ -15,10 +15,48 @@ namespace ft
 		RED
 	};
 
+	template < class T>
+	struct rb_node
+	{
+		rb_node* parent;
+		rb_node* left;
+		rb_node* right;
+		T item;
+		rb_tree_color color;
+
+		rb_node(T data)
+		{
+			this->item = data;
+			parent = left = right = NULL;
+				this->color = RED;
+		}
+			
+		bool
+		is_on_left()
+		{ return this == parent->left; }
+
+		rb_node
+		*sibling()
+		{
+			if (parent == NULL)
+				return NULL;
+			if (is_on_left())
+				return parent->right;
+			return parent->left;
+		}
+
+		bool
+		has_red_child()
+		{
+    		return (left != NULL && left->color == RED) || (right != NULL && right->color == RED);
+  		}
+	};
+
 	template < class T, class Alloc = std::allocator<T> >
 	class rb_tree
 	{
 	public:
+		typedef rb_node<T> rb_node;
 		typedef T value_type;
 		typedef T* pointer;
 		typedef T& reference;
@@ -27,42 +65,6 @@ namespace ft
 		typedef Alloc allocator_type;
 
 	private:
-
-		typedef struct rb_node
-		{
-			rb_node* parent;
-			rb_node* left;
-			rb_node* right;
-			value_type item;
-			node_color color;
-
-			rb_node(value_type data)
-			{
-				this->item = data;
-				parent = left = right = NULL;
-				this->color = RED;
-			}
-			
-			  bool
-			  is_on_left()
-			  { return this == parent->left; }
-
-			rb_node
-			*sibling()
-			{
-				if (parent == NULL)
-					return NULL;
-				if (is_on_left())
-					return parent->right;
-				return parent->left;
-			}
-
-			bool
-			has_red_child()
-			{
-    			return (left != NULL && left->color == RED) || (right != NULL && right->color == RED);
-  			}
-		}				rb_node;
 
 		rb_node *_root;
 
