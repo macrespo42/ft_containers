@@ -22,6 +22,31 @@ namespace ft
 
         rb_node<T> *_ptr;
 
+        void successor(void)
+        {
+            // si (current de droite existe)
+            //     go a droite puis go le plus a gauche possible
+            // sinon
+            //     remonte tant que tu viens de la droite
+            if (_ptr->right != NULL)
+            {
+                _ptr = _ptr->right;
+                while (_ptr->left != NULL)
+                    _ptr = _ptr->left;
+            }
+            else
+            {
+                rb_node *tmp;
+                tmp = _ptr;
+                _ptr = _ptr->parent;
+                while (_ptr->left != tmp)
+                {
+                    tmp = _ptr;
+                    _ptr = _ptr->parent;
+                }
+            }
+        }
+
         public:
 
         map_iterator(void) : _ptr(NULL)
@@ -73,7 +98,9 @@ namespace ft
         operator->(void) const
         {
             return &(this->_ptr->item);
-        }  
+        }
+
+
     };
 }
 
