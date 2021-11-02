@@ -49,7 +49,27 @@ namespace ft
 
         void predecessor(void)
         {
-            
+            // si current de gauche existe 
+            //     go a gauche puis le plus a droite possible
+            // sinon
+            //     remonte tant que tu viens de la gauche
+            if (_ptr->left != NULL)
+            {
+                _ptr = _ptr->left;
+                while (_ptr->right != NULL)
+                    _ptr = _ptr->right;
+            }
+            else
+            {
+                rb_node *tmp;
+                tmp = _ptr;
+                _ptr = _ptr->parent;
+                while (_ptr->right != tmp)
+                {
+                    tmp = _ptr;
+                    _ptr = ptr->parent;
+                }
+            }
         }
 
         public:
