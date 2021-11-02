@@ -27,8 +27,10 @@ namespace ft
 		rb_node(T data)
 		{
 			this->item = data;
-			parent = left = right = NULL;
-				this->color = RED;
+			parent = NULL;
+			left = NULL;
+			right = NULL;
+			this->color = RED;
 		}
 			
 		bool
