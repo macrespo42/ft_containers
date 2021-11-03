@@ -39,7 +39,7 @@ namespace ft
                 rb_node<T> *tmp;
                 tmp = _ptr;
                 _ptr = _ptr->parent;
-                while (_ptr->left != tmp)
+                while (_ptr->parent != NULL && _ptr->left != tmp)
                 {
                     tmp = _ptr;
                     _ptr = _ptr->parent;
@@ -53,7 +53,12 @@ namespace ft
             //     go a gauche puis le plus a droite possible
             // sinon
             //     remonte tant que tu viens de la gauche
-            if (_ptr->left != NULL)
+            if (_ptr->parent == NULL)
+            {
+                while (_ptr->right != NULL)
+                    _ptr = _ptr->right;
+            }
+            else if (_ptr->left != NULL)
             {
                 _ptr = _ptr->left;
                 while (_ptr->right != NULL)

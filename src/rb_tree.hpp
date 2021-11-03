@@ -68,7 +68,7 @@ namespace ft
 
 	private:
 
-		rb_node *_root;
+		rb_node *_nil;
 
 		void
 		change_color(rb_node *node)
@@ -168,21 +168,22 @@ namespace ft
 		}
 
 		rb_node *
-		bst_insert(rb_node *root ,rb_node *new_node)
+		find_destination(rb_node *current, rb_node *inserted)
 		{
-			if (root == NULL)
-				return new_node;
-			if (new_node->item < root->item)
+			if (inserted->item > current->item)
 			{
-				root->left = bst_insert(root->left, new_node);
-				root->left->parent = root;
+				if (current->right == NULL)
+					return (current);
+				else
+					return (this->find_destination(current->right, inserted));
 			}
-			else if (new_node->item > root->item)
+			else
 			{
-				root->right = bst_insert(root->right, new_node);
-				root->right->parent = root;
+				if (current->left == NULL)
+					return (current);
+				else
+					return (this->find_destination(current->left, inserted));
 			}
-			return root;
 		}
 
 		void
@@ -191,7 +192,7 @@ namespace ft
 			rb_node *cur_parent = NULL;
 			rb_node *cur_grand_parent = NULL;
 		
-			while ((current != root) && (current->color != BLACK) && (current->parent->color == RED))
+			while ((current != root) && (current->color == RED) && (current->parent->color == RED))
 			{
 				cur_parent = get_father(current);
 				cur_grand_parent = get_grandfather(current);
@@ -286,8 +287,8 @@ namespace ft
 			rb_node *parent = v->parent;
 			if (u == NULL)
 			{
-				if (v == _root)
-					_root = NULL;
+				if (v == _nil->right)
+					_nil->right = NULL;
 				else
 				{
 					if (uvBlack)
@@ -307,7 +308,7 @@ namespace ft
 			}
 			if (v->left == NULL or v->right == NULL)
 			{
-				if (v == _root)
+				if (v == _nil->right)
 				{
 					v->item = u->item;
 					v->left = v->right = NULL;
@@ -334,7 +335,7 @@ namespace ft
 
 		void fix_double_black(rb_node *x)
 		{
-			if (x == _root)
+			if (x == _nil->right)
 			return;
 		
 			rb_node *sibling = x->sibling(), *parent = x->parent;
@@ -349,9 +350,9 @@ namespace ft
 					parent->color = RED;
 					sibling->color = BLACK;
 					if (sibling->is_on_left())
-						rotate_right(_root, parent);
+						rotate_right(_nil->right, parent);
 					else
-						rotate_left(_root, parent);
+						rotate_left(_nil->right, parent);
 					fix_double_black(x);
 				}
 				else
@@ -364,13 +365,13 @@ namespace ft
 							{
 								sibling->left->color = sibling->color;
 								sibling->color = parent->color;
-								rotate_right(_root, parent);
+								rotate_right(_nil->right, parent);
 							}
 							else
 							{
 								sibling->left->color = parent->color;
-								rotate_right(_root, sibling);
-								rotate_left(_root, parent);
+								rotate_right(_nil->right, sibling);
+								rotate_left(_nil->right, parent);
 							}
 						}
 						else
@@ -378,14 +379,14 @@ namespace ft
 							if (sibling->is_on_left())
 							{
 								sibling->right->color = parent->color;
-								rotate_left(_root, sibling);
-								rotate_right(_root, parent);
+								rotate_left(_nil->right, sibling);
+								rotate_right(_nil->right, parent);
 							}
 							else
 							{
 								sibling->right->color = sibling->color;
 								sibling->color = parent->color;
-								rotate_left(_root, parent);
+								rotate_left(_nil->right, parent);
 							}
 						}
 						parent->color = BLACK;
@@ -406,25 +407,43 @@ namespace ft
 
 		rb_tree(void)
 		{
-			_root = NULL;
+			_nil = new rb_node(value_type());
+			_nil->color = BLACK;
 		}
 
 		~rb_tree(void)
-		{}
+		{
+			delete _nil;
+		}
 
 		void
 		insert_node(const value_type &value)
 		{
 			rb_node *new_node = new rb_node(value);
+			
+			if (_nil->right)
+			{
+				rb_node *parent = find_destination(_nil->right, new_node);
 
-			_root = bst_insert(_root, new_node);
-			fix_violation(_root, new_node);
+				if (new_node->item > parent->item)
+					parent->right = new_node;
+				else
+					parent->left = new_node;
+				new_node->parent = parent;
+			}
+			else
+			{
+				_nil->right = new_node;
+				new_node->parent = _nil;
+			}
+
+			fix_violation(_nil->right, new_node);
 		}
 
 		rb_node
 		*search(int n)
 		{
-			rb_node *temp = _root;
+			rb_node *temp = _nil->right;
 			while (temp != NULL)
 			{
 				if (n < temp->item)
@@ -450,9 +469,9 @@ namespace ft
 		void
 		delete_by_val(const value_type &n)
 		{
-			if (_root == NULL)
+			if (_nil->right == NULL)
 				return;
-			rb_node *v = search(n), *u;
+			rb_node *v = search(n);
 		
 			if (v->item && v->item != n)
 				return;
@@ -484,7 +503,7 @@ namespace ft
 
 		void
 		levelOrder()
-		{  levelOrderHelper(_root); }
+		{  levelOrderHelper(_nil->right); }
 	};
 }
 #endif

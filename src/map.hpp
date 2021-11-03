@@ -31,6 +31,7 @@ namespace ft
         typedef map_iterator<T, false> const_iterator;
         typedef ft::reverse_iterator<iterator> reverse_iterator;
         typedef ft::reverse_iterator<const_iterator> const_reverse_iterator;
+        typedef typename iterator_traits<iterator>::difference_type difference_type;
         typedef size_t size_type;
 
         private:
@@ -49,6 +50,14 @@ namespace ft
         {
             _map = new ft::rb_tree<value_type>();
         }
+
+        template <class InputIterator>
+        map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
+        {
+            
+        }
+
+        map (const map& x);
 
         bool empty() const
         {
