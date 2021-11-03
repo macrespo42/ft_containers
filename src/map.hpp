@@ -8,6 +8,7 @@
 #include <functional>
 #include "utility.hpp"
 #include "rb_tree.hpp"
+#include "map_iterator.hpp"
 
 namespace ft
 {
@@ -26,6 +27,10 @@ namespace ft
         typedef typename allocator_type::const_reference const_reference;
         typedef typename allocator_type::pointer pointer;
         typedef typename allocator_type::const_pointer const_pointer;
+        typedef map_iterator<T, true> iterator;
+        typedef map_iterator<T, false> const_iterator;
+        typedef ft::reverse_iterator<iterator> reverse_iterator;
+        typedef ft::reverse_iterator<const_iterator> const_reverse_iterator;
         typedef size_t size_type;
 
         private:

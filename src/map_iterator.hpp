@@ -13,9 +13,9 @@ namespace ft
         public:
 
         typedef std::ptrdiff_t difference_type;
-		typedef typename ft::is_const<IsConst, T*, const T*>::value value_type;
-		typedef typename value_type* pointer;
-		typedef typename value_type& reference;
+		typedef typename ft::is_const<isConst, T*, const T*>::value value_type;
+		typedef value_type* pointer;
+		typedef value_type& reference;
 		typedef bidirectional_iterator_tag iterator_category;
 
         private:
@@ -36,7 +36,7 @@ namespace ft
             }
             else
             {
-                rb_node *tmp;
+                rb_node<T> *tmp;
                 tmp = _ptr;
                 _ptr = _ptr->parent;
                 while (_ptr->left != tmp)
@@ -61,13 +61,13 @@ namespace ft
             }
             else
             {
-                rb_node *tmp;
+                rb_node<T> *tmp;
                 tmp = _ptr;
                 _ptr = _ptr->parent;
                 while (_ptr->right != tmp)
                 {
                     tmp = _ptr;
-                    _ptr = ptr->parent;
+                    _ptr = _ptr->parent;
                 }
             }
         }
@@ -77,7 +77,7 @@ namespace ft
         map_iterator(void) : _ptr(NULL)
         { }
 
-        map_iterator(rb_node *ptr) : _ptr(ptr)
+        map_iterator(rb_node<T> *ptr) : _ptr(ptr)
         { }
 
         template<bool B>
@@ -128,7 +128,7 @@ namespace ft
         map_iterator &
         operator++(void)
         {
-            successor()
+            successor();
             return *this;
         }
 
