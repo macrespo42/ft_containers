@@ -38,7 +38,7 @@ namespace ft
 
         size_type _size;
         allocator_type _allocator;
-        ft::rb_tree<value_type> *_map;
+        ft::rb_tree<value_type> _map;
         compare _cmp;
 
         public:
@@ -47,14 +47,20 @@ namespace ft
         _size(0),
         _allocator(alloc),
         _cmp(comp)
-        {
-            _map = new ft::rb_tree<value_type>();
-        }
+        {}
 
         template <class InputIterator>
         map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
         {
-            
+            size_type size;
+
+            size = 0;
+            for (InputIterator current = first; current != last; current++)
+            {
+                _map->insert_node(*current);
+                size++;
+            }
+            _size = size;
         }
 
         map (const map& x);
