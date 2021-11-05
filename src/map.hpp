@@ -43,12 +43,21 @@ namespace ft
 
         public:
 
+		/*
+		 *
+		 * CONSTRUCTORS
+		 *
+		 */
+
+
+        // default
         explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) :
         _size(0),
         _allocator(alloc),
         _cmp(comp)
         {}
 
+        //range
         template <class InputIterator>
         map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
         {
@@ -65,6 +74,12 @@ namespace ft
 
         map (const map& x);
 
+		/*
+		 *
+		 * CAPACITY
+		 *
+		 */
+
         bool empty() const
         {
             return _size == 0;
@@ -79,6 +94,12 @@ namespace ft
         {
             return _allocator.max_size();
         }
+
+		/*
+		 *
+		 * Iterators
+		 *
+		 */
 
         iterator begin()
         {

@@ -441,7 +441,7 @@ namespace ft
 		}
 
 		rb_node
-		*search(int n)
+		*search(value_type n)
 		{
 			rb_node *temp = _nil->right;
 			while (temp != NULL)
