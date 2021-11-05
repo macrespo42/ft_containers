@@ -496,6 +496,12 @@ namespace ft
 			return tmp;
 		}
 
+		rb_node *
+		get_nil_node(void) const
+		{
+			return _nil;
+		}
+
 		void
 		levelOrderHelper(rb_node *root)
 		{
