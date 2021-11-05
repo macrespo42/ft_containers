@@ -478,6 +478,24 @@ namespace ft
 			delete_node(v);
 		}
 
+		rb_node *
+		left_most(void) const
+		{
+			rb_node *tmp = _nil->right;
+			while (tmp->left != NULL)
+				tmp = tmp->left;
+			return tmp;
+		}
+
+		rb_node *
+		right_most(void) const
+		{
+			rb_node *tmp = _nil->right;
+			while (tmp->right != NULL)
+				tmp = tmp->right;
+			return tmp;
+		}
+
 		void
 		levelOrderHelper(rb_node *root)
 		{
@@ -499,6 +517,10 @@ namespace ft
 				if (temp->right != NULL)
 					q.push(temp->right);
 			}
+			std::cout << std::endl << "Left most : " << std::endl;
+			print_node(left_most());
+			std::cout << std::endl << "Right most : " << std::endl;
+			print_node(right_most());
 		}
 
 		void
