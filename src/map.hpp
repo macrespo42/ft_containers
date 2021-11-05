@@ -79,6 +79,17 @@ namespace ft
         {
             return _allocator.max_size();
         }
+
+        iterator begin()
+        {
+            return (iterator(_map.left_most()));
+        }
+
+        const_iterator begin() const
+        {
+            return (const_iterator(_map.left_most()));
+        }
+
     };
 }
 
