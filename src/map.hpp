@@ -109,6 +109,16 @@ namespace ft
         {
             return (const_reverse_iterator(_map.get_nil_node()));
         }
+
+        reverse_iterator rend()
+        {
+            return (reverse_iterator(_map.left_most()));
+        }
+
+        const_reverse_iterator rend() const
+        {
+            return (const_reverse_iterator(_map.left_most()));
+        }
     };
 }
 
