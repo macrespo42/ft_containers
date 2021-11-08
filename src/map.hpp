@@ -222,7 +222,7 @@ namespace ft
         {
             if (count(k))
             {
-                _map.delete_by_val(k)
+                _map.delete_by_val(k);
                 _size--;
                 return 1;
             }
