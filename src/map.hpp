@@ -176,6 +176,20 @@ namespace ft
                 return 0;
             return 1;
         }
+
+        iterator
+        lower_bound(const key_type& k)
+        {
+            iterator it(_map.search(k));
+            if (it.base() == NULL)
+            {
+                iterator tmp(_map.get_next_node(k));
+                if (tmp->item.first > k)
+                    tmp++;
+                it = tmp;
+            }
+            return it;
+        }
     };
 }
 

@@ -468,6 +468,22 @@ namespace ft
 			return temp;
 		}
 
+		template<class K>
+		rb_node*
+		get_next_node(K n)
+		{
+			rb_node* tmp = _nil->right;
+
+			while (tmp != NULL)
+			{
+				if (n < tmp->item.first)
+					tmp = tmp->left;
+				else if (n > tmp->item.first)
+					tmp = tmp->right;
+			}
+			return tmp;
+		}
+
 		void
 		delete_by_val(const value_type &n)
 		{
