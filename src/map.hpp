@@ -51,7 +51,7 @@ namespace ft
 
 
         // default
-        explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) :
+        explicit map(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) :
         _size(0),
         _allocator(alloc),
         _cmp(comp)
@@ -59,7 +59,7 @@ namespace ft
 
         //range
         template <class InputIterator>
-        map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
+        map(InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
         {
             size_type size;
 
@@ -72,7 +72,7 @@ namespace ft
             _size = size;
         }
 
-        map (const map& x);
+        map(const map& x);
 
 		/*
 		 *
@@ -80,17 +80,20 @@ namespace ft
 		 *
 		 */
 
-        bool empty() const
+        bool
+        empty() const
         {
             return _size == 0;
         }
 
-        size_type size() const
+        size_type
+        size() const
         {
             return _size;
         }
 
-        size_type max_size() const
+        size_type
+        max_size() const
         {
             return _allocator.max_size();
         }
@@ -101,42 +104,50 @@ namespace ft
 		 *
 		 */
 
-        iterator begin()
+        iterator
+        begin()
         {
             return (iterator(_map.left_most()));
         }
 
-        const_iterator begin() const
+        const_iterator
+        begin() const
         {
             return (const_iterator(_map.left_most()));
         }
 
-        iterator end()
+        iterator
+        end()
         {
             return (iterator(_map.get_nil_node()));
         }
 
-        const_iterator end() const
+        const_iterator
+        end()const
         {
             return (const_iterator(_map.get_nil_node()));
         }
 
-        reverse_iterator rbegin()
+        reverse_iterator
+        rbegin()
         {
             return (reverse_iterator(_map.get_nil_node()));
         }
 
-        const_reverse_iterator rbegin() const
+        const_reverse_iterator
+        rbegin() const
         {
             return (const_reverse_iterator(_map.get_nil_node()));
         }
 
-        reverse_iterator rend()
+        reverse_iterator
+        rend()
         {
             return (reverse_iterator(_map.left_most()));
         }
 
-        const_reverse_iterator rend() const
+        const_reverse_iterator
+        rend() const
         {
             return (const_reverse_iterator(_map.left_most()));
         }
