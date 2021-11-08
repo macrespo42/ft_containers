@@ -203,6 +203,23 @@ namespace ft
             }
             return it;
         }
+
+        iterator upper_bound (const key_type& k)
+        {
+            iterator it(_map.search(k));
+            if (it.base() == NULL)
+                return iterator tmp(_map.get_next_node(k));
+            return ++it;
+        }
+
+        const_iterator upper_bound (const key_type& k) const
+        {
+            const_iterator it(_map.search(k));
+            if (it.base() == NULL)
+                return const_iterator tmp(_map.get_next_node(k));
+            return ++it;
+        }
+
     };
 }
 
