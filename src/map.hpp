@@ -206,6 +206,39 @@ namespace ft
             }
         }
 
+        void
+        erase(iterator position)
+        {
+            key_type to_delete = position.base()->first;
+            if (count(to_delete))
+            {
+                _size--;
+                _map.delete_by_val(to_delete);
+            }
+        }
+
+        size_type
+        erase(const key_type& k)
+        {
+            if (count(k))
+            {
+                _map.delete_by_val(k)
+                _size--;
+                return 1;
+            }
+            return 0;
+        }
+
+        void
+        erase(iterator first, iterator last)
+        {
+            while (first != last)
+            {
+                erase(first);
+                first++;
+            }
+        }
+
 		/*
 		 *
 		 * Operations
