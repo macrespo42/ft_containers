@@ -159,7 +159,7 @@ namespace ft
 		 */
 
         mapped_type&
-        operator[] (const key_type& k)
+        operator[](const key_type& k)
         {
             return (*((this->insert(make_pair(k,mapped_type()))).first)).second;
         }
@@ -196,11 +196,12 @@ namespace ft
         }
 
         template <class InputIterator>
-        void insert(InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = 0)
+        void
+        insert(InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = 0)
         {
             while (first != last)
             {
-                insert(val);
+                insert(first.base());
                 first++;
             }
         }
@@ -217,7 +218,8 @@ namespace ft
             return iterator(_map.search(k));
         }
       
-        const_iterator find (const key_type& k) const
+        const_iterator
+        find(const key_type& k) const
         {
             return const_iterator(_map.search(k));
         }
@@ -244,7 +246,8 @@ namespace ft
             return it;
         }
 
-        const_iterator lower_bound (const key_type& k) const
+        const_iterator
+        lower_bound(const key_type& k) const
         {
             const_iterator it(_map.search(k));
             if (it.base() == NULL)
@@ -257,20 +260,27 @@ namespace ft
             return it;
         }
 
-        iterator upper_bound (const key_type& k)
+        iterator
+        upper_bound(const key_type& k)
         {
             iterator it(_map.search(k));
             if (it.base() == NULL)
-                return iterator tmp(_map.get_next_node(k));
+                return iterator(_map.get_next_node(k));
             return ++it;
         }
 
-        const_iterator upper_bound (const key_type& k) const
+        const_iterator
+        upper_bound(const key_type& k) const
         {
             const_iterator it(_map.search(k));
             if (it.base() == NULL)
-                return const_iterator tmp(_map.get_next_node(k));
+                return const_iterator(_map.get_next_node(k));
             return ++it;
+        }
+
+        allocator_type get_allocator() const
+        {
+            return _allocator;
         }
     };
 }
