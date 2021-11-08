@@ -278,9 +278,10 @@ namespace ft
             return ++it;
         }
 
-        allocator_type get_allocator() const
+        allocator_type
+        get_allocator() const
         {
-            return _allocator;
+            return allocator_type();
         }
     };
 }
