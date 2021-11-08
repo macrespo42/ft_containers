@@ -149,7 +149,9 @@ namespace ft
 
         size_type count (const key_type& k) const
         {
-            
+            if (!_map.search(k))
+                return 0;
+            return 1;
         }
     };
 }
