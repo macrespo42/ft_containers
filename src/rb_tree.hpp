@@ -6,6 +6,7 @@
 #include <string>
 #include <queue>
 #include "algorithm.hpp"
+#include "utility.hpp"
 
 namespace ft
 {
@@ -124,9 +125,9 @@ namespace ft
 			if (!current)
 				return ;
 			if (current->color == RED)
-				std::cout << red << current->item << reset << " ";
+				std::cout << red << current->item.second << reset << " ";
 			else
-				std::cout << current->item << " ";
+				std::cout << current->item.second << " ";
 		}
 
 		void
@@ -454,6 +455,33 @@ namespace ft
 					temp = temp->left;
 				}
 				else if (n == temp->item)
+					break;
+				else
+				{
+					if (temp->right == NULL)
+					break;
+					else
+					temp = temp->right;
+				}
+			}
+			return temp;
+		}
+		
+		template<class K, class V>
+		rb_node
+		*search(ft::pair<K, V> n)
+		{
+			rb_node *temp = _nil->right;
+			while (temp != NULL)
+			{
+				if (n.first < temp->item)
+				{
+					if (temp->left == NULL)
+						break;
+				else
+					temp = temp->left;
+				}
+				else if (n.first == temp->item)
 					break;
 				else
 				{

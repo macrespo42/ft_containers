@@ -10,7 +10,14 @@ int main(void)
 
     // product1 = product2;
 
-    // std::map<int, int> test;
+    std::map<int, int> test;
+
+    test[1] = 18;
+    test[2] = 3;
+    test[3] = 42;
+    test[4] = 1;
+
+    std::cout << test.begin()->second << std::endl;
     // if (test.empty())
     //     std::cout << "empty" << std::endl;
     // else
@@ -18,11 +25,5 @@ int main(void)
     
     // std::cout << test.size() << std::endl;
     // std::cout << test.max_size() << std::endl;
-    ft::rb_tree<int> tamere;
-
-    tamere.insert_node(10);
-    tamere.insert_node(14);
-    tamere.insert_node(12);
-    tamere.levelOrder();
     return 0;
 }

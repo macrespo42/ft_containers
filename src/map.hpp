@@ -140,6 +140,17 @@ namespace ft
         {
             return (const_reverse_iterator(_map.left_most()));
         }
+
+		/*
+		 *
+		 * Operations
+		 *
+		 */
+
+        size_type count (const key_type& k) const
+        {
+            
+        }
     };
 }
 
