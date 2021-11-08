@@ -239,6 +239,15 @@ namespace ft
             }
         }
 
+        void
+        swap(map& x)
+        {
+            ft::swap(_size, x._size);
+            ft::swap(_allocator, x._allocator);
+            ft::swap(_map, x._map);
+            ft::swap(_cmp, x._cmp);
+        }
+
 		/*
 		 *
 		 * Operations
