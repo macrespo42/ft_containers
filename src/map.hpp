@@ -190,6 +190,19 @@ namespace ft
             }
             return it;
         }
+
+        const_iterator lower_bound (const key_type& k) const
+        {
+            const_iterator it(_map.search(k));
+            if (it.base() == NULL)
+            {
+                const_iterator tmp(_map.get_next_node(k));
+                if (tmp->item.first > k)
+                    tmp++;
+                it = tmp;
+            }
+            return it;
+        }
     };
 }
 
