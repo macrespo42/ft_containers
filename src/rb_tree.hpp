@@ -440,48 +440,22 @@ namespace ft
 
 			fix_violation(_nil->right, new_node);
 		}
-
-		rb_node
-		*search(value_type n)
-		{
-			rb_node *temp = _nil->right;
-			while (temp != NULL)
-			{
-				if (n < temp->item)
-				{
-					if (temp->left == NULL)
-						break;
-				else
-					temp = temp->left;
-				}
-				else if (n == temp->item)
-					break;
-				else
-				{
-					if (temp->right == NULL)
-					break;
-					else
-					temp = temp->right;
-				}
-			}
-			return temp;
-		}
 		
-		template<class K, class V>
+		template<class K>
 		rb_node
-		*search(ft::pair<K, V> n)
+		*search(K n)
 		{
 			rb_node *temp = _nil->right;
 			while (temp != NULL)
 			{
-				if (n.first < temp->item)
+				if (n < temp->item.first)
 				{
 					if (temp->left == NULL)
 						break;
 				else
 					temp = temp->left;
 				}
-				else if (n.first == temp->item)
+				else if (n == temp->item.first)
 					break;
 				else
 				{
