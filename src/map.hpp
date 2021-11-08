@@ -158,6 +158,17 @@ namespace ft
 		 *
 		 */
 
+        iterator
+        find(const key_type& k)
+        {
+            return iterator(_map.search(k));
+        }
+      
+        const_iterator find (const key_type& k) const
+        {
+            return const_iterator(_map.search(k));
+        }
+
         size_type
         count(const key_type& k) const
         {
