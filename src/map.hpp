@@ -158,16 +158,29 @@ namespace ft
 		 *
 		 */
 
-        pair<iterator,bool> insert(const value_type& val)
+        pair<iterator,bool>
+        insert(const value_type& val)
         {
             bool inserted = false;
-            if (count(val))
+            if (!count(val))
             {
                 _map.insert_node(val);
                 _size++;
                 inserted = true;
             }
             return ft::make_pair(iterator(find(val.first), inserted));
+        }
+
+        iterator
+        insert(iterator position, const value_type& val)
+        {
+            (void)position;
+            if (!count(val))
+            {
+                _map.insert_node(val);
+                _size++;
+            }
+            return iterator(val);
         }
 
 		/*
