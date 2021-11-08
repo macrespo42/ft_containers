@@ -183,6 +183,16 @@ namespace ft
             return iterator(val);
         }
 
+        template <class InputIterator>
+        void insert(InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = 0)
+        {
+            while (first != last)
+            {
+                insert(val);
+                first++;
+            }
+        }
+
 		/*
 		 *
 		 * Operations
