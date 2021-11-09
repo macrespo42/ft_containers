@@ -426,7 +426,8 @@ namespace ft
 
 		~rb_tree(void)
 		{
-			delete _nil;
+			_allocator.destroy(_nil);
+			_allocator.deallocate(_nil, 1);
 		}
 
 		void
