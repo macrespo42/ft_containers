@@ -76,19 +76,16 @@ namespace ft
 
         //range
         template <class InputIterator>
-        map(InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
-        {
-            size_type size;
-            (void)comp;
-            (void)alloc;
-
-            size = 0;
+        map(InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) :
+        _size(0),
+        _allocator(alloc),
+        _cmp(comp)
+        {   
             for (InputIterator current = first; current != last; current++)
             {
                 _map->insert_node(*current);
-                size++;
+                _size++;
             }
-            _size = size;
         }
 
         map(const map& x)
