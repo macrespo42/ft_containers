@@ -121,7 +121,7 @@ namespace ft
 		{
 			if (get_father(current) && get_father(current) > current)
 				return get_father(current)->right;
-			else if (get_father(current) && get_father(current) < current))
+			else if (get_father(current) && get_father(current) < current)
 				return get_father(current)->left;
 			return NULL;
 		}
