@@ -265,6 +265,12 @@ namespace ft
             ft::swap(_cmp, x._cmp);
         }
 
+        void clear()
+        {
+            for (iterator prev = begin(), next = ++iterator(prev); prev != end(); prev = next, ++next)
+                erase(prev);
+        }
+
         /*
 		 *
 		 * Observers
