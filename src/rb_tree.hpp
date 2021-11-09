@@ -64,7 +64,7 @@ namespace ft
         typedef Key key_type;
         typedef T mapped_type;
         typedef compare key_compare;
-        typedef Alloc allocator_type;
+		typedef typename Alloc::template rebind<rb_node>::other allocator_type;
 		typedef rb_tree_color node_color;
 		typedef std::size_t size_type;
 		typedef rb_node<value_type> rb_node;
@@ -407,11 +407,20 @@ namespace ft
 			}
   		}
 
+		void
+		construct_node(rb_node *ptr, value_type val = value_type())
+		{
+			rb_node tmp(val);
+			_allocator.construct(ptr, tmp);
+		}
+
 	public:
 
 		rb_tree(void)
 		{
-			_nil = new rb_node(value_type());
+			_allocator(allocator_type());
+			_nil = _allocator.allocate(1);
+			construct_node(_nil);
 			_nil->color = BLACK;
 		}
 
@@ -423,7 +432,8 @@ namespace ft
 		void
 		insert_node(const value_type &value)
 		{
-			rb_node *new_node = new rb_node(value);
+			rb_node *new_node = _allocator.allocate(1);
+			construct_node(new_node);
 			
 			if (_nil->right)
 			{

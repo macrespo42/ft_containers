@@ -99,7 +99,6 @@ namespace ft
         {
             if (this == x)
                 return *this;
-            
             clear();
             for (iterator it = x.begin(); it != x.end();  it++)
                 insert(it);
