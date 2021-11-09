@@ -307,7 +307,8 @@ namespace ft
 					else
 						parent->right = NULL;
 				}
-				delete v;
+				_allocator.destroy(v);
+				_allocator.deallocate(v, 1);
 				return;
 			}
 			if (v->left == NULL or v->right == NULL)
@@ -316,7 +317,8 @@ namespace ft
 				{
 					v->item = u->item;
 					v->left = v->right = NULL;
-					delete u;
+					_allocator.destroy(u);
+					_allocator.deallocate(u, 1);
 				}
 				else
 				{
@@ -324,7 +326,8 @@ namespace ft
 						parent->left = u;
 					else
 						parent->right = u;
-					delete v;
+					_allocator.destroy(v);
+					_allocator.deallocate(v, 1);
 					u->parent = parent;
 					if (uvBlack)
 						fix_double_black(u);
