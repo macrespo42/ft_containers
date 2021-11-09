@@ -17,14 +17,14 @@ namespace ft
     {
         public:
 
-        template <class Key, class T, class Compare, class Alloc>
         class Value_compare
         {
             friend class map;
             protected:
-            Compare comp;
-            value_compare (Compare c) : comp(c) {}
+            compare comp;
+            Value_compare (compare c) : comp(c) {}
             public:
+            typedef ft::pair<const Key, T> value_type;
             typedef bool result_type;
             typedef value_type first_argument_type;
             typedef value_type second_argument_type;
@@ -32,7 +32,7 @@ namespace ft
             {
                 return comp(x.first, y.first);
             }
-        }
+        };
 
         typedef ft::pair<const Key, T> value_type;
         typedef Key key_type;
@@ -89,7 +89,7 @@ namespace ft
             _size = size;
         }
 
-        map(const map& x);
+        map(const map& x)
         {
             *this = x;
         }
