@@ -17,11 +17,28 @@ namespace ft
     {
         public:
 
+        template <class Key, class T, class Compare, class Alloc>
+        class Value_compare
+        {
+            friend class map;
+            protected:
+            Compare comp;
+            value_compare (Compare c) : comp(c) {}
+            public:
+            typedef bool result_type;
+            typedef value_type first_argument_type;
+            typedef value_type second_argument_type;
+            bool operator() (const value_type& x, const value_type& y) const
+            {
+                return comp(x.first, y.first);
+            }
+        }
+
         typedef ft::pair<const Key, T> value_type;
         typedef Key key_type;
         typedef T mapped_type;
         typedef compare key_compare;
-        // value_compare;
+        typedef Value_compare value_compare;
         typedef Alloc allocator_type;
         typedef typename allocator_type::reference reference;
         typedef typename allocator_type::const_reference const_reference;
@@ -246,6 +263,22 @@ namespace ft
             ft::swap(_allocator, x._allocator);
             ft::swap(_map, x._map);
             ft::swap(_cmp, x._cmp);
+        }
+
+        /*
+		 *
+		 * Observers
+		 *
+		 */
+
+        key_compare key_comp() const
+        {
+            return key_compare();
+        }
+
+        value_compare value_comp() const
+        {
+            return value_compare();
         }
 
 		/*
