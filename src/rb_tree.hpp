@@ -437,7 +437,7 @@ namespace ft
 		insert_node(const value_type &value)
 		{
 			rb_node *new_node = _allocator.allocate(1);
-			construct_node(new_node);
+			construct_node(new_node, value);
 			
 			if (_nil->right)
 			{

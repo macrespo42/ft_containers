@@ -79,6 +79,8 @@ namespace ft
         map(InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
         {
             size_type size;
+            (void)comp;
+            (void)alloc;
 
             size = 0;
             for (InputIterator current = first; current != last; current++)
