@@ -56,14 +56,15 @@ namespace ft
   		}
 	};
 
-	template <class Key, class T, class compare = std::less<Key>, class Alloc = std::allocator<ft::pair<const Key, T> > >
+	template <class Key, class T, class keyCompare = std::less<Key>, class valueCompare = std::less<T>, class Alloc = std::allocator<ft::pair<const Key, T> > >
 	class rb_tree
 	{
 	public:
 		typedef ft::pair<const Key, T> value_type;
         typedef Key key_type;
         typedef T mapped_type;
-        typedef compare key_compare;
+        typedef keyCompare key_compare;
+		typedef valueCompare value_compare;
 		typedef typename Alloc::template rebind<rb_node>::other allocator_type;
 		typedef rb_tree_color node_color;
 		typedef std::size_t size_type;
@@ -73,6 +74,12 @@ namespace ft
 
 		rb_node *_nil;
 		allocator_type _allocator;
+
+		bool
+		equal(key_type a, key_type b)
+		{
+			return (!compare(a, b) && !compare(b, a));
+		}
 
 		void
 		change_color(rb_node *node)
@@ -102,9 +109,9 @@ namespace ft
 		rb_node*
 		get_uncle(rb_node *current)
 		{
-			if (get_grandfather(current) && get_grandfather(current)->item > get_father(current)->item)
+			if (get_grandfather(current) && compare(get_father(current)->item.first, get_grandfather(current)->item.first))
 				return get_grandfather(current)->right;
-			else if (get_grandfather(current) && get_grandfather(current)->item < get_father(current)->item)
+			else if (get_grandfather(current) && compare(get_grandfather(current)->item.first, get_father(current)->item.first))
 				return get_grandfather(current)->left;
 			return NULL;
 		}
@@ -112,9 +119,9 @@ namespace ft
 		rb_node*
 		get_brother(rb_node *current)
 		{
-			if (get_father(current) && get_father(current)->item > current->item)
+			if (get_father(current) && compare(current->item.first, get_father(current)->item.first))
 				return get_father(current)->right;
-			else if (get_father(current) && get_father(current)->item < current->item)
+			else if (get_father(current) && compare(get_father(current)->item.first, current->item.first))
 				return get_father(current)->left;
 			return NULL;
 		}
@@ -144,7 +151,7 @@ namespace ft
 			pt_right->parent = pt->parent;
 			if (pt->parent == NULL)
 				root = pt_right;
-			else if (pt == pt->parent->left)
+			else if (equal(pt->item.first == pt->parent->left->item.first))
 				pt->parent->left = pt_right;
 			else
 				pt->parent->right = pt_right;
@@ -163,7 +170,7 @@ namespace ft
 			pt_left->parent = pt->parent;
 			if (pt->parent == NULL)
 				root = pt_left;
-			else if (pt == pt->parent->left)
+			else if (equal(pt->item.first == pt->parent->left->item.first))
 				pt->parent->left = pt_left;
 			else
 				pt->parent->right = pt_left;
@@ -174,7 +181,7 @@ namespace ft
 		rb_node *
 		find_destination(rb_node *current, rb_node *inserted)
 		{
-			if (inserted->item > current->item)
+			if (compare(current->item.first, inserted->item.first))
 			{
 				if (current->right == NULL)
 					return (current);
