@@ -7,6 +7,7 @@
 #include <queue>
 #include "algorithm.hpp"
 #include "utility.hpp"
+#include "map.hpp"
 
 namespace ft
 {
@@ -55,21 +56,23 @@ namespace ft
   		}
 	};
 
-	template < class T, class Alloc = std::allocator<T> >
+	template <class Key, class T, class compare = std::less<Key>, class Alloc = std::allocator<ft::pair<const Key, T> > >
 	class rb_tree
 	{
 	public:
-		typedef rb_node<T> rb_node;
-		typedef T value_type;
-		typedef T* pointer;
-		typedef T& reference;
+		typedef ft::pair<const Key, T> value_type;
+        typedef Key key_type;
+        typedef T mapped_type;
+        typedef compare key_compare;
+        typedef Alloc allocator_type;
 		typedef rb_tree_color node_color;
 		typedef std::size_t size_type;
-		typedef Alloc allocator_type;
+		typedef rb_node<value_type> rb_node;
 
 	private:
 
 		rb_node *_nil;
+		allocator_type _allocator;
 
 		void
 		change_color(rb_node *node)

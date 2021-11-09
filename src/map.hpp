@@ -55,7 +55,7 @@ namespace ft
 
         size_type _size;
         allocator_type _allocator;
-        ft::rb_tree<value_type> _map;
+        ft::rb_tree<key_type, mapped_type, compare, allocator_type> _map;
         compare _cmp;
 
         public:
