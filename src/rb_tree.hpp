@@ -109,9 +109,9 @@ namespace ft
 		rb_node*
 		get_uncle(rb_node *current)
 		{
-			if (get_grandfather(current) && compare(get_father(current)->item.first, get_grandfather(current)->item.first))
+			if (get_grandfather(current) && get_father(current) == get_grandfather(current)->left)
 				return get_grandfather(current)->right;
-			else if (get_grandfather(current) && compare(get_grandfather(current)->item.first, get_father(current)->item.first))
+			else if (get_grandfather(current) && get_grandfather(current) == get_father(current)->right)
 				return get_grandfather(current)->left;
 			return NULL;
 		}
@@ -119,9 +119,9 @@ namespace ft
 		rb_node*
 		get_brother(rb_node *current)
 		{
-			if (get_father(current) && compare(current->item.first, get_father(current)->item.first))
+			if (get_father(current) && get_father(current) > current)
 				return get_father(current)->right;
-			else if (get_father(current) && compare(get_father(current)->item.first, current->item.first))
+			else if (get_father(current) && get_father(current) < current))
 				return get_father(current)->left;
 			return NULL;
 		}
@@ -151,7 +151,7 @@ namespace ft
 			pt_right->parent = pt->parent;
 			if (pt->parent == NULL)
 				root = pt_right;
-			else if (equal(pt->item.first == pt->parent->left->item.first))
+			else if (pt == pt->parent->left)
 				pt->parent->left = pt_right;
 			else
 				pt->parent->right = pt_right;
@@ -170,7 +170,7 @@ namespace ft
 			pt_left->parent = pt->parent;
 			if (pt->parent == NULL)
 				root = pt_left;
-			else if (equal(pt->item.first == pt->parent->left->item.first))
+			else if (pt == pt->parent->left)
 				pt->parent->left = pt_left;
 			else
 				pt->parent->right = pt_left;
@@ -450,7 +450,7 @@ namespace ft
 			{
 				rb_node *parent = find_destination(_nil->right, new_node);
 
-				if (new_node->item > parent->item)
+				if (compare(parent->item.first, new_node->item.first))
 					parent->right = new_node;
 				else
 					parent->left = new_node;
@@ -472,14 +472,14 @@ namespace ft
 			rb_node *temp = _nil->right;
 			while (temp != NULL)
 			{
-				if (n < temp->item.first)
+				if (compare(n, temp->item.first))
 				{
 					if (temp->left == NULL)
 						break;
 				else
 					temp = temp->left;
 				}
-				else if (n == temp->item.first)
+				else if (compare(n, temp->item.first))
 					break;
 				else
 				{
@@ -500,9 +500,9 @@ namespace ft
 
 			while (tmp != NULL)
 			{
-				if (n < tmp->item.first)
+				if (compare(n, tmp->item.first))
 					tmp = tmp->left;
-				else if (n > tmp->item.first)
+				else if (compare(tmp->item.first, n))
 					tmp = tmp->right;
 			}
 			return tmp;
@@ -515,7 +515,7 @@ namespace ft
 				return;
 			rb_node *v = search(n);
 		
-			if (v->item && v->item != n)
+			if (v->item && !equal(v->item, n))
 				return;
 			delete_node(v);
 		}
