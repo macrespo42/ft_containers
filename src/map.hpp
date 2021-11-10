@@ -225,12 +225,12 @@ namespace ft
         insert(iterator position, const value_type& val)
         {
             (void)position;
-            if (!count(val))
+            if (!count(val.first))
             {
                 _map.insert_node(val);
                 _size++;
             }
-            return iterator(val);
+            return iterator(find(val.first));
         }
 
         template <class InputIterator>
@@ -239,7 +239,7 @@ namespace ft
         {
             while (first != last)
             {
-                insert(first.base());
+                insert(first.base()->item);
                 first++;
             }
         }
