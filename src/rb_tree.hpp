@@ -26,9 +26,8 @@ namespace ft
 		T item;
 		rb_tree_color color;
 
-		rb_node(T data)
+		rb_node(const T & data) : item(data.first, data.second)
 		{
-			this->item = data;
 			parent = NULL;
 			left = NULL;
 			right = NULL;
@@ -65,7 +64,7 @@ namespace ft
         typedef T mapped_type;
         typedef keyCompare key_compare;
 		typedef valueCompare value_compare;
-		typedef typename Alloc::template rebind<rb_node>::other allocator_type;
+		typedef typename Alloc::template rebind<rb_node<value_type> >::other allocator_type;
 		typedef rb_tree_color node_color;
 		typedef std::size_t size_type;
 		typedef rb_node<value_type> rb_node;
@@ -74,11 +73,12 @@ namespace ft
 
 		rb_node *_nil;
 		allocator_type _allocator;
+		key_compare _comp;
 
 		bool
-		equal(key_type a, key_type b)
+		equal(key_type a, key_type b) const
 		{
-			return (!compare(a, b) && !compare(b, a));
+			return (!_comp(a, b) && !_comp(b, a));
 		}
 
 		void
@@ -181,7 +181,7 @@ namespace ft
 		rb_node *
 		find_destination(rb_node *current, rb_node *inserted)
 		{
-			if (compare(current->item.first, inserted->item.first))
+			if (_comp(current->item.first, inserted->item.first))
 			{
 				if (current->right == NULL)
 					return (current);
@@ -284,10 +284,7 @@ namespace ft
 
 		void swap_values(rb_node *u, rb_node *v)
 		{
-			int temp;
-			temp = u->item;
-			u->item = v->item;
-			v->item = temp;
+			ft::swap(u, v);
 		}
 
 		void delete_node(rb_node *v)
@@ -320,27 +317,17 @@ namespace ft
 			}
 			if (v->left == NULL or v->right == NULL)
 			{
-				if (v == _nil->right)
-				{
-					v->item = u->item;
-					v->left = v->right = NULL;
-					_allocator.destroy(u);
-					_allocator.deallocate(u, 1);
-				}
+				if (v->is_on_left())
+					parent->left = u;
 				else
-				{
-					if (v->is_on_left())
-						parent->left = u;
-					else
-						parent->right = u;
-					_allocator.destroy(v);
-					_allocator.deallocate(v, 1);
-					u->parent = parent;
-					if (uvBlack)
-						fix_double_black(u);
-					else
-						u->color = BLACK;
-				}
+					parent->right = u;
+				_allocator.destroy(v);
+				_allocator.deallocate(v, 1);
+				u->parent = parent;
+				if (uvBlack)
+					fix_double_black(u);
+				else
+					u->color = BLACK;
 				return;
 			}
 			swap_values(u, v);
@@ -426,9 +413,10 @@ namespace ft
 
 	public:
 
-		rb_tree(void)
+		rb_tree(void) :
+		_allocator(allocator_type()),
+		_comp(key_compare())
 		{
-			_allocator(allocator_type());
 			_nil = _allocator.allocate(1);
 			construct_node(_nil);
 			_nil->color = BLACK;
@@ -450,7 +438,7 @@ namespace ft
 			{
 				rb_node *parent = find_destination(_nil->right, new_node);
 
-				if (compare(parent->item.first, new_node->item.first))
+				if (_comp(parent->item.first, new_node->item.first))
 					parent->right = new_node;
 				else
 					parent->left = new_node;
@@ -465,66 +453,63 @@ namespace ft
 			fix_violation(_nil->right, new_node);
 		}
 		
-		template<class K>
 		rb_node
-		*search(K n)
+		*search(const key_type & n) const
 		{
 			rb_node *temp = _nil->right;
 			while (temp != NULL)
 			{
-				if (compare(n, temp->item.first))
+				if (equal(n, temp->item.first))
+					return temp;
+				else if (_comp(n, temp->item.first))
 				{
 					if (temp->left == NULL)
-						break;
-				else
-					temp = temp->left;
+						return NULL;
+					else
+						temp = temp->left;
 				}
-				else if (compare(n, temp->item.first))
-					break;
 				else
 				{
 					if (temp->right == NULL)
-					break;
+						return NULL;
 					else
-					temp = temp->right;
+						temp = temp->right;
 				}
 			}
 			return temp;
 		}
 
-		template<class K>
 		rb_node*
-		get_next_node(K n)
+		get_next_node(const key_type & n)
 		{
 			rb_node* tmp = _nil->right;
 
 			while (tmp != NULL)
 			{
-				if (compare(n, tmp->item.first))
+				if (_comp(n, tmp->item.first))
 					tmp = tmp->left;
-				else if (compare(tmp->item.first, n))
+				else if (_comp(tmp->item.first, n))
 					tmp = tmp->right;
 			}
 			return tmp;
 		}
 
 		void
-		delete_by_val(const value_type &n)
+		delete_by_val(const key_type &n)
 		{
-			if (_nil->right == NULL)
-				return;
 			rb_node *v = search(n);
 		
-			if (v->item && !equal(v->item, n))
-				return;
-			delete_node(v);
+			if (v)
+				delete_node(v);
 		}
 
 		rb_node *
 		left_most(void) const
 		{
 			rb_node *tmp = _nil->right;
-			while (tmp->left != NULL)
+			if (!tmp)
+				return _nil;
+			while (tmp && tmp->left)
 				tmp = tmp->left;
 			return tmp;
 		}
@@ -533,7 +518,9 @@ namespace ft
 		right_most(void) const
 		{
 			rb_node *tmp = _nil->right;
-			while (tmp->right != NULL)
+			if (!tmp)
+				return _nil;
+			while (tmp && tmp->right)
 				tmp = tmp->right;
 			return tmp;
 		}

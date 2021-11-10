@@ -44,8 +44,9 @@ namespace ft
         typedef typename allocator_type::const_reference const_reference;
         typedef typename allocator_type::pointer pointer;
         typedef typename allocator_type::const_pointer const_pointer;
-        typedef map_iterator<T, true> iterator;
-        typedef map_iterator<T, false> const_iterator;
+        typedef rb_node<value_type> node_type;
+        typedef map_iterator<value_type ,node_type, true> iterator;
+        typedef map_iterator<value_type ,node_type, false> const_iterator;
         typedef ft::reverse_iterator<iterator> reverse_iterator;
         typedef ft::reverse_iterator<const_iterator> const_reverse_iterator;
         typedef typename iterator_traits<iterator>::difference_type difference_type;
@@ -243,7 +244,7 @@ namespace ft
         void
         erase(iterator position)
         {
-            key_type to_delete = position.base()->first;
+            key_type to_delete = position.base()->item.first;
             if (count(to_delete))
             {
                 _size--;
@@ -284,7 +285,7 @@ namespace ft
 
         void clear()
         {
-            for (iterator prev = begin(), next = ++iterator(prev); prev != end(); prev = next, ++next)
+            for (iterator prev = begin(), next = ++iterator(begin()); prev != end(); prev = next, ++next)
                 erase(prev);
         }
 

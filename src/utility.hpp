@@ -12,7 +12,9 @@ namespace ft
         first_type first;
         second_type second;
 
-        pair()
+        pair(void) : 
+        first(first_type()),
+        second(second_type())
         {}
 
         template<class U, class V>

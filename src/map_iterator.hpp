@@ -7,20 +7,22 @@
 
 namespace ft
 {
-    template<class T, bool isConst>
+    template<class T, class N, bool isConst>
     class map_iterator
     {
         public:
 
         typedef std::ptrdiff_t difference_type;
-		typedef typename ft::is_const<isConst, T*, const T*>::value value_type;
+		typedef typename ft::is_const<isConst, T, const T>::value value_type;
+		typedef typename ft::is_const<isConst, N, const N>::value node_type;
 		typedef value_type* pointer;
 		typedef value_type& reference;
+        typedef node_type*  node_pointer;
 		typedef bidirectional_iterator_tag iterator_category;
 
         private:
 
-        rb_node<T> *_ptr;
+        node_pointer _ptr;
 
         void successor(void)
         {
@@ -39,7 +41,7 @@ namespace ft
                 rb_node<T> *tmp;
                 tmp = _ptr;
                 _ptr = _ptr->parent;
-                while (_ptr->parent != NULL && _ptr->left != tmp)
+                while (_ptr && _ptr->parent != NULL && _ptr->left != tmp)
                 {
                     tmp = _ptr;
                     _ptr = _ptr->parent;
@@ -82,11 +84,11 @@ namespace ft
         map_iterator(void) : _ptr(NULL)
         { }
 
-        map_iterator(rb_node<T> *ptr) : _ptr(ptr)
+        map_iterator(node_pointer ptr) : _ptr(ptr)
         { }
 
         template<bool B>
-		map_iterator(map_iterator< T, B > const &src, typename ft::enable_if<B>::type* = 0)
+		map_iterator(map_iterator<T, N, B> const &src, typename ft::enable_if<B>::type* = 0)
 		{
 			this->_ptr = src.base();
 		}
@@ -100,19 +102,19 @@ namespace ft
 
         template<bool B>
 		bool
-		operator==(map_iterator<T, B> const &src) const
+		operator==(map_iterator<T, N, B> const &src) const
 		{
 			return this->_ptr == src.base();
 		}
 
 		template<bool B>
 		bool
-		operator!=(map_iterator<T, B> const &src) const
+		operator!=(map_iterator<T, N, B> const &src) const
 		{
 			return !(this->_ptr == src.base());
 		}
 
-        pointer
+        node_pointer
         base(void) const
         {
             return this->_ptr;
@@ -140,7 +142,7 @@ namespace ft
         map_iterator
         operator++(int)
         {
-            map_iterator<T, isConst> tmp(*this);
+            map_iterator<T, N, isConst> tmp(*this);
             operator++();
             return tmp;
         }
@@ -155,7 +157,7 @@ namespace ft
         map_iterator
         operator--(int)
         {
-            map_iterator<T, isConst> tmp(*this);
+            map_iterator<T, N, isConst> tmp(*this);
             operator--();
             return tmp;
         }
