@@ -50,9 +50,27 @@ int assignation_test(void)
   return 0;
 }
 
+int begin_end_test(void)
+{
+  ft::map<char,int> mymap;
+
+  mymap['b'] = 100;
+  mymap['a'] = 200;
+  mymap['c'] = 300;
+
+  // show content:
+  for (ft::map<char,int>::iterator it=mymap.begin(); it!=mymap.end(); ++it)
+    std::cout << it->first << " => " << it->second << '\n';
+
+  return 0;
+}
+
+
+
 int main(void)
 {
     constructors_test();
     assignation_test();
+    begin_end_test();
     return 0;
 }
