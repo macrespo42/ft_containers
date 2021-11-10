@@ -81,11 +81,29 @@ int rbegin_rend_test(void)
   return 0;
 }
 
+int empty_test(void)
+{
+  ft::map<char,int> mymap;
+
+  mymap['a']=10;
+  mymap['b']=20;
+  mymap['c']=30;
+
+  while (!mymap.empty())
+  {
+    std::cout << mymap.begin()->first << " => " << mymap.begin()->second << '\n';
+    mymap.erase(mymap.begin());
+  }
+
+  return 0;
+}
+
 int main(void)
 {
     // constructors_test();
     // assignation_test();
     // begin_end_test();
-    rbegin_rend_test();
+    // rbegin_rend_test();
+    empty_test();
     return 0;
 }
