@@ -209,13 +209,13 @@ namespace ft
         insert(const value_type& val)
         {
             bool inserted = false;
-            if (!count(val))
+            if (!count(val.first))
             {
                 _map.insert_node(val);
                 _size++;
                 inserted = true;
             }
-            return ft::make_pair(iterator(find(val.first), inserted));
+            return ft::make_pair(iterator(find(val.first)), inserted);
         }
 
         iterator

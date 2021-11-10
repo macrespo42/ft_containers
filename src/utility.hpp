@@ -18,10 +18,10 @@ namespace ft
         {}
 
         template<class U, class V>
-        pair (const pair<U,V>& pr)
-        {
-            this = pr;
-        }
+        pair (const pair<U,V>& pr) :
+        first(pr.first),
+        second(pr.second)
+        {}
 
         pair(const first_type& a, const second_type& b) :
         first(a),
