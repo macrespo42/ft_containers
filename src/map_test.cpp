@@ -3,6 +3,8 @@
 #include <string>
 #include <iostream>
 
+#define NAMESPACE FT
+
 bool fncomp (char lhs, char rhs) {return lhs<rhs;}
 
 struct classcomp {
@@ -31,8 +33,26 @@ int constructors_test(void)
   return 0;
 }
 
+int assignation_test(void)
+{
+  ft::map<char,int> first;
+  ft::map<char,int> second;
+
+  first['x']=8;
+  first['y']=16;
+  first['z']=32;
+
+  second=first;                // second now contains 3 ints
+  first=ft::map<char,int>();  // and first is now empty
+
+  std::cout << "Size of first: " << first.size() << '\n';
+  std::cout << "Size of second: " << second.size() << '\n';
+  return 0;
+}
+
 int main(void)
 {
     constructors_test();
+    assignation_test();
     return 0;
 }

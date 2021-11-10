@@ -282,9 +282,34 @@ namespace ft
 				return current->right;
 		}
 
-		void swap_values(rb_node *u, rb_node *v)
+		void
+		branch_swapper(rb_node *pointing, rb_node *origin, rb_node *destination)
 		{
-			ft::swap(u, v);
+			if (pointing)
+			{
+				if (pointing == destination)
+					destination = origin;
+				if (pointing == get_father(origin) && pointing->right == origin)
+					pointing->right = destination;
+				else if (pointing == get_father(origin) && pointing->left == origin)
+					pointing->left = destination;
+				else
+					pointing->parent = destination;
+			}
+		}
+
+		void swap_values(rb_node *a, rb_node *b)
+		{
+			branch_swapper(a->parent, a, b);
+			branch_swapper(a->left, a, b);
+			branch_swapper(a->right, a, b);
+			branch_swapper(b->parent, b, a);
+			branch_swapper(b->left, b, a);
+			branch_swapper(b->right, b, a);
+			ft::swap(a->parent, b->parent);
+			ft::swap(a->right, b->right);
+			ft::swap(a->left, b->left);
+			ft::swap(a->color, b->color);
 		}
 
 		void delete_node(rb_node *v)
