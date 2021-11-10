@@ -125,6 +125,24 @@ int max_size_test(void)
   return 0;
 }
 
+int operator_hook_test(void)
+{
+  ft::map<char,std::string> mymap;
+
+  mymap['a']="an element";
+  mymap['b']="another element";
+  mymap['c']=mymap['b'];
+
+  std::cout << "mymap['a'] is " << mymap['a'] << '\n';
+  std::cout << "mymap['b'] is " << mymap['b'] << '\n';
+  std::cout << "mymap['c'] is " << mymap['c'] << '\n';
+  std::cout << "mymap['d'] is " << mymap['d'] << '\n';
+
+  std::cout << "mymap now contains " << mymap.size() << " elements.\n";
+
+  return 0;
+}
+
 int main(void)
 {
     // constructors_test();
@@ -133,6 +151,7 @@ int main(void)
     // rbegin_rend_test();
     // empty_test();
     // size_test();
-    max_size_test();
+    // max_size_test();
+    operator_hook_test();
     return 0;
 }
