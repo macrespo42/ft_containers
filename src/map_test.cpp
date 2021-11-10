@@ -65,12 +65,27 @@ int begin_end_test(void)
   return 0;
 }
 
+int rbegin_rend_test(void)
+{
+  ft::map<char,int> mymap;
 
+  mymap['x'] = 100;
+  mymap['y'] = 200;
+  mymap['z'] = 300;
+
+  // show content:
+  ft::map<char,int>::reverse_iterator rit;
+  for (rit=mymap.rbegin(); rit!=mymap.rend(); ++rit)
+    std::cout << rit->first << " => " << rit->second << '\n';
+
+  return 0;
+}
 
 int main(void)
 {
-    constructors_test();
-    assignation_test();
-    begin_end_test();
+    // constructors_test();
+    // assignation_test();
+    // begin_end_test();
+    rbegin_rend_test();
     return 0;
 }
