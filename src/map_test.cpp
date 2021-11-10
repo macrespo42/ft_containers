@@ -98,12 +98,25 @@ int empty_test(void)
   return 0;
 }
 
+int size_test(void)
+{
+  ft::map<char,int> mymap;
+  mymap['a']=101;
+  mymap['b']=202;
+  mymap['c']=302;
+
+  std::cout << "mymap.size() is " << mymap.size() << '\n';
+
+  return 0;
+}
+
 int main(void)
 {
     // constructors_test();
     // assignation_test();
     // begin_end_test();
     // rbegin_rend_test();
-    empty_test();
+    // empty_test();
+    // size_test();
     return 0;
 }
