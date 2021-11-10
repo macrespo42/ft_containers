@@ -84,7 +84,7 @@ namespace ft
         {   
             for (InputIterator current = first; current != last; current++)
             {
-                _map->insert_node(*current);
+                _map.insert_node(*current);
                 _size++;
             }
         }
@@ -97,11 +97,14 @@ namespace ft
         map&
         operator=(const map& x)
         {
-            if (this == x)
+            if (this == &x)
                 return *this;
             clear();
-            for (iterator it = x.begin(); it != x.end();  it++)
-                insert(it);
+            _allocator = x._allocator;
+            _cmp = x._cmp;
+            for (const_iterator it = x.begin(); it != x.end();  it++)
+                insert(*it);
+            return *this;
         }
 
         ~map(void)

@@ -38,7 +38,7 @@ namespace ft
             }
             else
             {
-                rb_node<T> *tmp;
+                node_pointer tmp;
                 tmp = _ptr;
                 _ptr = _ptr->parent;
                 while (_ptr && _ptr->parent != NULL && _ptr->left != tmp)
