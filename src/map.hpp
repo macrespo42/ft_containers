@@ -305,7 +305,7 @@ namespace ft
 
         value_compare value_comp() const
         {
-            return value_compare();
+            return value_compare(_cmp);
         }
 
 		/*
