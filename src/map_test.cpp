@@ -203,6 +203,29 @@ int swap_test(void)
   return 0;
 }
 
+int clear_test(void)
+{
+  ft::map<char,int> mymap;
+
+  mymap['x']=100;
+  mymap['y']=200;
+  mymap['z']=300;
+
+  std::cout << "mymap contains:\n";
+  for (ft::map<char,int>::iterator it=mymap.begin(); it!=mymap.end(); ++it)
+    std::cout << it->first << " => " << it->second << '\n';
+
+  mymap.clear();
+  mymap['a']=1101;
+  mymap['b']=2202;
+
+  std::cout << "mymap contains:\n";
+  for (ft::map<char,int>::iterator it=mymap.begin(); it!=mymap.end(); ++it)
+    std::cout << it->first << " => " << it->second << '\n';
+
+  return 0;
+}
+
 int main(void)
 {
     // constructors_test();
@@ -214,6 +237,7 @@ int main(void)
     // max_size_test();
     // operator_hook_test();
     // insert_test();
-    swap_test();
+    // swap_test();
+    clear_test();
     return 0;
 }
