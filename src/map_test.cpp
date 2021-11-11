@@ -293,6 +293,27 @@ int find_test(void)
   return 0;
 }
 
+int count_test(void)
+{
+  ft::map<char,int> mymap;
+  char c;
+
+  mymap ['a']=101;
+  mymap ['c']=202;
+  mymap ['f']=303;
+
+  for (c='a'; c<'h'; c++)
+  {
+    std::cout << c;
+    if (mymap.count(c)>0)
+      std::cout << " is an element of mymap.\n";
+    else 
+      std::cout << " is not an element of mymap.\n";
+  }
+
+  return 0;
+}
+
 int main(void)
 {
     // constructors_test();
@@ -308,6 +329,7 @@ int main(void)
     // clear_test();
     // key_comp_test();
     // value_comp_test();
-    find_test();
+    // find_test();
+    count_test();
     return 0;
 }
