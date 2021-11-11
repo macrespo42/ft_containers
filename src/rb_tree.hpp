@@ -504,6 +504,31 @@ namespace ft
 			return temp;
 		}
 
+		// rb_node *search(const key_type &n) const
+		// {
+		// 	rb_node *temp = _nil->right;
+		// 	while (temp != NULL)
+		// 	{
+		// 		if (n < temp->item.first)
+		// 		{
+		// 			if (temp->left == NULL)
+		// 				break;
+		// 			else
+		// 				temp = temp->left;
+		// 		}
+		// 		else if (n == temp->item.first)
+		// 			break;
+		// 		else
+		// 		{
+		// 			if (temp->right == NULL)
+		// 				break;
+		// 			else
+		// 				temp = temp->right;
+		// 		}
+		// 	}
+		// 	return temp;
+		// }
+
 		rb_node*
 		get_next_node(const key_type & n)
 		{
@@ -554,6 +579,11 @@ namespace ft
 		get_nil_node(void) const
 		{
 			return _nil;
+		}
+
+		void swap_root(rb_tree &x)
+		{
+			ft::swap(_nil, x._nil);
 		}
 
 		void
