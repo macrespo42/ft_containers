@@ -179,6 +179,34 @@ int insert_test(void)
   return 0;
 }
 
+int erase_test(void)
+{
+  ft::map<char,int> mymap;
+  ft::map<char,int>::iterator it;
+
+  // insert some values:
+  mymap['a']=10;
+  mymap['b']=20;
+  mymap['c']=30;
+  mymap['d']=40;
+  mymap['e']=50;
+  mymap['f']=60;
+
+  it=mymap.find('b');
+  mymap.erase (it);                   // erasing by iterator
+
+  mymap.erase ('c');                  // erasing by key
+
+  it=mymap.find ('e');
+  mymap.erase ( it, mymap.end() );    // erasing by range
+
+  // show content:
+  for (it=mymap.begin(); it!=mymap.end(); ++it)
+    std::cout << it->first << " => " << it->second << '\n';
+
+  return 0;
+}
+
 int swap_test(void)
 {
   ft::map<char,int> foo,bar;
@@ -325,11 +353,12 @@ int main(void)
     // max_size_test();
     // operator_hook_test();
     // insert_test();
+    erase_test();
     // swap_test();
     // clear_test();
     // key_comp_test();
     // value_comp_test();
     // find_test();
-    count_test();
+    // count_test();
     return 0;
 }
