@@ -314,13 +314,19 @@ namespace ft
         iterator
         find(const key_type& k)
         {
-            return iterator(_map.search(k));
+            node_type *k_match = _map.search(k);
+            if (!k_match)
+                return iterator(_map.get_nil_node());
+            return iterator(k_match);
         }
       
         const_iterator
         find(const key_type& k) const
         {
-            return const_iterator(_map.search(k));
+            node_type *k_match = _map.search(k);
+            if (!k_match)
+                return const_iterator(_map.get_nil_node());
+            return const_iterator(k_match);
         }
 
         size_type
