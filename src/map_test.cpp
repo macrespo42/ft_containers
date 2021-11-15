@@ -343,6 +343,27 @@ int count_test(void)
   return 0;
 }
 
+int equal_bound_test(void)
+{
+
+  ft::map<char,int> mymap;
+
+  mymap['a']=10;
+  mymap['b']=20;
+  mymap['c']=30;
+
+  ft::pair<ft::map<char,int>::iterator,ft::map<char,int>::iterator> ret;
+  ret = mymap.equal_range('b');
+
+  std::cout << "lower bound points to: ";
+  std::cout << ret.first->first << " => " << ret.first->second << '\n';
+
+  std::cout << "upper bound points to: ";
+  std::cout << ret.second->first << " => " << ret.second->second << '\n';
+
+  return 0;
+}
+
 int main(void)
 {
     // constructors_test();
@@ -354,7 +375,7 @@ int main(void)
     // max_size_test();
     // operator_hook_test();
     // insert_test();
-    erase_test();
+    // erase_test();
     // swap_test();
     // clear_test();
     // key_comp_test();
