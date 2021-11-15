@@ -13,8 +13,8 @@ namespace ft
 {
 	enum rb_tree_color
 	{
-		BLACK,
-		RED
+		CBLACK,
+		CRED
 	};
 
 	template < class T>
@@ -31,7 +31,7 @@ namespace ft
 			parent = NULL;
 			left = NULL;
 			right = NULL;
-			this->color = RED;
+			this->color = CRED;
 		}
 			
 		bool
@@ -51,7 +51,7 @@ namespace ft
 		bool
 		has_red_child()
 		{
-    		return (left != NULL && left->color == RED) || (right != NULL && right->color == RED);
+    		return (left != NULL && left->color == CRED) || (right != NULL && right->color == CRED);
   		}
 	};
 
@@ -84,10 +84,10 @@ namespace ft
 		void
 		change_color(rb_node *node)
 		{
-			if (node->color == BLACK)
-				node->color = RED;
+			if (node->color == CBLACK)
+				node->color = CRED;
 			else
-				node->color = BLACK;
+				node->color = CBLACK;
 		}
 
 		rb_node*
@@ -134,7 +134,7 @@ namespace ft
 			
 			if (!current)
 				return ;
-			if (current->color == RED)
+			if (current->color == CRED)
 				std::cout << red << current->item.second << reset << " ";
 			else
 				std::cout << current->item.second << " ";
@@ -203,7 +203,7 @@ namespace ft
 			rb_node *cur_parent = NULL;
 			rb_node *cur_grand_parent = NULL;
 		
-			while ((current != root) && (current->color == RED) && (current->parent->color == RED))
+			while ((current != root) && (current->color == CRED) && (current->parent->color == CRED))
 			{
 				cur_parent = get_father(current);
 				cur_grand_parent = get_grandfather(current);
@@ -211,11 +211,11 @@ namespace ft
 				{
 					rb_node *cur_uncle = get_uncle(current);
 
-					if (cur_uncle != NULL && cur_uncle->color == RED)
+					if (cur_uncle != NULL && cur_uncle->color == CRED)
 					{
-						cur_grand_parent->color = RED;
-						cur_parent->color = BLACK;
-						cur_uncle->color = BLACK;
+						cur_grand_parent->color = CRED;
+						cur_parent->color = CBLACK;
+						cur_uncle->color = CBLACK;
 						current = cur_grand_parent;
 					}
 					else
@@ -235,11 +235,11 @@ namespace ft
 				{
 					rb_node *cur_uncle = get_uncle(current);
 		
-					if ((cur_uncle != NULL) && (cur_uncle->color == RED))
+					if ((cur_uncle != NULL) && (cur_uncle->color == CRED))
 					{
-						cur_grand_parent->color = RED;
-						cur_parent->color = BLACK;
-						cur_uncle->color = BLACK;
+						cur_grand_parent->color = CRED;
+						cur_parent->color = CBLACK;
+						cur_uncle->color = CBLACK;
 						current = cur_grand_parent;
 					}
 					else
@@ -256,7 +256,7 @@ namespace ft
 					}
 				}
 			}
-			root->color = BLACK;
+			root->color = CBLACK;
 		}
 
 		rb_node *
@@ -317,7 +317,7 @@ namespace ft
 		{
 			rb_node *u = bst_replace(v);
 			
-			bool uvBlack = ((u == NULL or u->color == BLACK) and (v->color == BLACK));
+			bool uvBlack = ((u == NULL or u->color == CBLACK) and (v->color == CBLACK));
 			rb_node *parent = v->parent;
 			if (u == NULL)
 			{
@@ -330,7 +330,7 @@ namespace ft
 					else
 					{
 						if (v->sibling() != NULL)
-							v->sibling()->color = RED;
+							v->sibling()->color = CRED;
 					}
 					if (v->is_on_left())
 						parent->left = NULL;
@@ -353,7 +353,7 @@ namespace ft
 				if (uvBlack)
 					fix_double_black(u);
 				else
-					u->color = BLACK;
+					u->color = CBLACK;
 				return;
 			}
 			swap_values(u, v);
@@ -372,10 +372,10 @@ namespace ft
 			}
 			else
 			{
-				if (sibling->color == RED)
+				if (sibling->color == CRED)
 				{
-					parent->color = RED;
-					sibling->color = BLACK;
+					parent->color = CRED;
+					sibling->color = CBLACK;
 					if (sibling->is_on_left())
 						rotate_right(_nil->right, parent);
 					else
@@ -386,7 +386,7 @@ namespace ft
 				{
 					if (sibling->has_red_child())
 					{
-						if (sibling->left != NULL and sibling->left->color == RED)
+						if (sibling->left != NULL and sibling->left->color == CRED)
 						{
 							if (sibling->is_on_left())
 							{
@@ -416,15 +416,15 @@ namespace ft
 								rotate_left(_nil->right, parent);
 							}
 						}
-						parent->color = BLACK;
+						parent->color = CBLACK;
 					}
 					else
 					{
-						sibling->color = RED;
-						if (parent->color == BLACK)
+						sibling->color = CRED;
+						if (parent->color == CBLACK)
 							fix_double_black(parent);
 						else
-							parent->color = BLACK;
+							parent->color = CBLACK;
 					}
 				}
 			}
@@ -445,7 +445,7 @@ namespace ft
 		{
 			_nil = _allocator.allocate(1);
 			construct_node(_nil);
-			_nil->color = BLACK;
+			_nil->color = CBLACK;
 		}
 
 		~rb_tree(void)
@@ -560,6 +560,12 @@ namespace ft
 		void swap_root(rb_tree &x)
 		{
 			ft::swap(_nil, x._nil);
+		}
+
+		allocator_type
+		get_allocator(void) const
+		{
+			return _allocator;
 		}
 
 		void
