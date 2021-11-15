@@ -192,17 +192,18 @@ int erase_test(void)
   mymap['e']=50;
   mymap['f']=60;
 
-  it=mymap.find('b');
-  mymap.erase (it);                   // erasing by iterator
+  // it=mymap.find('b');
+  // mymap.erase (it);                   // erasing by iterator
 
-  mymap.erase ('c');                  // erasing by key
+  // mymap.erase ('c');                  // erasing by key
 
   it=mymap.find ('e');
-  mymap.erase ( it, mymap.end() );    // erasing by range
+  mymap.erase(it);
+  // mymap.erase ( it, mymap.end() );    // erasing by range
 
   // show content:
-  for (it=mymap.begin(); it!=mymap.end(); ++it)
-    std::cout << it->first << " => " << it->second << '\n';
+  // for (it=mymap.begin(); it!=mymap.end(); ++it)
+  //   std::cout << it->first << " => " << it->second << '\n';
 
   return 0;
 }

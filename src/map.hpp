@@ -270,11 +270,8 @@ namespace ft
         void
         erase(iterator first, iterator last)
         {
-            while (first != last)
-            {
-                erase(first);
-                first++;
-            }
+            for (iterator prev = first, next = ++iterator(first); prev != last; prev = next, ++next)
+                erase(prev);
         }
 
         void

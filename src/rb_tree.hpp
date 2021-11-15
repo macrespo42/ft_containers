@@ -300,6 +300,7 @@ namespace ft
 
 		void swap_values(rb_node *a, rb_node *b)
 		{
+			std::cout << "COUCOU JE SWAP" << std::endl;
 			branch_swapper(a->parent, a, b);
 			branch_swapper(a->left, a, b);
 			branch_swapper(a->right, a, b);
@@ -504,31 +505,6 @@ namespace ft
 			return temp;
 		}
 
-		// rb_node *search(const key_type &n) const
-		// {
-		// 	rb_node *temp = _nil->right;
-		// 	while (temp != NULL)
-		// 	{
-		// 		if (n < temp->item.first)
-		// 		{
-		// 			if (temp->left == NULL)
-		// 				break;
-		// 			else
-		// 				temp = temp->left;
-		// 		}
-		// 		else if (n == temp->item.first)
-		// 			break;
-		// 		else
-		// 		{
-		// 			if (temp->right == NULL)
-		// 				break;
-		// 			else
-		// 				temp = temp->right;
-		// 		}
-		// 	}
-		// 	return temp;
-		// }
-
 		rb_node*
 		get_next_node(const key_type & n)
 		{
@@ -548,7 +524,7 @@ namespace ft
 		delete_by_val(const key_type &n)
 		{
 			rb_node *v = search(n);
-		
+
 			if (v)
 				delete_node(v);
 		}
