@@ -504,7 +504,7 @@ namespace ft
 		}
 
 		rb_node*
-		get_next_node(const key_type & n)
+		get_next_node(const key_type & n) const
 		{
 			rb_node* tmp = _nil->right;
 

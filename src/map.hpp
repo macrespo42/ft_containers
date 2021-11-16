@@ -197,7 +197,7 @@ namespace ft
         mapped_type&
         operator[](const key_type& k)
         {
-            return (*((this->insert(ft::make_pair(k,mapped_type()))).first)).second;
+            return (*((insert(ft::make_pair(k,mapped_type()))).first)).second;
         }
 
 		/*
@@ -338,47 +338,37 @@ namespace ft
         iterator
         lower_bound(const key_type& k)
         {
-            iterator it(_map.search(k));
-            if (it.base() == NULL)
-            {
-                iterator tmp(_map.get_next_node(k));
-                if (_cmp(k, tmp->first))
-                    tmp++;
-                it = tmp;
-            }
-            return it;
+            iterator it = begin();
+            while (_cmp(it->first, k) && it != end())
+                it++;
+            return (it);
         }
 
         const_iterator
         lower_bound(const key_type& k) const
         {
-            const_iterator it(_map.search(k));
-            if (it.base() == NULL)
-            {
-                const_iterator tmp(_map.get_next_node(k));
-                if (_cmp(k, tmp->first))
-                    tmp++;
-                it = tmp;
-            }
-            return it;
+            const_iterator it = begin();
+            while (_cmp(it->first, k) && it != end())
+                it++;
+            return (it);
         }
 
         iterator
         upper_bound(const key_type& k)
         {
-            iterator it(_map.search(k));
-            if (it.base() == NULL)
-                return iterator(_map.get_next_node(k));
-            return ++it;
+            iterator it = begin();
+            while (_cmp(k, it->first) == false && it != end())
+                it++;
+            return (it);
         }
 
         const_iterator
         upper_bound(const key_type& k) const
         {
-            const_iterator it(_map.search(k));
-            if (it.base() == NULL)
-                return const_iterator(_map.get_next_node(k));
-            return ++it;
+            const_iterator it = begin();
+            while (_cmp(k, it->first) == false && it != end())
+                it++;
+            return (it);
         }
 
         pair<iterator,iterator>
