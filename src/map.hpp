@@ -345,7 +345,7 @@ namespace ft
             if (it.base() == NULL)
             {
                 iterator tmp(_map.get_next_node(k));
-                if (tmp.base()->item.first > k)
+                if (_cmp(k, tmp->first))
                     tmp++;
                 it = tmp;
             }
@@ -359,7 +359,7 @@ namespace ft
             if (it.base() == NULL)
             {
                 const_iterator tmp(_map.get_next_node(k));
-                if (tmp.base()->item.first > k)
+                if (_cmp(k, tmp->first))
                     tmp++;
                 it = tmp;
             }

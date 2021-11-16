@@ -364,10 +364,17 @@ int equal_bound_test(void)
   return 0;
 }
 
+template <typename MAP>
+void (MAP test);
+{
+  (void)test;
+}
+
 int main(void)
 {
-    // constructors_test();
-    // assignation_test();
+    constructors_test();
+    assignation_test();
+    test();
     // begin_end_test();
     // rbegin_rend_test();
     // empty_test();
