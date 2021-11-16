@@ -237,7 +237,7 @@ namespace ft
         {
             while (first != last)
             {
-                insert(first.base()->item);
+                insert(ft::make_pair(first->first, first->second));
                 first++;
             }
         }
