@@ -1,5 +1,5 @@
-#ifndef MAP
-#define MAP
+#ifndef _MAP
+#define _MAP
 
 #include <memory>
 #include "iterator.hpp"
@@ -100,7 +100,7 @@ namespace ft
             clear();
             _allocator = x._allocator;
             _cmp = x._cmp;
-            for (const_iterator it = x.begin(); it != x.end();  it++)
+            for (const_iterator it = x.begin(); it != x.end(); it++)
                 insert(*it);
             return *this;
         }
