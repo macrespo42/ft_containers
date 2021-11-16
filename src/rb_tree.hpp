@@ -299,7 +299,6 @@ namespace ft
 
 		void swap_values(rb_node *a, rb_node *b)
 		{
-			std::cout << "COUCOU JE SWAP" << std::endl;
 			branch_swapper(a->parent, a, b);
 			branch_swapper(a->left, a, b);
 			branch_swapper(a->right, a, b);

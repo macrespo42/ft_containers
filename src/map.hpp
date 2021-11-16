@@ -81,12 +81,9 @@ namespace ft
         _size(0),
         _allocator(alloc),
         _cmp(comp)
-        {   
+        {  
             for (InputIterator current = first; current != last; current++)
-            {
-                _map.insert_node(*current);
-                _size++;
-            }
+                insert(*current);
         }
 
         map(const map& x) :
