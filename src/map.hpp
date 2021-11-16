@@ -89,7 +89,8 @@ namespace ft
             }
         }
 
-        map(const map& x)
+        map(const map& x) :
+        _size(0)
         {
             *this = x;
         }
