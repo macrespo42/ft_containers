@@ -132,11 +132,14 @@ namespace ft
 			std::string reset="\033[0m";
 			
 			if (!current)
-				return ;
+			{
+				std::cout << "NULL" << std::endl;
+				return ; 
+			}
 			if (current->color == CRED)
-				std::cout << red << current->item.second << reset << " ";
+				std::cout << red << current->item.first << reset << " ";
 			else
-				std::cout << current->item.second << " ";
+				std::cout << current->item.first << " ";
 		}
 
 		void
@@ -297,24 +300,56 @@ namespace ft
 			}
 		}
 
+		void fix_shit (rb_node *shit, rb_node *alternative)
+		{
+			if (shit->parent && shit->parent == shit)
+				shit->parent = alternative;
+			if (shit->left && shit->left == shit)
+				shit->left = alternative;
+			if (shit->right && shit->right == shit)
+				shit->right = alternative;
+		}
+
 		void swap_values(rb_node *a, rb_node *b)
 		{
+			// std::cout << "STARTING SWAP" << std::endl;
+			// printDatPtr(a);
+			// printDatPtr(b);
+			// levelOrder();
 			branch_swapper(a->parent, a, b);
 			branch_swapper(a->left, a, b);
 			branch_swapper(a->right, a, b);
 			branch_swapper(b->parent, b, a);
 			branch_swapper(b->left, b, a);
 			branch_swapper(b->right, b, a);
+			// std::cout << "MAN IN THE MIDDLE" << std::endl;
+			// printDatPtr(a);
+			// printDatPtr(b);
 			ft::swap(a->parent, b->parent);
 			ft::swap(a->right, b->right);
 			ft::swap(a->left, b->left);
 			ft::swap(a->color, b->color);
+			fix_shit(a, b);
+			fix_shit(b, a);
+			// std::cout << "SWAP END" << std::endl;	
+			// printDatPtr(a);
+			// printDatPtr(b);
+			// levelOrder();
 		}
 
 		void delete_node(rb_node *v)
 		{
+			// std::cout << "COUCOU JE DELETE" << std::endl;
 			rb_node *u = bst_replace(v);
-			
+			// std::cout << v->item.first << " is value of V" << std::endl;
+			// if (v->left)
+			// 	std::cout << v->left->item.first << std::endl;
+			// else
+			// 	std::cout << "v of left is NULL" << std::endl;
+			// if (v->right)
+			// 	std::cout << v->right->item.first << std::endl;
+			// else
+			// 	std::cout << "v of right is NULL" << std::endl;
 			bool uvBlack = ((u == NULL or u->color == CBLACK) and (v->color == CBLACK));
 			rb_node *parent = v->parent;
 			if (u == NULL)
@@ -339,7 +374,7 @@ namespace ft
 				_allocator.deallocate(v, 1);
 				return;
 			}
-			if (v->left == NULL or v->right == NULL)
+			if (v->left == NULL || v->right == NULL)
 			{
 				if (v->is_on_left())
 					parent->left = u;
@@ -354,8 +389,46 @@ namespace ft
 					u->color = CBLACK;
 				return;
 			}
+			printDatPtr(u);
+			printDatPtr(v);
+			std::cout << "COUCOU JE SWAP" << std::endl;
 			swap_values(u, v);
-			delete_node(u);
+			if (u->left == v)
+				u->left = NULL;
+			else
+				u->right = NULL;
+			printDatPtr(u);
+			printDatPtr(v);
+			// v->parent->child
+			// v->parent->child = NULL;
+			// v->left->parent = NULL;
+			// v->right->parent = NULL;
+			_allocator.destroy(v);
+			_allocator.deallocate(v, 1);
+			// delete_node(u);
+		}
+
+		void printDatPtr (rb_node *nd)
+		{
+			std::cout << "Out here printin " << nd << std::endl;
+			std::cout << "Key: " << nd->item.first << std::endl;
+			std::cout << "Value:" << nd->item.second << std::endl;
+			std::cout << "Parent: ";
+			print_node(nd->parent);
+			std::cout << std::endl;
+			std::cout << "Left: ";
+			print_node(nd->left);
+			std::cout << std::endl;
+			std::cout << "Right: ";
+			print_node(nd->right);
+			std::cout << std::endl;
+			if (nd->parent && nd->parent->left != nd && nd->parent->right != nd)
+				std::cout << "SHIT: node is not parent's child" << std::endl;
+			if (nd->left && nd->left->parent != nd)
+				std::cout << "SHIT: node is not left's parent" << std::endl;
+			if (nd->right && nd->right->parent != nd)
+				std::cout << "SHIT: node is not right's parent" << std::endl;
+			std::cout << "================" << std::endl << std::endl;
 		}
 
 		void fix_double_black(rb_node *x)
@@ -384,7 +457,7 @@ namespace ft
 				{
 					if (sibling->has_red_child())
 					{
-						if (sibling->left != NULL and sibling->left->color == CRED)
+						if (sibling->left != NULL && sibling->left->color == CRED)
 						{
 							if (sibling->is_on_left())
 							{
@@ -473,7 +546,6 @@ namespace ft
 				_nil->right = new_node;
 				new_node->parent = _nil;
 			}
-
 			fix_violation(_nil->right, new_node);
 		}
 		
@@ -579,6 +651,11 @@ namespace ft
 			{
 				rb_node *temp = q.front();
 				print_node(temp);
+				std::cout << std::endl << "right : " ;
+				print_node(temp->right);
+				std::cout << std::endl  <<  "left : ";
+				print_node(temp->left);
+				std::cout << std::endl << "----------------------" << std::endl;
 				q.pop();
 		
 				if (temp->left != NULL)

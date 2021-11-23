@@ -192,18 +192,17 @@ int erase_test(void)
   mymap['e']=50;
   mymap['f']=60;
 
-  // it=mymap.find('b');
-  // mymap.erase (it);                   // erasing by iterator
+  it=mymap.find('b');
+  mymap.erase (it);                   // erasing by iterator
 
-  // mymap.erase ('c');                  // erasing by key
+  mymap.erase ('c');                  // erasing by key
 
   it=mymap.find ('e');
-  mymap.erase(it);
-  // mymap.erase ( it, mymap.end() );    // erasing by range
+  mymap.erase ( it, mymap.end() );    // erasing by range
 
   // show content:
-  // for (it=mymap.begin(); it!=mymap.end(); ++it)
-  //   std::cout << it->first << " => " << it->second << '\n';
+  for (it=mymap.begin(); it!=mymap.end(); ++it)
+    std::cout << it->first << " => " << it->second << '\n';
 
   return 0;
 }
@@ -364,17 +363,10 @@ int equal_bound_test(void)
   return 0;
 }
 
-template <typename MAP>
-void (MAP test);
-{
-  (void)test;
-}
-
 int main(void)
 {
-    constructors_test();
-    assignation_test();
-    test();
+    // constructors_test();
+    // assignation_test();
     // begin_end_test();
     // rbegin_rend_test();
     // empty_test();
@@ -382,7 +374,7 @@ int main(void)
     // max_size_test();
     // operator_hook_test();
     // insert_test();
-    // erase_test();
+    erase_test();
     // swap_test();
     // clear_test();
     // key_comp_test();

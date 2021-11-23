@@ -107,6 +107,7 @@ namespace ft
 
         ~map(void)
         {
+            // _map.levelOrder();
             clear();
         }
 
