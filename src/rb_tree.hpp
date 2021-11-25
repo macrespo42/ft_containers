@@ -405,7 +405,6 @@ namespace ft
 			// v->right->parent = NULL;
 			_allocator.destroy(v);
 			_allocator.deallocate(v, 1);
-			// delete_node(u);
 		}
 
 		void printDatPtr (rb_node *nd)
@@ -638,41 +637,38 @@ namespace ft
 			return _allocator;
 		}
 
-		void
-		levelOrderHelper(rb_node *root)
-		{
-			if (root == NULL)
-				return;
-		
-			std::queue<rb_node *> q;
-			q.push(root);
-		
-			while (!q.empty())
-			{
-				rb_node *temp = q.front();
-				print_node(temp);
-				std::cout << std::endl << "right : " ;
-				print_node(temp->right);
-				std::cout << std::endl  <<  "left : ";
-				print_node(temp->left);
-				std::cout << std::endl << "----------------------" << std::endl;
-				q.pop();
-		
-				if (temp->left != NULL)
-					q.push(temp->left);
-		
-				if (temp->right != NULL)
-					q.push(temp->right);
-			}
-			std::cout << std::endl << "Left most : " << std::endl;
-			print_node(left_most());
-			std::cout << std::endl << "Right most : " << std::endl;
-			print_node(right_most());
-		}
+        void printHelper(rb_node *root, std::string indent, bool last)
+        {
+            if (root != NULL)
+            {
+                std::cout << indent;
+                if (last)
+                {
+                    std::cout << "R----";
+                    indent += "   ";
+                }
+                else
+                {
+                    std::cout << "L----";
+                    indent += "|  ";
+                }
+                std::string sColor;
+                if (root->color)
+                    sColor = "BLACK";
+                else
+                    sColor = "RED";
+                std::cout << root->item.first << "(" << sColor << ")" << std::endl;
+                printHelper(root->left, indent, false);
+                printHelper(root->right, indent, true);
+            }
+        }
 
 		void
 		levelOrder()
-		{  levelOrderHelper(_nil->right); }
+		{
+            if (_nil->right)
+            	printHelper(_nil->right, "", true);
+		}
 	};
 }
 #endif

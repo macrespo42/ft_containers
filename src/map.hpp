@@ -107,7 +107,6 @@ namespace ft
 
         ~map(void)
         {
-            // _map.levelOrder();
             clear();
         }
 
@@ -388,6 +387,11 @@ namespace ft
         get_allocator() const
         {
             return allocator_type();
+        }
+
+        void print_tree(void)
+        {
+            _map.levelOrder();
         }
     };
 
