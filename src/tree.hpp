@@ -88,6 +88,57 @@ namespace ft
             insert_fix(new_node);
         }
 
+        void delete_node_helper(node *root, const key_type &key)
+        {
+            node *z = search(key);
+            node *x;
+            node *y;
+
+            if (!z)
+                return;
+            y = z;
+            int original_color = y->color;
+            if (z->left == NULL)
+            {
+                x = z->right;
+                transplant(z, z->right);
+            }
+            else if (z->right == NULL)
+            {
+                x = z->left;
+                transplant(z, z->left);
+            }
+            else
+            {
+                y = minimum(z->right);
+                original_color = y->color;
+                x = y->right;
+                if (y->parent == z)
+                {
+                    if (x)
+                        x->parent = y;
+                }
+                else
+                {
+                    transplant(y, y->right);
+                    y->right = z->right;
+                    y->right->parent = y;
+                }
+                transplant(z, y);
+                y->left = z->left;
+                y->left->parent = y;
+                y->color = z->color;
+            }
+			_alloc.destroy(z);
+			_alloc.deallocate(z, 1);
+            (void)root;
+        }
+
+        void delete_node(const key_type &key)
+        {
+            delete_node_helper(_nil->right, key);
+        }
+
         void printTree()
         {
             if (_nil->right)
@@ -107,16 +158,54 @@ namespace ft
             _alloc.construct(ptr, tmp);
         }
 
+        node
+		*search(const key_type & n) const
+		{
+			node *temp = _nil->right;
+			while (temp != NULL)
+			{
+				if (equal(n, temp->item.first))
+					return temp;
+				else if (_cmp(n, temp->item.first))
+				{
+					if (temp->left == NULL)
+						return NULL;
+					else
+						temp = temp->left;
+				}
+				else
+				{
+					if (temp->right == NULL)
+						return NULL;
+					else
+						temp = temp->right;
+				}
+			}
+			return temp;
+		}
+
+        void transplant(node *u, node *v)
+        {
+            if (u->parent == NULL)
+                _nil->right = v;
+            else if (u == u->parent->left)
+                u->parent->left = v;
+            else
+                u->parent->right = v;
+            if (v && u)
+                v->parent = u->parent;
+        }
+
         node *minimum(node *node)
         {
-            while (node != NULL)
+            while (node->left != NULL)
                 node = node->left;
             return node;
         }
 
         node *maximum(node *node)
         {
-            while (node != NULL)
+            while (node->right != NULL)
                 node = node->right;
             return node;
         }
@@ -225,6 +314,12 @@ namespace ft
             }
             return position;
         }
+
+		bool
+		equal(key_type a, key_type b) const
+		{
+			return (!_cmp(a, b) && !_cmp(b, a));
+		}
 
         void printHelper(node *root, std::string indent, bool last)
         {
