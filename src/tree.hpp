@@ -90,10 +90,9 @@ namespace ft
 
         void printTree()
         {
-            if (_nil->right) {
+            if (_nil->right)
             printHelper(_nil->right, "", true);
         }
-  }
 
         private:
 
@@ -106,6 +105,20 @@ namespace ft
         {
             node tmp(val);
             _alloc.construct(ptr, tmp);
+        }
+
+        node *minimum(node *node)
+        {
+            while (node != NULL)
+                node = node->left;
+            return node;
+        }
+
+        node *maximum(node *node)
+        {
+            while (node != NULL)
+                node = node->right;
+            return node;
         }
 
         void left_rotate(node *x)
