@@ -69,8 +69,8 @@ namespace ft
         void insert(const value_type &value)
         {
             node *new_node = _alloc.allocate(1);
-            _alloc.construct(new_node, value);
-            if (!_nil->right)
+            construct_node(new_node, value);
+            if (_nil->right == _nil)
             {
                 _nil->right = new_node;
                 new_node->parent = _nil;
@@ -85,7 +85,7 @@ namespace ft
                 new_node->parent = new_parent;
                 new_node->color = CRED;
             }
-            insert_fix(new_node);
+            // insert_fix(new_node);
         }
 
         void delete_node_helper(node *root, const key_type &key)
@@ -131,7 +131,8 @@ namespace ft
             }
 			_alloc.destroy(z);
 			_alloc.deallocate(z, 1);
-            (void)root;
+            if (original_color == 1)
+                delete_fix(x);
         }
 
         void delete_node(const key_type &key)
@@ -155,7 +156,14 @@ namespace ft
         construct_node(node *ptr, value_type val = value_type())
         {
             node tmp(val);
+            tmp.left = _nil;
+            tmp.right = _nil;
             _alloc.construct(ptr, tmp);
+        }
+
+        void delete_fix(node *x)
+        {
+            (void)x;
         }
 
         node
@@ -297,17 +305,17 @@ namespace ft
 
         node *insertion_destination(node *position, node *new_node)
         {
-            while (position != NULL)
+            while (position != _nil)
             {
                 if (_cmp(position->item.first, new_node->item.first))
                 {
-                    if (position->right == NULL)
+                    if (position->right == _nil)
                         return position;
                     position = position->right;
                 }
                 else
                 {
-                    if (position->left == NULL)
+                    if (position->left == _nil)
                         return position;
                     position = position->left;
                 }
@@ -323,7 +331,7 @@ namespace ft
 
         void printHelper(node *root, std::string indent, bool last)
         {
-            if (root != NULL)
+            if (root != _nil)
             {
                 std::cout << indent;
                 if (last)
