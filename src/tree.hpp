@@ -98,12 +98,12 @@ namespace ft
                 return;
             y = z;
             int original_color = y->color;
-            if (z->left == NULL)
+            if (z->left == _nil)
             {
                 x = z->right;
                 transplant(z, z->right);
             }
-            else if (z->right == NULL)
+            else if (z->right == _nil)
             {
                 x = z->left;
                 transplant(z, z->left);
@@ -163,27 +163,95 @@ namespace ft
 
         void delete_fix(node *x)
         {
-            (void)x;
+            node *s;
+            while (x != _nil->right && x->color == 1)
+            {
+                if (x == x->parent->left)
+                {
+                    s = x->parent->right;
+                    if (s->color == 0)
+                    {
+                        s->color = 1;
+                        x->parent->color = 0;
+                        left_rotate(x->parent);
+                        s = x->parent->right;
+                    }
+                    if (s->left->color == 1 && s->right->color == 1)
+                    {
+                        s->color = 0;
+                        x = x->parent;
+                    }
+                    else
+                    {
+                        if (s->right->color == 1)
+                        {
+                            s->left->color = 1;
+                            s->color = 0;
+                            right_rotate(s);
+                            s = x->parent->right;
+                        }
+
+                        s->color = x->parent->color;
+                        x->parent->color = 1;
+                        s->right->color = 1;
+                        left_rotate(x->parent);
+                        x = _nil->right;
+                    }
+                }
+                else
+                {
+                    s = x->parent->left;
+                    if (s->color == 0)
+                    {
+                        s->color = 1;
+                        x->parent->color = 0;
+                        right_rotate(x->parent);
+                        s = x->parent->right;
+                    }
+                    if (s->right->color == 1)
+                    {
+                        s->color = 0;
+                        x = x->parent;
+                    }
+                    else
+                    {
+                        if (s->left->color == 1)
+                        {
+                            s->right->color = 1;
+                            s->color = 0;
+                            left_rotate(s);
+                            s = x->parent->right;
+                        }
+
+                        s->color = x->parent->color;
+                        x->parent->color = 1;
+                        s->left->color = 1;
+                        right_rotate(x->parent);
+                        x = _nil->right;
+                    }
+                }
+            }
+            x->color = 1;
         }
 
         node
 		*search(const key_type & n) const
 		{
 			node *temp = _nil->right;
-			while (temp != NULL)
+			while (temp != _nil)
 			{
 				if (equal(n, temp->item.first))
 					return temp;
 				else if (_cmp(n, temp->item.first))
 				{
-					if (temp->left == NULL)
+					if (temp->left == _nil)
 						return NULL;
 					else
 						temp = temp->left;
 				}
 				else
 				{
-					if (temp->right == NULL)
+					if (temp->right == _nil)
 						return NULL;
 					else
 						temp = temp->right;
@@ -206,14 +274,14 @@ namespace ft
 
         node *minimum(node *node)
         {
-            while (node->left != NULL)
+            while (node->left != _nil)
                 node = node->left;
             return node;
         }
 
         node *maximum(node *node)
         {
-            while (node->right != NULL)
+            while (node->right != _nil)
                 node = node->right;
             return node;
         }
