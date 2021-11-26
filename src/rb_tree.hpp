@@ -598,7 +598,7 @@ namespace ft
 				delete_node(v);
 		}
 
-		rb_node *
+		node *
 		left_most(void) const
 		{
 			rb_node *tmp = _nil->right;
@@ -609,7 +609,7 @@ namespace ft
 			return tmp;
 		}
 
-		rb_node *
+		node *
 		right_most(void) const
 		{
 			rb_node *tmp = _nil->right;
@@ -620,13 +620,14 @@ namespace ft
 			return tmp;
 		}
 
-		rb_node *
+		node *
 		get_nil_node(void) const
 		{
 			return _nil;
 		}
 
-		void swap_root(rb_tree &x)
+		void
+		swap_root(rb_tree &x)
 		{
 			ft::swap(_nil, x._nil);
 		}

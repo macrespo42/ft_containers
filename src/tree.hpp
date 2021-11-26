@@ -6,6 +6,7 @@
 #include <string>
 #include <queue>
 #include <string>
+#include "algorithm.hpp"
 #define CBLACK 1;
 #define CRED 0;
 
@@ -26,15 +27,6 @@ namespace ft
             left = NULL;
             right = NULL;
             color = CBLACK;
-        }
-
-        void
-        change_color(void)
-        {
-            if (this->color == 1)
-                this->color = 0;
-            else
-                this->color = 1; 
         }
     };
 
@@ -145,6 +137,46 @@ namespace ft
             if (_nil->right)
             printHelper(_nil->right, "", true);
         }
+
+		node *
+		left_most(void) const
+		{
+			node *tmp = _nil->right;
+			if (tmp == _nil)
+				return _nil;
+			while (tmp->left != _nil)
+				tmp = tmp->left;
+			return tmp;
+		}
+
+		node *
+		right_most(void) const
+		{
+			node *tmp = _nil->right;
+			if (tmp == _nil)
+				return _nil;
+			while (tmp->_left != _nil)
+				tmp = tmp->right;
+			return tmp;
+		}
+
+		node *
+		get_nil_node(void) const
+		{
+			return _nil;
+		}
+
+		void
+		swap_root(rb_tree &x)
+		{
+			ft::swap(_nil, x._nil);
+		}
+
+		allocator_type
+		get_allocator(void) const
+		{
+			return _alloc;
+		}
 
         private:
 
