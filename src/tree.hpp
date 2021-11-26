@@ -85,7 +85,7 @@ namespace ft
                 new_node->parent = new_parent;
                 new_node->color = CRED;
             }
-            // insert_fix(new_node);
+            insert_fix(new_node);
         }
 
         void delete_node_helper(node *root, const key_type &key)
@@ -222,7 +222,7 @@ namespace ft
         {
             node *y = x->right;
             x->right = y->left;
-            if (y->left != NULL)
+            if (y->left != _nil)
                 y->left->parent = x;
             y->parent = x->parent;
             if (x->parent == NULL)
@@ -239,7 +239,7 @@ namespace ft
         {
             node *y = x->left;
             x->left = y->right;
-            if (y->right != NULL)
+            if (y->right != _nil)
                 y->right->parent = x;
             y->parent = x->parent;
             if (x->parent == NULL)
@@ -252,24 +252,22 @@ namespace ft
             x->parent = y;
         }
 
-        node *recoloration(node *uncle, node *parent)
-        {
-            uncle->color = 1;
-            parent->color = 1;
-            parent->parent->color = 0;
-            return parent->parent;
-        }
-
         void insert_fix(node *z)
         {
             // red = 0 et black = 1
+            node *uncle;
             while (z->parent->color == 0)
             {
-                if (z->parent == z->parent->parent->left)
+                if (z->parent == z->parent->parent->right)
                 {
-                    node *uncle = z->parent->parent->right;
+                    uncle = z->parent->parent->left;
                     if (uncle->color == 0)
-                        z = recoloration(uncle, z->parent);
+                    {
+                        uncle->color = 1;
+                        z->parent->color = 1;
+                        z->parent->parent->color = 0;
+                        z = z->parent->parent;
+                    }
                     else
                     {
                         if (z == z->parent->left)
@@ -284,9 +282,14 @@ namespace ft
                 }
                 else
                 {
-                    node *uncle = z->parent->parent->left;
+                    uncle = z->parent->parent->right;
                     if (uncle->color == 0)
-                        z = recoloration(uncle, z->parent);
+                    {
+                        uncle->color = 1;
+                        z->parent->color = 1;
+                        z->parent->parent->color = 0;
+                        z = z->parent->parent;
+                    }
                     else
                     {
                         if (z == z->parent->right)
@@ -299,6 +302,8 @@ namespace ft
                         right_rotate(z->parent->parent);
                     }
                 }
+                if (z == _nil->right)
+                    break;
             }
             _nil->right->color = 1;
         }
