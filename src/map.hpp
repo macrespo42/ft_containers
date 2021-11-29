@@ -143,6 +143,8 @@ namespace ft
         iterator
         begin()
         {
+            _map.printTree();
+            std::cout << "Left most : " << _map.left_most()->item.first << std::endl;
             return (iterator(_map.left_most()));
         }
 
@@ -330,8 +332,10 @@ namespace ft
         size_type
         count(const key_type& k) const
         {
-            if (!_map.search(k))
+            if (!_map.search(k)) {
+                std::cout << k << " don't founded" << std::endl;
                 return 0;
+            }
             return 1;
         }
 

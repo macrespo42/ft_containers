@@ -15,7 +15,6 @@ namespace ft
     template<class T>
     struct node
     {
-        node *nil_node;
         node *parent;
         node *left;
         node *right;
@@ -28,6 +27,14 @@ namespace ft
             left = NULL;
             right = NULL;
             color = CBLACK;
+        }
+
+        bool 
+        is_nil(void)
+        {
+            if (this->parent == this)
+                return true;
+            return false;
         }
     };
 
@@ -50,6 +57,7 @@ namespace ft
         {
             _nil = _alloc.allocate(1);
             construct_node(_nil);
+            _nil->parent = _nil;
             _nil->color = CBLACK;
         }
 
@@ -122,23 +130,24 @@ namespace ft
 		node *
 		left_most(void) const
 		{
-			node *tmp = _nil->right;
-			if (tmp == _nil)
-				return _nil;
-			while (tmp->left != _nil)
-				tmp = tmp->left;
-			return tmp;
+            node *tmp = _nil->right;
+            
+            std::cout << "nil->right : " << _nil->right->item.first << std::endl;
+            while (tmp->left != _nil) {
+                std::cout << "tmp : " << _nil->right->item.first << std::endl;
+                tmp = tmp->left;
+            }
+            return tmp;
 		}
 
 		node *
 		right_most(void) const
 		{
-			node *tmp = _nil->right;
-			if (tmp == _nil)
-				return _nil;
-			while (tmp->_left != _nil)
-				tmp = tmp->right;
-			return tmp;
+            node *tmp = _nil->right;
+            
+            while (tmp->right != _nil)
+                tmp = tmp->right;
+            return tmp;
 		}
 
 		node*
@@ -187,7 +196,6 @@ namespace ft
             _alloc.construct(ptr, tmp);
             ptr->left = _nil;
             ptr->right = _nil;
-            ptr->nil_node = _nil;
         }
 
         void delete_node_helper(const key_type &key)
@@ -454,6 +462,7 @@ namespace ft
 
         void printHelper(node *root, std::string indent, bool last)
         {
+            std::cout << "The tree : " << std::endl;
             if (root != _nil)
             {
                 std::cout << indent;
