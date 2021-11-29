@@ -5,8 +5,8 @@
 #include <memory>
 #include <string>
 #include <queue>
-#include <string>
 #include "algorithm.hpp"
+#include "utility.hpp"
 #define CBLACK 1;
 #define CRED 0;
 
@@ -30,18 +30,18 @@ namespace ft
         }
     };
 
-    template <class Key, class T, class keyCompare = std::less<Key>, class valueCompare = std::less<T>, class Alloc = std::allocator<std::pair<const Key, T> > >
+    template <class Key, class T, class keyCompare = std::less<Key>, class valueCompare = std::less<T>, class Alloc = std::allocator<ft::pair<const Key, T> > >
     class rb_tree
     {
         public:
-        typedef std::pair<const Key, T> value_type;
+		typedef ft::pair<const Key, T> value_type;
         typedef Key key_type;
         typedef T mapped_type;
         typedef keyCompare key_compare;
-        typedef valueCompare value_compare;
-        typedef std::size_t size_type;
-        typedef typename Alloc::template rebind<node<value_type> >::other allocator_type;
-        typedef node<value_type> node;
+		typedef valueCompare value_compare;
+		typedef typename Alloc::template rebind<node<value_type> >::other allocator_type;
+		typedef std::size_t size_type;
+		typedef node<value_type> node;
 
         rb_tree(void) :
         _alloc(allocator_type()),
@@ -52,13 +52,14 @@ namespace ft
             _nil->color = CBLACK;
         }
 
-        virtual ~rb_tree(void)
+        ~rb_tree(void)
 		{
 			_alloc.destroy(_nil);
 			_alloc.deallocate(_nil, 1);
 		}
 
-        void insert(const value_type &value)
+        void
+        insert_node(const value_type &value)
         {
             node *new_node = _alloc.allocate(1);
             construct_node(new_node, value);
@@ -80,7 +81,114 @@ namespace ft
             insert_fix(new_node);
         }
 
-        void delete_node_helper(node *root, const key_type &key)
+        node
+		*search(const key_type & n) const
+		{
+			node *temp = _nil->right;
+			while (temp != _nil)
+			{
+				if (equal(n, temp->item.first))
+					return temp;
+				else if (_cmp(n, temp->item.first))
+				{
+					if (temp->left == _nil)
+						return NULL;
+					else
+						temp = temp->left;
+				}
+				else
+				{
+					if (temp->right == _nil)
+						return NULL;
+					else
+						temp = temp->right;
+				}
+			}
+			return temp;
+		}
+
+        void delete_by_key(const key_type &key)
+        {
+            delete_node_helper(key);
+        }
+
+        void printTree()
+        {
+            if (_nil->right)
+                printHelper(_nil->right, "", true);
+        }
+
+		node *
+		left_most(void) const
+		{
+			node *tmp = _nil->right;
+			if (tmp == _nil)
+				return _nil;
+			while (tmp->left != _nil)
+				tmp = tmp->left;
+			return tmp;
+		}
+
+		node *
+		right_most(void) const
+		{
+			node *tmp = _nil->right;
+			if (tmp == _nil)
+				return _nil;
+			while (tmp->_left != _nil)
+				tmp = tmp->right;
+			return tmp;
+		}
+
+		node*
+		get_next_node(const key_type & n) const
+		{
+			node* tmp = _nil->right;
+
+			while (tmp != _nil)
+			{
+				if (_cmp(n, tmp->item.first))
+					tmp = tmp->left;
+				else if (_cmp(tmp->item.first, n))
+					tmp = tmp->right;
+			}
+			return tmp;
+		}
+
+		node *
+		get_nil_node(void) const
+		{
+			return _nil;
+		}
+
+		void
+		swap_root(rb_tree &x)
+		{
+			ft::swap(_nil, x._nil);
+		}
+
+		allocator_type
+		get_allocator(void) const
+		{
+			return _alloc;
+		}
+
+        private:
+
+        node *_nil;
+        allocator_type _alloc;
+        key_compare _cmp;
+
+        void
+        construct_node(node *ptr, value_type val = value_type())
+        {
+            node tmp(val);
+            _alloc.construct(ptr, tmp);
+            ptr->left = _nil;
+            ptr->right = _nil;
+        }
+
+        void delete_node_helper(const key_type &key)
         {
             node *z = search(key);
             node *x;
@@ -125,72 +233,6 @@ namespace ft
 			_alloc.deallocate(z, 1);
             if (original_color == 1)
                 delete_fix(x);
-        }
-
-        void delete_node(const key_type &key)
-        {
-            delete_node_helper(_nil->right, key);
-        }
-
-        void printTree()
-        {
-            if (_nil->right)
-            printHelper(_nil->right, "", true);
-        }
-
-		node *
-		left_most(void) const
-		{
-			node *tmp = _nil->right;
-			if (tmp == _nil)
-				return _nil;
-			while (tmp->left != _nil)
-				tmp = tmp->left;
-			return tmp;
-		}
-
-		node *
-		right_most(void) const
-		{
-			node *tmp = _nil->right;
-			if (tmp == _nil)
-				return _nil;
-			while (tmp->_left != _nil)
-				tmp = tmp->right;
-			return tmp;
-		}
-
-		node *
-		get_nil_node(void) const
-		{
-			return _nil;
-		}
-
-		void
-		swap_root(rb_tree &x)
-		{
-			ft::swap(_nil, x._nil);
-		}
-
-		allocator_type
-		get_allocator(void) const
-		{
-			return _alloc;
-		}
-
-        private:
-
-        node *_nil;
-        allocator_type _alloc;
-        key_compare _cmp;
-
-        void
-        construct_node(node *ptr, value_type val = value_type())
-        {
-            node tmp(val);
-            tmp.left = _nil;
-            tmp.right = _nil;
-            _alloc.construct(ptr, tmp);
         }
 
         void delete_fix(node *x)
@@ -265,32 +307,6 @@ namespace ft
             }
             x->color = 1;
         }
-
-        node
-		*search(const key_type & n) const
-		{
-			node *temp = _nil->right;
-			while (temp != _nil)
-			{
-				if (equal(n, temp->item.first))
-					return temp;
-				else if (_cmp(n, temp->item.first))
-				{
-					if (temp->left == _nil)
-						return NULL;
-					else
-						temp = temp->left;
-				}
-				else
-				{
-					if (temp->right == _nil)
-						return NULL;
-					else
-						temp = temp->right;
-				}
-			}
-			return temp;
-		}
 
         void transplant(node *u, node *v)
         {

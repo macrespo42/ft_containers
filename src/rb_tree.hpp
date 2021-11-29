@@ -17,15 +17,15 @@ namespace ft
 	};
 
 	template < class T>
-	struct rb_node
+	struct node
 	{
-		rb_node* parent;
-		rb_node* left;
-		rb_node* right;
+		node* parent;
+		node* left;
+		node* right;
 		T item;
 		rb_tree_color color;
 
-		rb_node(const T & data) : item(data.first, data.second)
+		node(const T & data) : item(data.first, data.second)
 		{
 			parent = NULL;
 			left = NULL;
@@ -37,7 +37,7 @@ namespace ft
 		is_on_left()
 		{ return this == parent->left; }
 
-		rb_node
+		node
 		*sibling()
 		{
 			if (parent == NULL)
@@ -63,14 +63,14 @@ namespace ft
         typedef T mapped_type;
         typedef keyCompare key_compare;
 		typedef valueCompare value_compare;
-		typedef typename Alloc::template rebind<rb_node<value_type> >::other allocator_type;
+		typedef typename Alloc::template rebind<node<value_type> >::other allocator_type;
 		typedef rb_tree_color node_color;
 		typedef std::size_t size_type;
-		typedef rb_node<value_type> rb_node;
+		typedef node<value_type> node;
 
 	private:
 
-		rb_node *_nil;
+		node *_nil;
 		allocator_type _allocator;
 		key_compare _comp;
 
@@ -80,33 +80,24 @@ namespace ft
 			return (!_comp(a, b) && !_comp(b, a));
 		}
 
-		void
-		change_color(rb_node *node)
-		{
-			if (node->color == CBLACK)
-				node->color = CRED;
-			else
-				node->color = CBLACK;
-		}
-
-		rb_node*
-		get_father(rb_node *current)
+		node*
+		get_father(node *current)
 		{
 			if (current->parent)
 				return current->parent;
 			return NULL;
 		}
 
-		rb_node*
-		get_grandfather(rb_node *current)
+		node*
+		get_grandfather(node *current)
 		{
 			if (get_father(current) && current->parent->parent)
 				return current->parent->parent;
 			return NULL;
 		}
 
-		rb_node*
-		get_uncle(rb_node *current)
+		node*
+		get_uncle(node *current)
 		{
 			if (get_grandfather(current) && get_father(current) == get_grandfather(current)->left)
 				return get_grandfather(current)->right;
@@ -115,8 +106,8 @@ namespace ft
 			return NULL;
 		}
 
-		rb_node*
-		get_brother(rb_node *current)
+		node*
+		get_brother(node *current)
 		{
 			if (get_father(current) && get_father(current) > current)
 				return get_father(current)->right;
@@ -126,7 +117,7 @@ namespace ft
 		}
 
 		void
-		print_node(rb_node *current)
+		print_node(node *current)
 		{
 			std::string red="\033[0;31m";
 			std::string reset="\033[0m";
@@ -143,9 +134,9 @@ namespace ft
 		}
 
 		void
-		rotate_left(rb_node *&root, rb_node *&pt)
+		rotate_left(node *&root, node *&pt)
 		{
-			rb_node *pt_right = pt->right;
+			node *pt_right = pt->right;
 		
 			pt->right = pt_right->left;
 			if (pt->right != NULL)
@@ -162,9 +153,9 @@ namespace ft
 		}
 		
 		void
-		rotate_right(rb_node *&root, rb_node *&pt)
+		rotate_right(node *&root, node *&pt)
 		{
-			rb_node *pt_left = pt->left;
+			node *pt_left = pt->left;
 
 			pt->left = pt_left->right;
 			if (pt->left != NULL)
@@ -180,8 +171,8 @@ namespace ft
 			pt->parent = pt_left;
 		}
 
-		rb_node *
-		find_destination(rb_node *current, rb_node *inserted)
+		node *
+		find_destination(node *current, node *inserted)
 		{
 			if (_comp(current->item.first, inserted->item.first))
 			{
@@ -200,10 +191,10 @@ namespace ft
 		}
 
 		void
-		fix_violation(rb_node *&root, rb_node *&current)
+		fix_violation(node *&root, node *&current)
 		{
-			rb_node *cur_parent = NULL;
-			rb_node *cur_grand_parent = NULL;
+			node *cur_parent = NULL;
+			node *cur_grand_parent = NULL;
 		
 			while ((current != root) && (current->color == CRED) && (current->parent->color == CRED))
 			{
@@ -211,7 +202,7 @@ namespace ft
 				cur_grand_parent = get_grandfather(current);
 				if (cur_parent == cur_grand_parent->left)
 				{
-					rb_node *cur_uncle = get_uncle(current);
+					node *cur_uncle = get_uncle(current);
 
 					if (cur_uncle != NULL && cur_uncle->color == CRED)
 					{
@@ -235,7 +226,7 @@ namespace ft
 				}
 				else
 				{
-					rb_node *cur_uncle = get_uncle(current);
+					node *cur_uncle = get_uncle(current);
 		
 					if ((cur_uncle != NULL) && (cur_uncle->color == CRED))
 					{
@@ -261,18 +252,18 @@ namespace ft
 			root->color = CBLACK;
 		}
 
-		rb_node *
-		successor(rb_node *current)
+		node *
+		successor(node *current)
 		{
-			rb_node *tmp = current;
+			node *tmp = current;
 
 			while (tmp->left != NULL)
 				tmp = tmp->left;
 			return tmp;
 		}
 
-		rb_node *
-		bst_replace(rb_node *current)
+		node *
+		bst_replace(node *current)
 		{
 			if (current->left != NULL && current->right != NULL)
 				return successor(current->right);
@@ -285,7 +276,7 @@ namespace ft
 		}
 
 		void
-		branch_swapper(rb_node *pointing, rb_node *origin, rb_node *destination)
+		branch_swapper(node *pointing, node *origin, node *destination)
 		{
 			if (pointing)
 			{
@@ -300,7 +291,7 @@ namespace ft
 			}
 		}
 
-		void fix_shit (rb_node *shit, rb_node *alternative)
+		void fix_shit (node *shit, node *alternative)
 		{
 			if (shit->parent && shit->parent == shit)
 				shit->parent = alternative;
@@ -310,7 +301,7 @@ namespace ft
 				shit->right = alternative;
 		}
 
-		void swap_values(rb_node *a, rb_node *b)
+		void swap_values(node *a, node *b)
 		{
 			// std::cout << "STARTING SWAP" << std::endl;
 			// printDatPtr(a);
@@ -337,10 +328,10 @@ namespace ft
 			// levelOrder();
 		}
 
-		void delete_node(rb_node *v)
+		void delete_node(node *v)
 		{
 			// std::cout << "COUCOU JE DELETE" << std::endl;
-			rb_node *u = bst_replace(v);
+			node *u = bst_replace(v);
 			// std::cout << v->item.first << " is value of V" << std::endl;
 			// if (v->left)
 			// 	std::cout << v->left->item.first << std::endl;
@@ -351,7 +342,7 @@ namespace ft
 			// else
 			// 	std::cout << "v of right is NULL" << std::endl;
 			bool uvBlack = ((u == NULL or u->color == CBLACK) and (v->color == CBLACK));
-			rb_node *parent = v->parent;
+			node *parent = v->parent;
 			if (u == NULL)
 			{
 				if (v == _nil->right)
@@ -389,16 +380,16 @@ namespace ft
 					u->color = CBLACK;
 				return;
 			}
-			printDatPtr(u);
-			printDatPtr(v);
-			std::cout << "COUCOU JE SWAP" << std::endl;
+			// printDatPtr(u);
+			// printDatPtr(v);
+			// std::cout << "COUCOU JE SWAP" << std::endl;
 			swap_values(u, v);
 			if (u->left == v)
 				u->left = NULL;
 			else
 				u->right = NULL;
-			printDatPtr(u);
-			printDatPtr(v);
+			// printDatPtr(u);
+			// printDatPtr(v);
 			// v->parent->child
 			// v->parent->child = NULL;
 			// v->left->parent = NULL;
@@ -407,7 +398,7 @@ namespace ft
 			_allocator.deallocate(v, 1);
 		}
 
-		void printDatPtr (rb_node *nd)
+		void printDatPtr (node *nd)
 		{
 			std::cout << "Out here printin " << nd << std::endl;
 			std::cout << "Key: " << nd->item.first << std::endl;
@@ -430,12 +421,12 @@ namespace ft
 			std::cout << "================" << std::endl << std::endl;
 		}
 
-		void fix_double_black(rb_node *x)
+		void fix_double_black(node *x)
 		{
 			if (x == _nil->right)
 			return;
 		
-			rb_node *sibling = x->sibling(), *parent = x->parent;
+			node *sibling = x->sibling(), *parent = x->parent;
 			if (sibling == NULL)
 			{
 				fix_double_black(parent);
@@ -501,9 +492,9 @@ namespace ft
   		}
 
 		void
-		construct_node(rb_node *ptr, value_type val = value_type())
+		construct_node(node *ptr, value_type val = value_type())
 		{
-			rb_node tmp(val);
+			node tmp(val);
 			_allocator.construct(ptr, tmp);
 		}
 
@@ -527,12 +518,12 @@ namespace ft
 		void
 		insert_node(const value_type &value)
 		{
-			rb_node *new_node = _allocator.allocate(1);
+			node *new_node = _allocator.allocate(1);
 			construct_node(new_node, value);
 			
 			if (_nil->right)
 			{
-				rb_node *parent = find_destination(_nil->right, new_node);
+				node *parent = find_destination(_nil->right, new_node);
 
 				if (_comp(parent->item.first, new_node->item.first))
 					parent->right = new_node;
@@ -548,10 +539,10 @@ namespace ft
 			fix_violation(_nil->right, new_node);
 		}
 		
-		rb_node
+		node
 		*search(const key_type & n) const
 		{
-			rb_node *temp = _nil->right;
+			node *temp = _nil->right;
 			while (temp != NULL)
 			{
 				if (equal(n, temp->item.first))
@@ -574,10 +565,10 @@ namespace ft
 			return temp;
 		}
 
-		rb_node*
+		node*
 		get_next_node(const key_type & n) const
 		{
-			rb_node* tmp = _nil->right;
+			node* tmp = _nil->right;
 
 			while (tmp != NULL)
 			{
@@ -590,9 +581,9 @@ namespace ft
 		}
 
 		void
-		delete_by_val(const key_type &n)
+		delete_by_key(const key_type &n)
 		{
-			rb_node *v = search(n);
+			node *v = search(n);
 
 			if (v)
 				delete_node(v);
@@ -601,7 +592,7 @@ namespace ft
 		node *
 		left_most(void) const
 		{
-			rb_node *tmp = _nil->right;
+			node *tmp = _nil->right;
 			if (!tmp)
 				return _nil;
 			while (tmp && tmp->left)
@@ -612,7 +603,7 @@ namespace ft
 		node *
 		right_most(void) const
 		{
-			rb_node *tmp = _nil->right;
+			node *tmp = _nil->right;
 			if (!tmp)
 				return _nil;
 			while (tmp && tmp->right)
@@ -638,7 +629,7 @@ namespace ft
 			return _allocator;
 		}
 
-        void printHelper(rb_node *root, std::string indent, bool last)
+        void printHelper(node *root, std::string indent, bool last)
         {
             if (root != NULL)
             {

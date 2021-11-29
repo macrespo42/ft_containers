@@ -7,7 +7,7 @@
 #include <stdexcept>
 #include <functional>
 #include "utility.hpp"
-#include "rb_tree.hpp"
+#include "tree.hpp"
 #include "map_iterator.hpp"
 
 namespace ft
@@ -44,7 +44,7 @@ namespace ft
         typedef typename allocator_type::const_reference const_reference;
         typedef typename allocator_type::pointer pointer;
         typedef typename allocator_type::const_pointer const_pointer;
-        typedef rb_node<value_type> node_type;
+        typedef node<value_type> node_type;
         typedef map_iterator<value_type ,node_type, true> iterator;
         typedef map_iterator<value_type ,node_type, false> const_iterator;
         typedef ft::reverse_iterator<iterator> reverse_iterator;
@@ -249,7 +249,7 @@ namespace ft
             if (count(to_delete))
             {
                 _size--;
-                _map.delete_by_val(to_delete);
+                _map.delete_by_key(to_delete);
             }
         }
 
@@ -258,7 +258,7 @@ namespace ft
         {
             if (count(k))
             {
-                _map.delete_by_val(k);
+                _map.delete_by_key(k);
                 _size--;
                 return 1;
             }
