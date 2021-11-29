@@ -30,7 +30,7 @@ namespace ft
         }
 
         bool 
-        is_nil(void)
+        is_nil(void) const
         {
             if (this->parent == this)
                 return true;

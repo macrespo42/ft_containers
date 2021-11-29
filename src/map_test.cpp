@@ -21,8 +21,10 @@ int constructors_test(void)
   first['c']=50;
   first['d']=70;
 
-  std::cout << first.begin().base()->item.first << std::endl;
-  std::cout << first.end().base()->item.first << std::endl;
+  ft::map<char,int>::iterator it = first.end();
+  it--;
+
+  std::cout << it->first << std::endl;
 
   // ft::map<char,int> second (first.begin(),first.end());
 

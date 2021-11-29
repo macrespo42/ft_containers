@@ -30,22 +30,17 @@ namespace ft
             //     go a droite puis go le plus a gauche possible
             // sinon
             //     remonte tant que tu viens de la droite
-            if (!_ptr->right->is_nil())
+            if (_ptr->right->is_nil() == false)
             {
                 _ptr = _ptr->right;
-                while (!_ptr->left->is_nil())
+                while (_ptr->left->is_nil() == false)
                     _ptr = _ptr->left;
             }
             else
             {
-                node_pointer tmp;
-                tmp = _ptr;
-                _ptr = _ptr->parent;
-                while (_ptr && !_ptr->parent->is_nil() && _ptr->left != tmp)
-                {
-                    tmp = _ptr;
-                    _ptr = _ptr->parent;
-                }
+				while (_ptr == _ptr->parent->right && _ptr != _ptr->parent)
+					_ptr = _ptr->parent;
+				_ptr = _ptr->parent;
             }
         }
 
@@ -55,28 +50,24 @@ namespace ft
             //     go a gauche puis le plus a droite possible
             // sinon
             //     remonte tant que tu viens de la gauche
-            if (_ptr->parent->is_nil())
-            {
-                while (!_ptr->right->is_nil())
-                    _ptr = _ptr->right;
-            }
-            else if (!_ptr->left->is_nil())
+            if (_ptr->left->is_nil() == false)
             {
                 _ptr = _ptr->left;
-                while (!_ptr->right->is_nil())
-                    _ptr = _ptr->right;
+                while (_ptr->left->is_nil() == false)
+                    _ptr = _ptr->left;
             }
-            else
-            {
-                node_pointer tmp;
-                tmp = _ptr;
-                _ptr = _ptr->parent;
-                while (_ptr->right != tmp)
-                {
-                    tmp = _ptr;
-                    _ptr = _ptr->parent;
-                }
-            }
+			else if (_ptr->left != _ptr->left->left)
+			{
+				_ptr = _ptr->left;
+				while (_ptr->right != _ptr->right->left)
+					_ptr = _ptr->right;
+			}
+			else
+			{
+				while (_ptr == _ptr->parent->left && _ptr != _ptr->parent)
+					_ptr = _ptr->parent;
+				_ptr = _ptr->parent;
+			}
         }
 
         public:
