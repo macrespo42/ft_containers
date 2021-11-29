@@ -15,6 +15,7 @@ namespace ft
     template<class T>
     struct node
     {
+        node *nil_node;
         node *parent;
         node *left;
         node *right;
@@ -186,6 +187,7 @@ namespace ft
             _alloc.construct(ptr, tmp);
             ptr->left = _nil;
             ptr->right = _nil;
+            ptr->nil_node = _nil;
         }
 
         void delete_node_helper(const key_type &key)

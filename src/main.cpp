@@ -2,7 +2,7 @@
 
 int main(void)
 {
-    ft::rb_tree<int, int> tree;
+    ft::rb_tree<int, char> tree;
     tree.insert_node(ft::make_pair(55, 12));
     tree.insert_node(ft::make_pair(40, 12));
     tree.insert_node(ft::make_pair(65, 12));

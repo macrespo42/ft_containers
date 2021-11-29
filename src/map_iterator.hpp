@@ -30,10 +30,10 @@ namespace ft
             //     go a droite puis go le plus a gauche possible
             // sinon
             //     remonte tant que tu viens de la droite
-            if (_ptr->right != NULL)
+            if (_ptr->right != _ptr->nil_node)
             {
                 _ptr = _ptr->right;
-                while (_ptr->left != NULL)
+                while (_ptr->left != _ptr->nil_node)
                     _ptr = _ptr->left;
             }
             else
@@ -41,7 +41,7 @@ namespace ft
                 node_pointer tmp;
                 tmp = _ptr;
                 _ptr = _ptr->parent;
-                while (_ptr && _ptr->parent != NULL && _ptr->left != tmp)
+                while (_ptr && _ptr->parent != _ptr->nil_node && _ptr->left != tmp)
                 {
                     tmp = _ptr;
                     _ptr = _ptr->parent;
@@ -55,15 +55,15 @@ namespace ft
             //     go a gauche puis le plus a droite possible
             // sinon
             //     remonte tant que tu viens de la gauche
-            if (_ptr->parent == NULL)
+            if (_ptr->parent == _ptr->nil_node)
             {
-                while (_ptr->right != NULL)
+                while (_ptr->right != _ptr->nil_node)
                     _ptr = _ptr->right;
             }
-            else if (_ptr->left != NULL)
+            else if (_ptr->left != _ptr->nil_node)
             {
                 _ptr = _ptr->left;
-                while (_ptr->right != NULL)
+                while (_ptr->right != _ptr->nil_node)
                     _ptr = _ptr->right;
             }
             else
