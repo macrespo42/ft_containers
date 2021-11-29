@@ -93,27 +93,7 @@ namespace ft
         node
 		*search(const key_type & n) const
 		{
-			node *temp = _nil->right;
-			while (temp != _nil)
-			{
-				if (equal(n, temp->item.first))
-					return temp;
-				else if (_cmp(n, temp->item.first))
-				{
-					if (temp->left == _nil)
-						return NULL;
-					else
-						temp = temp->left;
-				}
-				else
-				{
-					if (temp->right == _nil)
-						return NULL;
-					else
-						temp = temp->right;
-				}
-			}
-			return temp;
+			return search_helper(_nil->right, n);
 		}
 
         void delete_by_key(const key_type &key)
@@ -132,9 +112,7 @@ namespace ft
 		{
             node *tmp = _nil->right;
             
-            std::cout << "nil->right : " << _nil->right->item.first << std::endl;
             while (tmp->left != _nil) {
-                std::cout << "tmp : " << _nil->right->item.first << std::endl;
                 tmp = tmp->left;
             }
             return tmp;
@@ -196,6 +174,16 @@ namespace ft
             _alloc.construct(ptr, tmp);
             ptr->left = _nil;
             ptr->right = _nil;
+        }
+
+        node *search_helper(node *current, const key_type &key) const
+        {
+            if (current == _nil || equal(key, current->item.first))
+                return current;
+            
+            if (_cmp(key, current->item.first))
+                return search_helper(current->left, key);
+            return search_helper(current->right, key);
         }
 
         void delete_node_helper(const key_type &key)

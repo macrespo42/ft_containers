@@ -107,7 +107,7 @@ namespace ft
 
         ~map(void)
         {
-            clear();
+            // clear();
         }
 
 		/*
@@ -143,8 +143,6 @@ namespace ft
         iterator
         begin()
         {
-            _map.printTree();
-            std::cout << "Left most : " << _map.left_most()->item.first << std::endl;
             return (iterator(_map.left_most()));
         }
 
@@ -212,7 +210,7 @@ namespace ft
         insert(const value_type& val)
         {
             bool inserted = false;
-            if (!count(val.first))
+            if (count(val.first) == 0)
             {
                 _map.insert_node(val);
                 _size++;
@@ -225,7 +223,7 @@ namespace ft
         insert(iterator position, const value_type& val)
         {
             (void)position;
-            if (!count(val.first))
+            if (count(val.first) == 0)
             {
                 _map.insert_node(val);
                 _size++;
@@ -315,7 +313,7 @@ namespace ft
         find(const key_type& k)
         {
             node_type *k_match = _map.search(k);
-            if (!k_match)
+            if (k_match == _map.get_nil_node())
                 return iterator(_map.get_nil_node());
             return iterator(k_match);
         }
@@ -324,7 +322,7 @@ namespace ft
         find(const key_type& k) const
         {
             node_type *k_match = _map.search(k);
-            if (!k_match)
+            if (k_match == _map.get_nil_node())
                 return const_iterator(_map.get_nil_node());
             return const_iterator(k_match);
         }
@@ -332,10 +330,8 @@ namespace ft
         size_type
         count(const key_type& k) const
         {
-            if (!_map.search(k)) {
-                std::cout << k << " don't founded" << std::endl;
+            if (_map.search(k) == _map.get_nil_node())
                 return 0;
-            }
             return 1;
         }
 

@@ -21,12 +21,9 @@ int constructors_test(void)
   first['c']=50;
   first['d']=70;
 
-  // std::cout << first.begin().base()->item.first << std::endl;
-  // std::cout << first.end().base()->item.first << std::endl;
-  if (first.count('a'))
-    std::cout << "a is in the map" << std::endl;
-  else
-    std::cout << "a is not in the map" << std::endl;
+  std::cout << first.begin().base()->item.first << std::endl;
+  std::cout << first.end().base()->item.first << std::endl;
+
   // ft::map<char,int> second (first.begin(),first.end());
 
   // ft::map<char,int> third (second);
