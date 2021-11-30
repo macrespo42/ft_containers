@@ -38,7 +38,7 @@ namespace ft
             }
             else
             {
-				while (_ptr == _ptr->parent->right && _ptr != _ptr->parent)
+				while (_ptr == _ptr->parent->right && _ptr->is_nil() == false)
 					_ptr = _ptr->parent;
 				_ptr = _ptr->parent;
             }
@@ -50,24 +50,25 @@ namespace ft
             //     go a gauche puis le plus a droite possible
             // sinon
             //     remonte tant que tu viens de la gauche
-            if (_ptr->left->is_nil() == false)
+            if (_ptr->is_nil())
+            {
+                _ptr = _ptr->right;
+                while (_ptr->right->is_nil() == false)
+                    _ptr = _ptr->right;
+
+            }
+            else if (_ptr->left->is_nil() == false)
             {
                 _ptr = _ptr->left;
-                while (_ptr->left->is_nil() == false)
-                    _ptr = _ptr->left;
+                while (_ptr->right->is_nil() == false)
+                    _ptr = _ptr->right;
             }
-			else if (_ptr->left != _ptr->left->left)
-			{
-				_ptr = _ptr->left;
-				while (_ptr->right != _ptr->right->left)
-					_ptr = _ptr->right;
-			}
-			else
-			{
-				while (_ptr == _ptr->parent->left && _ptr != _ptr->parent)
-					_ptr = _ptr->parent;
-				_ptr = _ptr->parent;
-			}
+            else
+            {
+                while (_ptr == _ptr->parent->left && _ptr->is_nil() == false)
+                    _ptr = _ptr->parent;
+                _ptr = _ptr->parent;
+            }
         }
 
         public:
