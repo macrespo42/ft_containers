@@ -231,6 +231,7 @@ namespace ft
 			_alloc.deallocate(z, 1);
             if (original_color == 1)
                 delete_fix(x);
+            _nil->parent = _nil;
         }
 
         void delete_fix(node *x)
@@ -450,7 +451,6 @@ namespace ft
 
         void printHelper(node *root, std::string indent, bool last)
         {
-            std::cout << "The tree : " << std::endl;
             if (root != _nil)
             {
                 std::cout << indent;

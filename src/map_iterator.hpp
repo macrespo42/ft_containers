@@ -30,16 +30,24 @@ namespace ft
             //     go a droite puis go le plus a gauche possible
             // sinon
             //     remonte tant que tu viens de la droite
-            if (_ptr->right->is_nil() == false)
+            // std::cout << "FOR " << _ptr->item.first << std::endl;
+            if (_ptr->right != _ptr->right->left)
             {
+                // std::cout << "I GO IN 1" << std::endl;
                 _ptr = _ptr->right;
-                while (_ptr->left->is_nil() == false)
+                while (_ptr->left != _ptr->left->left)
                     _ptr = _ptr->left;
             }
             else
             {
-				while (_ptr == _ptr->parent->right && _ptr->is_nil() == false)
-					_ptr = _ptr->parent;
+                // std::cout << "I GO IN 2" << std::endl;
+				while (_ptr == _ptr->parent->right && _ptr->is_nil() == false) {
+                    // std::cout << "ptr:"<< _ptr->item.first << std::endl;
+                    // std::cout << "ptr parent:"<< _ptr->parent->item.first << std::endl;
+                    // std::cout << "ptr parent right:"<< _ptr->parent->right->item.first << std::endl;
+                    _ptr = _ptr->parent;
+                }
+                // std::cout << "END OF LOOP RESULT IS : " << _ptr->item.first << std::endl;
 				_ptr = _ptr->parent;
             }
         }

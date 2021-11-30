@@ -21,19 +21,14 @@ int constructors_test(void)
   first['c']=50;
   first['d']=70;
 
-  ft::map<char,int>::iterator it = first.end();
-  it--;
+  ft::map<char,int> second (first.begin(),first.end());
 
-  std::cout << it->first << std::endl;
+  ft::map<char,int> third (second);
 
-  // ft::map<char,int> second (first.begin(),first.end());
+  ft::map<char,int,classcomp> fourth;                 // class as Compare
 
-  // ft::map<char,int> third (second);
-
-  // ft::map<char,int,classcomp> fourth;                 // class as Compare
-
-  // bool(*fn_pt)(char,char) = fncomp;
-  // ft::map<char,int,bool(*)(char,char)> fifth (fn_pt); // function pointer as Compare
+  bool(*fn_pt)(char,char) = fncomp;
+  ft::map<char,int,bool(*)(char,char)> fifth (fn_pt); // function pointer as Compare
 
   return 0;
 }
@@ -186,8 +181,8 @@ int insert_test(void)
 
 int erase_test(void)
 {
-  ft::map<char,int> mymap;
-  ft::map<char,int>::iterator it;
+  std::map<char,int> mymap;
+  std::map<char,int>::iterator it;
 
   // insert some values:
   mymap['a']=10;
@@ -200,7 +195,7 @@ int erase_test(void)
   it=mymap.find('b');
   mymap.erase (it);                   // erasing by iterator
 
-  mymap.erase ('c');                  // erasing by key
+  mymap.erase ('c');                 // erasing by key
 
   it=mymap.find ('e');
   mymap.erase ( it, mymap.end() );    // erasing by range
@@ -347,30 +342,77 @@ int count_test(void)
   return 0;
 }
 
+int lower_bound_test(void)
+{
+
+  ft::map<char,int> mymap;
+  ft::map<char,int>::iterator itlow,itup;
+
+  mymap['a']=20;
+  mymap['b']=40;
+  mymap['c']=60;
+  mymap['d']=80;
+  mymap['e']=100;
+
+  itlow=mymap.lower_bound ('b');  // itlow points to b
+  itup=mymap.upper_bound ('d');   // itup points to e (not d!)
+
+  mymap.erase(itlow,itup);        // erases [itlow,itup)
+
+  // print content:
+  for (ft::map<char,int>::iterator it=mymap.begin(); it!=mymap.end(); ++it)
+    std::cout << it->first << " => " << it->second << '\n';
+
+  return 0;
+}
+
+int upper_bound_test(void)
+{
+  ft::map<char,int> mymap;
+  ft::map<char,int>::iterator itlow,itup;
+
+  mymap['a']=20;
+  mymap['b']=40;
+  mymap['c']=60;
+  mymap['d']=80;
+  mymap['e']=100;
+
+  itlow=mymap.lower_bound ('b');  // itlow points to b
+  itup=mymap.upper_bound ('d');   // itup points to e (not d!)
+
+  mymap.erase(itlow,itup);        // erases [itlow,itup)
+
+  // print content:
+  for (ft::map<char,int>::iterator it=mymap.begin(); it!=mymap.end(); ++it)
+    std::cout << it->first << " => " << it->second << '\n';
+
+  return 0;
+}
+
 int equal_bound_test(void)
 {
 
-  // ft::map<char,int> mymap;
+  ft::map<char,int> mymap;
 
-  // mymap['a']=10;
-  // mymap['b']=20;
-  // mymap['c']=30;
+  mymap['a']=10;
+  mymap['b']=20;
+  mymap['c']=30;
 
-  // ft::pair<ft::map<char,int>::iterator,ft::map<char,int>::iterator> ret;
-  // ret = mymap.equal_range('b');
+  ft::pair<ft::map<char,int>::iterator,ft::map<char,int>::iterator> ret;
+  ret = mymap.equal_range('b');
 
-  // std::cout << "lower bound points to: ";
-  // std::cout << ret.first->first << " => " << ret.first->second << '\n';
+  std::cout << "lower bound points to: ";
+  std::cout << ret.first->first << " => " << ret.first->second << '\n';
 
-  // std::cout << "upper bound points to: ";
-  // std::cout << ret.second->first << " => " << ret.second->second << '\n';
+  std::cout << "upper bound points to: ";
+  std::cout << ret.second->first << " => " << ret.second->second << '\n';
 
   return 0;
 }
 
 int main(void)
 {
-    constructors_test();
+    // constructors_test();
     // assignation_test();
     // begin_end_test();
     // rbegin_rend_test();
@@ -384,6 +426,9 @@ int main(void)
     // clear_test();
     // key_comp_test();
     // value_comp_test();
+    // lower_bound_test();
+    // upper_bound_test();
+    equal_bound_test();
     // find_test();
     // count_test();
     return 0;

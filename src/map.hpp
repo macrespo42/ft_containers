@@ -284,9 +284,7 @@ namespace ft
         void clear()
         {
             for (iterator prev = begin(), next = ++iterator(begin()); prev != end(); prev = next, ++next) {
-                // std::cout << "Wanna delete : " << prev->first << std::endl;
-                // std::cout << "next is : " << next->first << std::endl;
-                // erase(prev);
+                erase(prev);
             }
         }
 
