@@ -9,7 +9,6 @@ namespace ft
 	{
 		T c(a); a=b; b=c;
 	}
-}
 
 	template <class InputIterator1, class InputIterator2>
 	bool
@@ -36,5 +35,6 @@ namespace ft
 		}
 		return (first2!=last2);
 	}
+}
 
 #endif

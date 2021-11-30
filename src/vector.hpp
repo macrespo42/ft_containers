@@ -548,14 +548,14 @@ namespace ft
 		operator==(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
 		{
 			if (lhs.size() == rhs.size())
-				return equal(lhs.begin(), lhs.end(), rhs.begin());
+				return ft::equal(lhs.begin(), lhs.end(), rhs.begin());
 			return false;
 		}
 
 		friend bool
 		operator<(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
 		{
-			return lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+			return ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
 		}
 
 		friend bool
