@@ -392,7 +392,7 @@ namespace ft
 
         void print_tree(void)
         {
-            _map.levelOrder();
+            _map.printTree();
         }
     };
 
