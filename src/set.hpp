@@ -133,6 +133,17 @@ namespace ft
             return (const_iterator(_map.get_nil_node()));
         }
 
+        reverse_iterator rbegin()
+        {
+            return (reverse_iterator(_map.get_nil_node()));
+        }
+
+        const_reverse_iterator rbegin() const
+        {
+            return (const_reverse_iterator(_map.get_nil_node()));
+        }
+
+
     };
 }
 

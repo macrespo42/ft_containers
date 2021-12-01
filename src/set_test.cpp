@@ -55,10 +55,27 @@ int set_begin_end_test(void)
   return 0;
 }
 
+int set_rbegin_rend_test(void)
+{
+  int myints[] = {21,64,17,78,49};
+  ft::set<int> myset (myints,myints+5);
+
+  ft::set<int>::reverse_iterator rit;
+
+  std::cout << "myset contains:";
+  for (rit=myset.rbegin(); rit != myset.rend(); ++rit)
+    std::cout << ' ' << *rit;
+
+  std::cout << '\n';
+
+  return 0;
+}
+
 int main(void)
 {
     set_constructor_test();
     set_assignation_test();
     set_begin_end_test();
+    set_rbegin_rend_test();
     return 0;
 }
