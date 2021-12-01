@@ -207,6 +207,36 @@ namespace ft
                 first++;
             }
         }
+
+        void
+        erase(iterator position)
+        {
+            key_type to_delete = position.base()->item;
+            if (count(to_delete))
+            {
+                _size--;
+                _set.delete_by_key(to_delete);
+            }
+        }
+
+        size_type
+        erase(const value_type& k)
+        {
+            if (count(k))
+            {
+                _set.delete_by_key(k);
+                _size--;
+                return 1;
+            }
+            return 0;
+        }
+
+        void
+        erase(iterator first, iterator last)
+        {
+            for (iterator prev = first, next = ++iterator(first); prev != last; prev = next, ++next)
+                erase(prev);
+        }
     };
 }
 
