@@ -195,6 +195,31 @@ int set_swap_test(void)
   return 0;
 }
 
+int set_clear_test(void)
+{
+  ft::set<int> myset;
+
+  myset.insert (100);
+  myset.insert (200);
+  myset.insert (300);
+
+  std::cout << "myset contains:";
+  for (ft::set<int>::iterator it=myset.begin(); it!=myset.end(); ++it)
+    std::cout << ' ' << *it;
+  std::cout << '\n';
+
+  myset.clear();
+  myset.insert (1101);
+  myset.insert (2202);
+
+  std::cout << "myset contains:";
+  for (ft::set<int>::iterator it=myset.begin(); it!=myset.end(); ++it)
+    std::cout << ' ' << *it;
+  std::cout << '\n';
+
+  return 0;
+}
+
 int main(void)
 {
     set_constructor_test();
@@ -207,5 +232,6 @@ int main(void)
     set_insert_test();
     set_erase_test();
     set_swap_test();
+    set_clear_test();
     return 0;
 }

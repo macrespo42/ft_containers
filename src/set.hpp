@@ -245,6 +245,13 @@ namespace ft
             _set.swap_root(x._set);
             ft::swap(_cmp, x._cmp);
         }
+
+        void clear()
+        {
+            for (iterator prev = begin(), next = ++iterator(begin()); prev != end(); prev = next, ++next) {
+                erase(prev);
+            }
+        }
     };
 }
 
