@@ -379,7 +379,7 @@ namespace ft
 				else
 					reserve(this->_capacity * 2);
 			}
-			this->_vector[this->_size++] = val;
+			this->_allocator.construct(this->_vector + this->_size++, val);
 		}
 
 		void
