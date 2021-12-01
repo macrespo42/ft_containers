@@ -143,7 +143,28 @@ namespace ft
             return (const_reverse_iterator(_map.get_nil_node()));
         }
 
+		/*
+		 *
+		 * CAPACITY
+		 *
+		 */
 
+        bool empty() const
+        {
+            return _size == 0;
+        }
+
+        size_type
+        size() const
+        {
+            return _size;
+        }
+
+        size_type
+        max_size() const
+        {
+            return _set.get_allocator().max_size();
+        }
     };
 }
 

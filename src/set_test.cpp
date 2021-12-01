@@ -71,11 +71,65 @@ int set_rbegin_rend_test(void)
   return 0;
 }
 
+int set_empty_test(void)
+{
+  ft::set<int> myset;
+
+  myset.insert(20);
+  myset.insert(30);
+  myset.insert(10);
+
+  std::cout << "myset contains:";
+  while (!myset.empty())
+  {
+     std::cout << ' ' << *myset.begin();
+     myset.erase(myset.begin());
+  }
+  std::cout << '\n';
+
+  return 0;
+}
+
+int set_size_test(void)
+{
+  ft::set<int> myints;
+  std::cout << "0. size: " << myints.size() << '\n';
+
+  for (int i=0; i<10; ++i) myints.insert(i);
+  std::cout << "1. size: " << myints.size() << '\n';
+
+  myints.insert (100);
+  std::cout << "2. size: " << myints.size() << '\n';
+
+  myints.erase(5);
+  std::cout << "3. size: " << myints.size() << '\n';
+
+  return 0;
+}
+
+int set_maxsize_test(void)
+{
+  int i;
+  ft::set<int> myset;
+
+  if (myset.max_size()>1000)
+  {
+    for (i=0; i<1000; i++) myset.insert(i);
+    std::cout << "The set contains 1000 elements.\n";
+  }
+  else std::cout << "The set could not hold 1000 elements.\n";
+
+  return 0;
+}
+
 int main(void)
 {
     set_constructor_test();
     set_assignation_test();
     set_begin_end_test();
     set_rbegin_rend_test();
+    set_empty_test();
+    set_size_test();
+    set_maxsize_test();
     return 0;
 }
