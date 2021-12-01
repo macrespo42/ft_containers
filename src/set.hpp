@@ -259,17 +259,32 @@ namespace ft
 		 *
 		 */
 
-        key_compare key_comp() const
+        key_compare
+        key_comp() const
         {
             return key_compare();
         }
 
-        value_compare value_comp() const
+        value_compare
+        value_comp() const
         {
             return value_compare(_cmp);
         }
 
-        
+		/*
+		 *
+		 * Operations
+		 *
+		 */
+
+        iterator
+        find(const value_type& val) const
+        {
+            node_type *v_match = _map.search(val);
+            if (v_match == _map.get_nil_node())
+                return iterator(_map.get_nil_node());
+            return iterator(v_match);
+        }
     };
 }
 
