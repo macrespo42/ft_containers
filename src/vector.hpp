@@ -466,6 +466,7 @@ namespace ft
 				this->_allocator.destroy(this->_vector + i);
 			this->_allocator.deallocate(this->_vector, this->_capacity);
 			this->_size = i;
+			this->_capacity = this->_size;
 			this->_vector = tmp;
 		}
 
@@ -503,14 +504,18 @@ namespace ft
 					i++;
 				}
 			}
-			this->_size = i;
 			if (this->_size + 1 > this->_capacity && this->_capacity == 0)
 				this->reserve(this->_size);
 			else if (this->_size + 1 > this->_capacity * 2)
 				this->reserve(this->_size);
 			else if (this->_size + 1 > this->_capacity)
 				this->reserve(this->_capacity * 2);
+			for (size_type i = 0; i < this->_size; i++)
+				this->_allocator.destroy(this->_vector + i);
+			this->_allocator.deallocate(this->_vector, this->_capacity);
+			this->_size = i;
 			this->_vector = tmp;
+			this->_capacity = this->_size;
 		}
 
 		iterator
