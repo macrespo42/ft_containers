@@ -425,6 +425,9 @@ namespace ft
 				this->reserve(1);
 			else if (this->_size + 1 > this->_capacity)
 				this->reserve(this->_capacity * 2);
+			for (size_type i = 0; i < this->_size; i++)
+				this->_allocator.destroy(this->_vector + i);
+			this->_allocator.deallocate(this->_vector, this->_capacity);
 			this->_vector = tmp;
 			return tmp + ret;
 		}
@@ -459,8 +462,10 @@ namespace ft
 					i++;
 				}
 			}
+			for (size_type i = 0; i < this->_size; i++)
+				this->_allocator.destroy(this->_vector + i);
+			this->_allocator.deallocate(this->_vector, this->_capacity);
 			this->_size = i;
-			this->reserve(this->_size);
 			this->_vector = tmp;
 		}
 
