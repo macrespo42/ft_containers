@@ -285,6 +285,14 @@ namespace ft
                 return iterator(_map.get_nil_node());
             return iterator(v_match);
         }
+
+        size_type
+        count(const value_type& val) const
+        {
+            if (_map.search(val) == _map.get_nil_node())
+                return 0;
+            return 1;
+        }
     };
 }
 
