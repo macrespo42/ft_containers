@@ -342,7 +342,7 @@ namespace ft
 				size_type i = 0;
 				while (first != last)
 				{
-					this->_vector[i] = *first;
+					this->_allocator.construct(this->_vector + i, *first);
 					i++;
 					first++;
 				}
@@ -364,7 +364,7 @@ namespace ft
 				this->reserve(n);
 				this->_size = this->_capacity;
 				for (size_type i = 0; i < n; i++)
-					this->_vector[i] = val;
+					this->_allocator.construct(this->_vector + i, val);
 				return ;
 			}
 			for (size_type i = 0; i < n; i++)
