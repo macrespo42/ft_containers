@@ -81,7 +81,7 @@ namespace vec
     // set some content in the vector:
     for (int i=0; i<100; i++) myvector.push_back(i);
 
-      std::cout << "size: " << myvector.size() << "\n";
+    std::cout << "size: " << myvector.size() << "\n";
     std::cout << "capacity: " << myvector.capacity() << "\n";
     std::cout << "max_size: " << myvector.max_size() << "\n";
   }
@@ -325,26 +325,26 @@ namespace vec
 
   int vector_unit_tests(void)
   {
-    vectorConstructor_test();
-    vectorAssignation_test();
-    beginEnd_test();
-    rendRbegin_test();
-    size_test();
+    // vectorConstructor_test();
+    // vectorAssignation_test();
+    // beginEnd_test();
+    // rendRbegin_test();
+    // size_test();
     max_size_test();
-    resize_test();
-    capacity_test();
-    reserve_test();
-    empty_test();
-    assign_test();
-    erase_test();
-    swap_test();
-    push_back_test();
-    pop_back_test();
-    at_test();
-    front_test();
-    back_test();
-    clear_test();
-    comparaison_test();
+    // resize_test();
+    // capacity_test();
+    // reserve_test();
+    // empty_test();
+    // assign_test();
+    // erase_test();
+    // swap_test();
+    // push_back_test();
+    // pop_back_test();
+    // at_test();
+    // front_test();
+    // back_test();
+    // clear_test();
+    // comparaison_test();
     return 0;
   }
 }
