@@ -389,11 +389,6 @@ namespace ft
         {
             return allocator_type();
         }
-
-        void print_tree(void)
-        {
-            _map.printTree();
-        }
     };
 
     template< class Key, class T, class Compare, class Alloc >

@@ -34,7 +34,7 @@ int set_assignation_test(void)
   ft::set<int> second;                    // empty set
 
   second = first;                          // now second contains the 5 ints
-  first = std::set<int>();                 // and first is empty
+  first = ft::set<int>();                 // and first is empty
 
   std::cout << "Size of first: " << int (first.size()) << '\n';
   std::cout << "Size of second: " << int (second.size()) << '\n';
@@ -146,6 +146,7 @@ int set_insert_test(void)
   for (it=myset.begin(); it!=myset.end(); ++it)
     std::cout << ' ' << *it;
   std::cout << '\n';
+  return 0;
 }
 
 int set_erase_test(void)
@@ -302,6 +303,41 @@ int set_count_test(void)
   return 0;
 }
 
+int set_loweupperrbound_test(void)
+{
+  ft::set<int> myset;
+  ft::set<int>::iterator itlow,itup;
+
+  for (int i=1; i<10; i++) myset.insert(i*10); // 10 20 30 40 50 60 70 80 90
+
+  itlow=myset.lower_bound (30);                //       ^
+  itup=myset.upper_bound (60);                 //                   ^
+
+  myset.erase(itlow,itup);                     // 10 20 70 80 90
+
+  std::cout << "myset contains:";
+  for (ft::set<int>::iterator it=myset.begin(); it!=myset.end(); ++it)
+    std::cout << ' ' << *it;
+  std::cout << '\n';
+
+  return 0;
+}
+
+int set_equalbound_test(void)
+{
+  ft::set<int> myset;
+
+  for (int i=1; i<=5; i++) myset.insert(i*10);   // myset: 10 20 30 40 50
+
+  ft::pair<ft::set<int>::const_iterator,ft::set<int>::const_iterator> ret;
+  ret = myset.equal_range(30);
+
+  std::cout << "the lower bound points to: " << *ret.first << '\n';
+  std::cout << "the upper bound points to: " << *ret.second << '\n';
+
+  return 0;
+}
+
 int main(void)
 {
     set_constructor_test();
@@ -319,5 +355,7 @@ int main(void)
     set_value_compare();
     set_find_test();
     set_count_test();
+    set_loweupperrbound_test();
+    set_equalbound_test();
     return 0;
 }

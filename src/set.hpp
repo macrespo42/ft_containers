@@ -31,7 +31,7 @@ namespace ft
             typedef value_type second_argument_type;
             bool operator() (const value_type& x, const value_type& y) const
             {
-                return comp(x.first, y.first);
+                return comp(x, y);
             }
         };
 
@@ -125,22 +125,32 @@ namespace ft
 
         iterator end()
         {
-            return (iterator(_map.get_nil_node()));
+            return (iterator(_set.get_nil_node()));
         }
 
         const_iterator end() const
         {
-            return (const_iterator(_map.get_nil_node()));
+            return (const_iterator(_set.get_nil_node()));
         }
 
         reverse_iterator rbegin()
         {
-            return (reverse_iterator(_map.get_nil_node()));
+            return (reverse_iterator(_set.get_nil_node()));
         }
 
         const_reverse_iterator rbegin() const
         {
-            return (const_reverse_iterator(_map.get_nil_node()));
+            return (const_reverse_iterator(_set.get_nil_node()));
+        }
+
+        reverse_iterator rend()
+        {
+            return (reverse_iterator(_set.left_most()));
+        }
+
+        const_reverse_iterator rend() const
+        {
+            return (const_reverse_iterator(_set.left_most()));
         }
 
 		/*
@@ -280,20 +290,51 @@ namespace ft
         iterator
         find(const value_type& val) const
         {
-            node_type *v_match = _map.search(val);
-            if (v_match == _map.get_nil_node())
-                return iterator(_map.get_nil_node());
+            node_type *v_match = _set.search(val);
+            if (v_match == _set.get_nil_node())
+                return iterator(_set.get_nil_node());
             return iterator(v_match);
         }
 
         size_type
         count(const value_type& val) const
         {
-            if (_map.search(val) == _map.get_nil_node())
+            if (_set.search(val) == _set.get_nil_node())
                 return 0;
             return 1;
         }
+
+        iterator
+        lower_bound (const value_type& val) const
+        {
+            iterator it = begin();
+            while (_cmp(*it, val) && it != end())
+                    it++;
+                return (it);
+        }
+
+        iterator
+        upper_bound(const value_type& val) const
+        {
+            iterator it = begin();
+            while (_cmp(val, *it) == false && it != end())
+                it++;
+            return (it);
+        }
+
+        pair<iterator,iterator>
+        equal_range (const value_type& val) const
+        {
+            return ft::make_pair(lower_bound(val), upper_bound(val));
+        }
+
+        allocator_type
+        get_allocator() const
+        {
+            return allocator_type();
+        }
     };
+
 }
 
 #endif
