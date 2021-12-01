@@ -220,6 +220,49 @@ int set_clear_test(void)
   return 0;
 }
 
+int set_key_compare_test(void)
+{
+  ft::set<int> myset;
+  int highest;
+
+  ft::set<int>::key_compare mycomp = myset.key_comp();
+
+  for (int i=0; i<=5; i++) myset.insert(i);
+
+  std::cout << "myset contains:";
+
+  highest=*myset.rbegin();
+  ft::set<int>::iterator it=myset.begin();
+  do {
+    std::cout << ' ' << *it;
+  } while ( mycomp(*(++it),highest) );
+
+  std::cout << '\n';
+
+  return 0;
+}
+
+int set_value_compare(void)
+{
+  ft::set<int> myset;
+
+  ft::set<int>::value_compare mycomp = myset.value_comp();
+
+  for (int i=0; i<=5; i++) myset.insert(i);
+
+  std::cout << "myset contains:";
+
+  int highest=*myset.rbegin();
+  ft::set<int>::iterator it=myset.begin();
+  do {
+    std::cout << ' ' << *it;
+  } while ( mycomp(*(++it),highest) );
+
+  std::cout << '\n';
+
+  return 0;
+}
+
 int main(void)
 {
     set_constructor_test();
@@ -233,5 +276,7 @@ int main(void)
     set_erase_test();
     set_swap_test();
     set_clear_test();
+    set_key_compare_test();
+    set_value_compare();
     return 0;
 }
