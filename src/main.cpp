@@ -1,39 +1,39 @@
-#include "tree.hpp"
+#include "set_rb_tree.hpp"
 
 int main(void)
 {
-    ft::rb_tree<int, int> tree;
-    tree.insert_node(ft::make_pair(42, 12));
-    tree.insert_node(ft::make_pair(50, 12));
-    tree.insert_node(ft::make_pair(25, 12));
-    tree.insert_node(ft::make_pair(46, 12));
-    tree.insert_node(ft::make_pair(21, 12));
-    tree.insert_node(ft::make_pair(30, 12));
-    tree.insert_node(ft::make_pair(55, 12));
-    tree.insert_node(ft::make_pair(18, 12));
-    tree.insert_node(ft::make_pair(23, 12));
-    tree.insert_node(ft::make_pair(28, 12));
-    tree.insert_node(ft::make_pair(35, 12));
-    tree.insert_node(ft::make_pair(44, 12));
-    tree.insert_node(ft::make_pair(48, 12));
-    tree.insert_node(ft::make_pair(53, 12));
-    tree.insert_node(ft::make_pair(80, 12));
-    tree.insert_node(ft::make_pair(12, 12));
-    tree.insert_node(ft::make_pair(20, 12));
-    tree.insert_node(ft::make_pair(22, 12));
-    tree.insert_node(ft::make_pair(24, 12));
-    tree.insert_node(ft::make_pair(27, 12));
-    tree.insert_node(ft::make_pair(29, 12));
-    tree.insert_node(ft::make_pair(33, 12));
-    tree.insert_node(ft::make_pair(38, 12));
-    tree.insert_node(ft::make_pair(43, 12));
-    tree.insert_node(ft::make_pair(45, 12));
-    tree.insert_node(ft::make_pair(47, 12));
-    tree.insert_node(ft::make_pair(49, 12));
-    tree.insert_node(ft::make_pair(51, 12));
-    tree.insert_node(ft::make_pair(54, 12));
-    tree.insert_node(ft::make_pair(60, 12));
-    tree.insert_node(ft::make_pair(90, 12));
+    ft::rb_tree<int> tree;
+    tree.insert_node(42);
+    tree.insert_node(50);
+    tree.insert_node(25);
+    tree.insert_node(46);
+    tree.insert_node(21);
+    tree.insert_node(30);
+    tree.insert_node(55);
+    tree.insert_node(18);
+    tree.insert_node(23);
+    tree.insert_node(28);
+    tree.insert_node(35);
+    tree.insert_node(44);
+    tree.insert_node(48);
+    tree.insert_node(53);
+    tree.insert_node(80);
+    tree.insert_node(12);
+    tree.insert_node(20);
+    tree.insert_node(22);
+    tree.insert_node(24);
+    tree.insert_node(27);
+    tree.insert_node(29);
+    tree.insert_node(33);
+    tree.insert_node(38);
+    tree.insert_node(43);
+    tree.insert_node(45);
+    tree.insert_node(47);
+    tree.insert_node(49);
+    tree.insert_node(51);
+    tree.insert_node(54);
+    tree.insert_node(60);
+    tree.insert_node(90);
 
     tree.delete_by_key(25);
     tree.delete_by_key(55);

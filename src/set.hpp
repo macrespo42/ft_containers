@@ -8,6 +8,7 @@
 #include <functional>
 #include "utility.hpp"
 #include "map_iterator.hpp"
+#include "set_rb_tree.hpp"
 
 namespace ft
 {
@@ -50,7 +51,7 @@ namespace ft
         typedef typename iterator_traits<iterator>::difference_type difference_type;
         typedef size_t size_type;
 
-        
+
     };
 }
 
