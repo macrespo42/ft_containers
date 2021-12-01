@@ -237,6 +237,14 @@ namespace ft
             for (iterator prev = first, next = ++iterator(first); prev != last; prev = next, ++next)
                 erase(prev);
         }
+
+        void swap (set& x)
+        {
+            ft::swap(_size, x._size);
+            ft::swap(_allocator, x._allocator);
+            _set.swap_root(x._set);
+            ft::swap(_cmp, x._cmp);
+        }
     };
 }
 
