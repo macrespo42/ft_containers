@@ -22,8 +22,8 @@ namespace ft
         {
             friend class set;
             protected:
-            compare comp;
-            Value_compare (compare c) : comp(c) {}
+            Compare comp;
+            Value_compare (Compare c) : comp(c) {}
             public:
             typedef T value_type;
             typedef bool result_type;
@@ -38,6 +38,7 @@ namespace ft
         typedef T value_type;
         typedef T key_type;
         typedef Value_compare value_compare;
+        typedef Compare key_compare;
         typedef Alloc allocator_type;
         typedef typename allocator_type::reference reference;
         typedef typename allocator_type::const_reference const_reference;
@@ -51,7 +52,36 @@ namespace ft
         typedef typename iterator_traits<iterator>::difference_type difference_type;
         typedef size_t size_type;
 
+        private:
 
+        size_type _size;
+        allocator_type _allocator;
+        ft::rb_tree<value_type, Compare, Alloc> _set;
+        key_compare _cmp;
+
+        public:
+
+        explicit set (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) :
+        _size(0),
+        _allocator(alloc),
+        _cmp(comp)
+        {}
+
+        template <class InputIterator>
+        set (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) :
+        _size(0),
+        _allocator(alloc),
+        _cmp(comp)
+        {
+            for (InputIterator current = first; current != last; current++)
+                insert(*current);
+        }
+
+        set(const set& x) :
+        _size(0)
+        {
+            *this = x;
+        }
     };
 }
 
