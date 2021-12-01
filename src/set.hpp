@@ -165,6 +165,48 @@ namespace ft
         {
             return _set.get_allocator().max_size();
         }
+
+		/*
+		 *
+		 * Modifiers
+		 *
+		 */
+
+        pair<iterator,bool>
+        insert(const value_type& val)
+        {
+            bool inserted = false;
+            if (count(val) == 0)
+            {
+                _set.insert_node(val);
+                _size++;
+                inserted = true;
+            }
+            return ft::make_pair(iterator(find(val)), inserted);
+        }
+
+        iterator
+        insert(iterator position, const value_type& val)
+        {
+            (void)position;
+            if (count(val) == 0)
+            {
+                _set.insert_node(val);
+                _size++;
+            }
+            return iterator(find(val));
+        }
+
+        template <class InputIterator>
+        void
+        insert(InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = 0)
+        {
+            while (first != last)
+            {
+                insert(first);
+                first++;
+            }
+        }
     };
 }
 
