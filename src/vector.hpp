@@ -216,6 +216,8 @@ namespace ft
 		void
 		reserve(size_type n)
 		{
+			if (n > this->max_size())
+				throw std::length_error("vector::reserve");
 			if (n <= this->_capacity)
 				return ;
 			pointer vector;
@@ -283,7 +285,7 @@ namespace ft
 		at(size_type n)
 		{
 			if (n > this->_size)
-				throw std::out_of_range("");
+				throw std::out_of_range("vector::at");
 			return this->_vector[n];
 		}
 
@@ -291,7 +293,7 @@ namespace ft
 		at(size_type n) const
 		{
 			if (n > this->_size)
-				throw std::out_of_range("");
+				throw std::out_of_range("vector::at");
 			return this->_vector[n];
 		}
 
