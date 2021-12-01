@@ -41,8 +41,24 @@ int set_assignation_test(void)
   return 0;
 }
 
+int set_begin_end_test(void)
+{
+  int myints[] = {75,23,65,42,13};
+  ft::set<int> myset (myints,myints+5);
+
+  std::cout << "myset contains:";
+  for (ft::set<int>::iterator it=myset.begin(); it!=myset.end(); ++it)
+    std::cout << ' ' << *it;
+
+  std::cout << '\n';
+
+  return 0;
+}
+
 int main(void)
 {
     set_constructor_test();
+    set_assignation_test();
+    set_begin_end_test();
     return 0;
 }

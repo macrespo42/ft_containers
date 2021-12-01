@@ -105,6 +105,34 @@ namespace ft
                 insert(*it);
             return *this;
         }
+
+		/*
+		 *
+		 * Iterators
+		 *
+		 */
+
+        iterator begin()
+        {
+            return (iterator(_set.left_most()));
+        }
+
+        const_iterator
+        begin() const
+        {
+            return (const_iterator(_set.left_most()));
+        }
+
+        iterator end()
+        {
+            return (iterator(_map.get_nil_node()));
+        }
+
+        const_iterator end() const
+        {
+            return (const_iterator(_map.get_nil_node()));
+        }
+
     };
 }
 
