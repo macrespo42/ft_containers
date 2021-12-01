@@ -90,7 +90,7 @@ namespace ft
 			this->_vector = this->_allocator.allocate(this->_capacity);
 			while (first != last)
 			{
-				this->_vector[index] = *first;
+				this->_allocator.construct(this->_vector + index, *first);
 				first++;
 				index++; 
 			}
