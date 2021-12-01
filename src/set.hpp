@@ -61,6 +61,12 @@ namespace ft
 
         public:
 
+		/*
+		 *
+		 * CONSTRUCTORS
+		 *
+		 */
+
         explicit set (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) :
         _size(0),
         _allocator(alloc),
@@ -81,6 +87,23 @@ namespace ft
         _size(0)
         {
             *this = x;
+        }
+
+        ~set()
+        {
+            clear();
+        }
+
+        set& operator= (const set& x)
+        {
+            if (this == &x)
+                return *this;
+            clear();
+            _allocator = x._allocator;
+            _cmp = x._cmp;
+            for (const_iterator it = x.begin(); it != x.end(); it++)
+                insert(*it);
+            return *this;
         }
     };
 }
