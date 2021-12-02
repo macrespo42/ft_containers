@@ -432,7 +432,7 @@ namespace ft
     bool
     operator>=(const ft::map<Key,T,Compare,Alloc>& lhs, const ft::map<Key,T,Compare,Alloc>& rhs)
     {
-      return !(lhs < rhs);  
+      return !(lhs < rhs);
     }
 
     template< class Key, class T, class Compare, class Alloc >
