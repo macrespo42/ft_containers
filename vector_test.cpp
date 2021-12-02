@@ -322,11 +322,6 @@
 
   int vec_vector_unit_tests(void)
   {
-    #ifdef FT
-      std::cout << "FT" << std::endl;
-    #else
-      std::cout << "STD" << std::endl;
-    #endif
     vec_vectorConstructor_test();
     vec_vectorAssignation_test();
     vec_beginEnd_test();

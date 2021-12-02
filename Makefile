@@ -1,17 +1,26 @@
-all:
-	clang++ -I ./src/ -Wall -Wextra -Werror -std=c++98 -o ft_bin vector_test.cpp stack_test.cpp main.cpp -D NAMESPACE=ft
+FT_NAME = ft_bin
 
-test: all
-	clang++ -I ./src/ -Wall -Wextra -Werror -std=c++98 -o std_bin vector_test.cpp stack_test.cpp main.cpp -D NAMESPACE=std
-	@./std_bin > std_res
-	@./ft_bin > ft_res
-	@diff std_res ft_res > diff
-	@./test.sh
+STD_NAME = std_bin 
+
+CC = clang++
+
+CLFAGS = -I src/ -Wall -Wextra -Werror -std=c++98
+
+TEST_FILES = vector_test.cpp stack_test.cpp map_test.cpp
+
+SRC = $(addsuffix .cpp, $(TEST_FILES))
+
+all: $(STD_NAME) $(FT_NAME)
+
+$(STD_NAME):
+	$(CC) $(CLFAGS) -o $(STD_NAME) $(TEST_FILES) main.cpp
+
+$(FT_NAME):
+	$(CC) -DFT $(CLFAGS) -o $(FT_NAME) $(TEST_FILES) main.cpp
 
 clean:
-	rm -f std_res ft_res diff
+	rm -rf $(FT_NAME) $(STD_NAME) diff
 
 fclean: clean
-	rm -f std_bin ft_bin
 
 re: fclean all

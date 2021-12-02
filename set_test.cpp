@@ -1,5 +1,4 @@
-#include "set.hpp"
-#include <iostream>
+#include "bonus_test.hpp"
 
 bool fncomp (int lhs, int rhs) {return lhs<rhs;}
 
@@ -10,19 +9,19 @@ struct classcomp {
 
 int set_constructor_test(void)
 {
-  ft::set<int> first;                           // empty set of ints
+  set<int> first;                           // empty set of ints
 
   int myints[]= {10,20,30,40,50};
-  ft::set<int> second (myints,myints+5);        // range
+  set<int> second (myints,myints+5);        // range
 
-  ft::set<int> third (second);                  // a copy of second
+  set<int> third (second);                  // a copy of second
 
-  ft::set<int> fourth (second.begin(), second.end());  // iterator ctor.
+  set<int> fourth (second.begin(), second.end());  // iterator ctor.
 
-  ft::set<int,classcomp> fifth;                 // class as Compare
+  set<int,classcomp> fifth;                 // class as Compare
 
   bool(*fn_pt)(int,int) = fncomp;
-  ft::set<int,bool(*)(int,int)> sixth (fn_pt);  // function pointer as Compare
+  set<int,bool(*)(int,int)> sixth (fn_pt);  // function pointer as Compare
 
   return 0;
 }
@@ -30,11 +29,11 @@ int set_constructor_test(void)
 int set_assignation_test(void)
 {
   int myints[]={ 12,82,37,64,15 };
-  ft::set<int> first (myints,myints+5);   // set with 5 ints
-  ft::set<int> second;                    // empty set
+  set<int> first (myints,myints+5);   // set with 5 ints
+  set<int> second;                    // empty set
 
   second = first;                          // now second contains the 5 ints
-  first = ft::set<int>();                 // and first is empty
+  first = set<int>();                 // and first is empty
 
   std::cout << "Size of first: " << int (first.size()) << '\n';
   std::cout << "Size of second: " << int (second.size()) << '\n';
@@ -44,10 +43,10 @@ int set_assignation_test(void)
 int set_begin_end_test(void)
 {
   int myints[] = {75,23,65,42,13};
-  ft::set<int> myset (myints,myints+5);
+  set<int> myset (myints,myints+5);
 
   std::cout << "myset contains:";
-  for (ft::set<int>::iterator it=myset.begin(); it!=myset.end(); ++it)
+  for (set<int>::iterator it=myset.begin(); it!=myset.end(); ++it)
     std::cout << ' ' << *it;
 
   std::cout << '\n';
@@ -58,9 +57,9 @@ int set_begin_end_test(void)
 int set_rbegin_rend_test(void)
 {
   int myints[] = {21,64,17,78,49};
-  ft::set<int> myset (myints,myints+5);
+  set<int> myset (myints,myints+5);
 
-  ft::set<int>::reverse_iterator rit;
+  set<int>::reverse_iterator rit;
 
   std::cout << "myset contains:";
   for (rit=myset.rbegin(); rit != myset.rend(); ++rit)
@@ -73,7 +72,7 @@ int set_rbegin_rend_test(void)
 
 int set_empty_test(void)
 {
-  ft::set<int> myset;
+  set<int> myset;
 
   myset.insert(20);
   myset.insert(30);
@@ -92,7 +91,7 @@ int set_empty_test(void)
 
 int set_size_test(void)
 {
-  ft::set<int> myints;
+  set<int> myints;
   std::cout << "0. size: " << myints.size() << '\n';
 
   for (int i=0; i<10; ++i) myints.insert(i);
@@ -110,7 +109,7 @@ int set_size_test(void)
 int set_maxsize_test(void)
 {
   int i;
-  ft::set<int> myset;
+  set<int> myset;
 
   if (myset.max_size()>1000)
   {
@@ -124,9 +123,9 @@ int set_maxsize_test(void)
 
 int set_insert_test(void)
 {
-  ft::set<int> myset;
-  ft::set<int>::iterator it;
-  ft::pair<ft::set<int>::iterator,bool> ret;
+  set<int> myset;
+  set<int>::iterator it;
+  pair<set<int>::iterator,bool> ret;
 
   // set some initial values:
   for (int i=1; i<=5; ++i) myset.insert(i*10);    // set: 10 20 30 40 50
@@ -151,8 +150,8 @@ int set_insert_test(void)
 
 int set_erase_test(void)
 {
-  ft::set<int> myset;
-  ft::set<int>::iterator it;
+  set<int> myset;
+  set<int>::iterator it;
 
   // insert some values:
   for (int i=1; i<10; i++) myset.insert(i*10);  // 10 20 30 40 50 60 70 80 90
@@ -178,18 +177,18 @@ int set_erase_test(void)
 int set_swap_test(void)
 {
   int myints[]={12,75,10,32,20,25};
-  ft::set<int> first (myints,myints+3);     // 10,12,75
-  ft::set<int> second (myints+3,myints+6);  // 20,25,32
+  set<int> first (myints,myints+3);     // 10,12,75
+  set<int> second (myints+3,myints+6);  // 20,25,32
 
   first.swap(second);
 
   std::cout << "first contains:";
-  for (ft::set<int>::iterator it=first.begin(); it!=first.end(); ++it)
+  for (set<int>::iterator it=first.begin(); it!=first.end(); ++it)
     std::cout << ' ' << *it;
   std::cout << '\n';
 
   std::cout << "second contains:";
-  for (ft::set<int>::iterator it=second.begin(); it!=second.end(); ++it)
+  for (set<int>::iterator it=second.begin(); it!=second.end(); ++it)
     std::cout << ' ' << *it;
   std::cout << '\n';
 
@@ -198,14 +197,14 @@ int set_swap_test(void)
 
 int set_clear_test(void)
 {
-  ft::set<int> myset;
+  set<int> myset;
 
   myset.insert (100);
   myset.insert (200);
   myset.insert (300);
 
   std::cout << "myset contains:";
-  for (ft::set<int>::iterator it=myset.begin(); it!=myset.end(); ++it)
+  for (set<int>::iterator it=myset.begin(); it!=myset.end(); ++it)
     std::cout << ' ' << *it;
   std::cout << '\n';
 
@@ -214,7 +213,7 @@ int set_clear_test(void)
   myset.insert (2202);
 
   std::cout << "myset contains:";
-  for (ft::set<int>::iterator it=myset.begin(); it!=myset.end(); ++it)
+  for (set<int>::iterator it=myset.begin(); it!=myset.end(); ++it)
     std::cout << ' ' << *it;
   std::cout << '\n';
 
@@ -223,17 +222,17 @@ int set_clear_test(void)
 
 int set_key_compare_test(void)
 {
-  ft::set<int> myset;
+  set<int> myset;
   int highest;
 
-  ft::set<int>::key_compare mycomp = myset.key_comp();
+  set<int>::key_compare mycomp = myset.key_comp();
 
   for (int i=0; i<=5; i++) myset.insert(i);
 
   std::cout << "myset contains:";
 
   highest=*myset.rbegin();
-  ft::set<int>::iterator it=myset.begin();
+  set<int>::iterator it=myset.begin();
   do {
     std::cout << ' ' << *it;
   } while ( mycomp(*(++it),highest) );
@@ -245,16 +244,16 @@ int set_key_compare_test(void)
 
 int set_value_compare(void)
 {
-  ft::set<int> myset;
+  set<int> myset;
 
-  ft::set<int>::value_compare mycomp = myset.value_comp();
+  set<int>::value_compare mycomp = myset.value_comp();
 
   for (int i=0; i<=5; i++) myset.insert(i);
 
   std::cout << "myset contains:";
 
   int highest=*myset.rbegin();
-  ft::set<int>::iterator it=myset.begin();
+  set<int>::iterator it=myset.begin();
   do {
     std::cout << ' ' << *it;
   } while ( mycomp(*(++it),highest) );
@@ -266,8 +265,8 @@ int set_value_compare(void)
 
 int set_find_test(void)
 {
-  ft::set<int> myset;
-  ft::set<int>::iterator it;
+  set<int> myset;
+  set<int>::iterator it;
 
   // set some initial values:
   for (int i=1; i<=5; i++) myset.insert(i*10);    // set: 10 20 30 40 50
@@ -286,7 +285,7 @@ int set_find_test(void)
 
 int set_count_test(void)
 {
-  ft::set<int> myset;
+  set<int> myset;
 
   // set some initial values:
   for (int i=1; i<5; ++i) myset.insert(i*3);    // set: 3 6 9 12
@@ -305,8 +304,8 @@ int set_count_test(void)
 
 int set_loweupperrbound_test(void)
 {
-  ft::set<int> myset;
-  ft::set<int>::iterator itlow,itup;
+  set<int> myset;
+  set<int>::iterator itlow,itup;
 
   for (int i=1; i<10; i++) myset.insert(i*10); // 10 20 30 40 50 60 70 80 90
 
@@ -316,7 +315,7 @@ int set_loweupperrbound_test(void)
   myset.erase(itlow,itup);                     // 10 20 70 80 90
 
   std::cout << "myset contains:";
-  for (ft::set<int>::iterator it=myset.begin(); it!=myset.end(); ++it)
+  for (set<int>::iterator it=myset.begin(); it!=myset.end(); ++it)
     std::cout << ' ' << *it;
   std::cout << '\n';
 
@@ -325,11 +324,11 @@ int set_loweupperrbound_test(void)
 
 int set_equalbound_test(void)
 {
-  ft::set<int> myset;
+  set<int> myset;
 
   for (int i=1; i<=5; i++) myset.insert(i*10);   // myset: 10 20 30 40 50
 
-  ft::pair<ft::set<int>::const_iterator,ft::set<int>::const_iterator> ret;
+  pair<set<int>::const_iterator,set<int>::const_iterator> ret;
   ret = myset.equal_range(30);
 
   std::cout << "the lower bound points to: " << *ret.first << '\n';
@@ -338,7 +337,7 @@ int set_equalbound_test(void)
   return 0;
 }
 
-int main(void)
+int set_unit_test(void)
 {
     set_constructor_test();
     set_assignation_test();
