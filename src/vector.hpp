@@ -37,6 +37,18 @@ namespace ft
 		typedef std::size_t size_type;
 
 	private:
+
+		size_type
+		alloc_capacity(size_type size)
+		{
+			if (size > this->_capacity * 2 || this->_capacity == 0)
+				return size;
+			else if (size > this->_capacity && this->_capacity > 0)
+				return this->_size * 2;
+			else
+				return this->_capacity;
+		}
+
 		size_type _size;
 		size_type _capacity;
 		pointer  _vector;
@@ -101,8 +113,8 @@ namespace ft
 		{
 			this->_allocator = x._allocator;
 			this->_size = x._size;
-			this->_capacity = x._capacity;
-			this->_vector = this->_allocator.allocate(this->_capacity);
+			this->_capacity = x._size;
+			this->_vector = this->_allocator.allocate(this->_size);
 
 			for (size_type i = 0 ; i < this->_size ; i++)
 				this->_allocator.construct(_vector + i, x[i]);
@@ -401,7 +413,7 @@ namespace ft
 		{
 			pointer tmp;
 
-			tmp = this->_allocator.allocate(this->_size + 1);
+			tmp = this->_allocator.allocate(alloc_capacity(this->_size + 1));
 			// std::cout << "Allocated " << tmp << " (capacity " << _capacity << ")" << std::endl;
 			iterator it = this->begin();
 			size_type i = 0;
@@ -434,7 +446,7 @@ namespace ft
 			this->_allocator.deallocate(this->_vector, this->_capacity);
 			// std::cout << "Done !" << std::endl;
 			this->_vector = tmp;
-			this->_capacity = this->_size + 1;
+			this->_capacity = alloc_capacity(this->_size + 1);
 			this->_size = i;
 			return tmp + ret;
 		}
@@ -444,7 +456,7 @@ namespace ft
 		{
 			pointer tmp;
 
-			tmp = this->_allocator.allocate(this->_size + n);
+			tmp = this->_allocator.allocate(alloc_capacity(this->_size + n));
 			// std::cout << "Allocated " << tmp << " (capacity " << _capacity << ")" << std::endl;
 			iterator it = this->begin();
 			size_type i = 0;
@@ -475,7 +487,7 @@ namespace ft
 			// std::cout << "Deallocating " << this->_vector << " (capacity " << this->_capacity << ")" << std::endl;
 			this->_allocator.deallocate(this->_vector, this->_capacity);
 			// std::cout << "Done !" << std::endl;
-			this->_capacity = this->_size + n;
+			this->_capacity = alloc_capacity(this->_size + n);
 			this->_size = i;
 			this->_vector = tmp;
 		}
@@ -489,7 +501,7 @@ namespace ft
 
 			for (InputIterator len = first; len != last; len++)
 				n++;
-			tmp = this->_allocator.allocate(this->_size + n);
+			tmp = this->_allocator.allocate(alloc_capacity(this->_size + n));
 			// std::cout << "Allocated " << tmp << " (capacity " << this->_size + n << ")" << std::endl;
 			iterator it = this->begin();
 			size_type i = 0;
@@ -526,7 +538,7 @@ namespace ft
 			// std::cout << "Deallocating " << this->_vector << " (capacity " << this->_capacity << ")" << std::endl;
 			this->_allocator.deallocate(this->_vector, this->_capacity);
 			// std::cout << "Done !" << std::endl;
-			this->_capacity = this->_size + n;
+			this->_capacity = alloc_capacity(this->_size + n);
 			this->_size = i;
 			this->_vector = tmp;
 		}
