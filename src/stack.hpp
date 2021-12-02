@@ -2,6 +2,9 @@
 #define STACK
 
 #include "vector.hpp"
+#include <list>
+#include <deque>
+#include <vector>
 
 namespace ft
 {
