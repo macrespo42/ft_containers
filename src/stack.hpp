@@ -82,7 +82,7 @@ namespace ft
 			return !(lhs._stack < rhs._stack);
 		}
 
-	private:
+	protected:
 
 		container_type _stack;
 	};
