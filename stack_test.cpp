@@ -2,16 +2,16 @@
 
 void stack_stackConstructor_test(void)
 {
-  std::deque<int> mydeque (3,100);
-  vector<int> myvector (2,200);     
-  stack<int> first;
-  stack<int> second (mydeque);
-  stack<int,vector<int> > third;
-  stack<int,vector<int> > fourth (myvector);
-  std::cout << "size of first: " << first.size() << '\n';
-  std::cout << "size of second: " << second.size() << '\n';
-  std::cout << "size of third: " << third.size() << '\n';
-  std::cout << "size of fourth: " << fourth.size() << '\n';
+  // std::deque<int> mydeque (3,100);
+  // vector<int> myvector (2,200);     
+  // stack<int> first;
+  // stack<int> second (mydeque);
+  // stack<int,vector<int> > third;
+  // stack<int,vector<int> > fourth (myvector);
+  // std::cout << "size of first: " << first.size() << '\n';
+  // std::cout << "size of second: " << second.size() << '\n';
+  // std::cout << "size of third: " << third.size() << '\n';
+  // std::cout << "size of fourth: " << fourth.size() << '\n';
 }
 
 void stack_empty_test(void)

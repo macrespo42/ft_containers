@@ -2,11 +2,14 @@
 #define UNIT_TEST
 
 #include <iostream>
+#include <string>
 #include <vector>
 #include <stack>
+#include <map>
 #include <deque>
 #include "vector.hpp"
 #include "stack.hpp"
+#include "map.hpp"
 
 
 #ifdef FT
@@ -56,5 +59,32 @@ void stack_top_test(void);
 void stack_push_test(void);
 void stack_pop_test(void);
 int stack_unit_test(void);
+
+/********************************************
+*********************************************
+****************FT MAP TESTS*****************
+*********************************************
+********************************************/
+
+int map_constructors_test(void);
+int map_assignation_test(void);
+int map_begin_end_test(void);
+int map_rbegin_rend_test(void);
+int map_empty_test(void);
+int map_size_test(void);
+int map_max_size_test(void);
+int map_operator_hook_test(void);
+int map_insert_test(void);
+int map_erase_test(void);
+int map_swap_test(void);
+int map_clear_test(void);
+int map_key_comp_test(void);
+int map_value_comp_test(void);
+int map_find_test(void);
+int map_count_test(void);
+int map_lower_bound_test(void);
+int map_upper_bound_test(void);
+int map_equal_bound_test(void);
+int map_unit_test(void);
 
 #endif
