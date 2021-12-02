@@ -7,7 +7,7 @@
 #include <stdexcept>
 #include <functional>
 #include "utility.hpp"
-#include "map_iterator.hpp"
+#include "set_iterator.hpp"
 #include "set_rb_tree.hpp"
 
 namespace ft
@@ -45,8 +45,8 @@ namespace ft
         typedef typename allocator_type::pointer pointer;
         typedef typename allocator_type::const_pointer const_pointer;
         typedef node<value_type> node_type;
-        typedef map_iterator<value_type ,node_type, true> iterator;
-        typedef map_iterator<value_type ,node_type, false> const_iterator;
+        typedef set_iterator<value_type ,node_type, true> iterator;
+        typedef set_iterator<value_type ,node_type, false> const_iterator;
         typedef ft::reverse_iterator<iterator> reverse_iterator;
         typedef ft::reverse_iterator<const_iterator> const_reverse_iterator;
         typedef typename iterator_traits<iterator>::difference_type difference_type;
@@ -213,7 +213,7 @@ namespace ft
         {
             while (first != last)
             {
-                insert(first);
+                insert(*first);
                 first++;
             }
         }

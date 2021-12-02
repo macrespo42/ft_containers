@@ -15,11 +15,11 @@ namespace ft
     template<class T>
     struct node
     {
-        int color;
         node *parent;
         node *left;
         node *right;
         T item;
+        int color;
 
         node(const T & data) : item(data)
         {
