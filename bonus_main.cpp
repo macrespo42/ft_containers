@@ -2,5 +2,5 @@
 
 int main(void)
 {
-    set_unit_test();
+    set_clear_test();
 }

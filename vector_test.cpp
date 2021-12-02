@@ -34,10 +34,14 @@
     vector<int> myvector;
     for (int i=1; i<=5; i++) myvector.push_back(i);
 
-      std::cout << "myvector contains:";
+    std::cout << "myvector contains:";
     for (vector<int>::iterator it = myvector.begin() ; it != myvector.end(); ++it)
       std::cout << ' ' << *it;
     std::cout << '\n';
+    vector<int>::iterator it = myvector.begin();
+    vector<int>::const_iterator cit = myvector.begin();
+    if (it == cit)
+      std::cout << "coucou" << std::endl;
   }
 
   void vec_rendRbegin_test(void)

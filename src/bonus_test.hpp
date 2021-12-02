@@ -5,6 +5,12 @@
 #include <set>
 #include "set.hpp"
 
+#ifdef FT
+	using namespace ft;
+#else
+	using namespace std;
+#endif
+
 /********************************************
 *********************************************
 ****************FT SET TESTS*****************
