@@ -118,6 +118,8 @@ namespace ft
 		vector &
 		operator=(const vector& x)
 		{
+			if (this == &x)
+  				return *this;
 			for (size_type i = 0; i < this->_size; i++)
 				this->_allocator.destroy(this->_vector + i);
 			this->_allocator = x._allocator;
@@ -538,6 +540,7 @@ namespace ft
 				*cursor = *(cursor + 1);
 				cursor++;
 			}
+			this->_allocator.destroy(this->_vector + _size - 1);
 			this->_size--;
 			return (iterator(position));
 		}
