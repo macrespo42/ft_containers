@@ -22,7 +22,7 @@ $(STD_NAME):
 $(FT_NAME):
 	$(CC) -DFT $(CLFAGS) -o $(FT_NAME) $(TEST_FILES) main.cpp
 
-bonus:
+bonus: all
 	$(CC) $(CLFAGS) -o $(STD_BONUS) set_test.cpp bonus_main.cpp
 	$(CC) -DFT $(CLFAGS) -o $(FT_BONUS) set_test.cpp bonus_main.cpp
 
